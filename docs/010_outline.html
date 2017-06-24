@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>RcppのためのC++入門</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Rcppを使うために最低限必要なC++の知識を紹介します。">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="RcppのためのC++入門" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Rcppを使うために最低限必要なC++の知識を紹介します。" />
+  <meta name="github-repo" content="<a href="https://github.com/teuder/cpp4rcpp" class="uri">https://github.com/teuder/cpp4rcpp</a>" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="RcppのためのC++入門" />
+  
+  <meta name="twitter:description" content="Rcppを使うために最低限必要なC++の知識を紹介します。" />
+  
+
+<meta name="author" content="Masaki E. Tsuda">
+
+
+<meta name="date" content="2017-03-26">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="020-title2.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">RcppのためのC++入門</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#本書の構成"><i class="fa fa-check"></i><b>0.1</b> 本書の構成</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="010_outline.html"><a href="010_outline.html"><i class="fa fa-check"></i><b>1</b> C++の概要</a><ul>
+<li class="chapter" data-level="1.1" data-path="010_outline.html"><a href="010_outline.html#cの特徴"><i class="fa fa-check"></i><b>1.1</b> C++の特徴</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="010_outline.html"><a href="010_outline.html#コンパイル言語"><i class="fa fa-check"></i><b>1.1.1</b> コンパイル言語</a></li>
+<li class="chapter" data-level="1.1.2" data-path="010_outline.html"><a href="010_outline.html#静的型付け言語"><i class="fa fa-check"></i><b>1.1.2</b> 静的型付け言語</a></li>
+<li class="chapter" data-level="1.1.3" data-path="010_outline.html"><a href="010_outline.html#c言語の機能を包含している"><i class="fa fa-check"></i><b>1.1.3</b> C言語の機能を包含している</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="010_outline.html"><a href="010_outline.html#cの基本的な構成要素"><i class="fa fa-check"></i><b>1.2</b> C++の基本的な構成要素</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="010_outline.html"><a href="010_outline.html#変数オブジェクト"><i class="fa fa-check"></i><b>1.2.1</b> 変数（オブジェクト）</a></li>
+<li class="chapter" data-level="1.2.2" data-path="010_outline.html"><a href="010_outline.html#関数"><i class="fa fa-check"></i><b>1.2.2</b> 関数</a></li>
+<li class="chapter" data-level="1.2.3" data-path="010_outline.html"><a href="010_outline.html#制御文"><i class="fa fa-check"></i><b>1.2.3</b> 制御文</a></li>
+<li class="chapter" data-level="1.2.4" data-path="010_outline.html"><a href="010_outline.html#標準ライブラリ"><i class="fa fa-check"></i><b>1.2.4</b> 標準ライブラリ</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="020-title2.html"><a href="020-title2.html"><i class="fa fa-check"></i><b>2</b> 変数</a><ul>
+<li class="chapter" data-level="2.1" data-path="020-title2.html"><a href="020-title2.html#変数の宣言"><i class="fa fa-check"></i><b>2.1</b> 変数の宣言</a></li>
+<li class="chapter" data-level="2.2" data-path="020-title2.html"><a href="020-title2.html#変数の型"><i class="fa fa-check"></i><b>2.2</b> 変数の型</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">RcppのためのC++入門</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cの概要" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> C++の概要</h1>
+<p>C++とはどのような言語なのでしょうか？</p>
+<div id="cの特徴" class="section level2">
+<h2><span class="header-section-number">1.1</span> C++の特徴</h2>
+<div id="コンパイル言語" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> コンパイル言語</h3>
+<p>CやC++は<strong>コンパイル言語</strong>と呼ばれます。一方、RやPythonなどの言語は<strong>スクリプト言語</strong>と呼ばれています。その違いを述べる前に、簡単にプログラミング言語とは何なのかを説明すると、コンピューターは、ユーザーが作成したソースコードをそのまま実行することはできません。実行するにはソースコードをコンピューターが実行可能な機械語に変換する必要があります。人間が直接書くのが困難な機械語を、人間に理解しやすい構文で書けるように設計された言語がプログラミング言語です。</p>
+<p><strong>スクリプト言語</strong>はソースコードを１文ごとにインタープリター（RやPythonの本体）が機械語に変換しながら実行します。RやPythonのコンソールからコードを入力してリターンを押すたびに実行されるので、ユーザーからはソースコードが直接実行されているように見えます。スクリプト言語はユーザーがコードを記述し実行するまでの手間を簡単にすることを目的に設計されているので比較的お手軽に使える利点があります。しかし、実行速度の観点からはコンパイル言語には劣ります。それは、実行時に１文ずつ機械語に変換されるので、変換するための時間もかかりますし、機械語に変換するときの最適化も１文単位でしか行うという限界があるためです。</p>
+<p><strong>コンパイル言語</strong>はあらかじめソースコードの全体をコンパイラーにより機械語に変換して実行ファイルを作成します。そして実行したいときに、その実行ファイルを実行します。実行ファイルはアプリケーションの本体なのでRやPythonのインタープリタも実行ファイルです。コンパイル言語は実行する前にコンパイルしておかないといけないですし、ソースコードを変更するたびにこのパイルしなおす必要があるので、トライアンドエラーを行うのに手間がかかります。しかし、ソースコード全体をまとめて機械語に変換するため機械語に変換時の最適化はスクリプト言語よりも優れており実行速度に勝ります。ただ、コンパイルにも時間がかかるので、一度コンパイルしたコードを何度も使うような場面には向いていますが、一度しか実行しないような使い捨て作業には向いていません。</p>
+<p>（ちなみに使ったことはないですが<a href="https://root.cern.ch/cling">Cling</a>というC++のインタープリターもあるみたいです。）</p>
+</div>
+<div id="静的型付け言語" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> 静的型付け言語</h3>
+</div>
+<div id="c言語の機能を包含している" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> C言語の機能を包含している</h3>
+<p>C++はC言語の機能を（ほぼ）包含しているので、Cの構文で記述されたプログラムはC++としても動きます。Cの標準ライブラリもC++の標準ライブラリの中に含まれているので基本的にはそのまま利用できます。ただCの標準ライブラリをC++の流儀で使えるように多少変更も加えられています。例えば、Cの <code>stdio.h</code> をC++で利用する場合には <code>cstdio</code> をインクルードします（同様に <code>math.h</code> は <code>cmath</code>）。<code>stdio.h</code> も使えるのですが、C++では <code>cstdio</code> を利用することが推奨されています。その理由は、標準ライブラリにある関数の名前が、ユーザーが定義した関数や他のライブラリの関数の名前と衝突するのを避けるために <code>cstdio</code> では全ての関数が　<code>std</code> 名前空間の中で定義されているためです。なので <code>cstdio</code> の中で定義されている <code>printf()</code> を利用したい場合にはC++では <code>std::printf()</code> と指定します。</p>
+<p>たまにC++を使うにはまずCを覚えた方が良いのかという話を聞きますが、Cを覚える必要はありません。むしろ、C++の方がシンプルで高機能に記述できるケースが多いと感じています。それを知らずC言語の流儀で書いてしまうクセを回避するために、初めからC++を学ぶことをオススメします。</p>
+</div>
+</div>
+<div id="cの基本的な構成要素" class="section level2">
+<h2><span class="header-section-number">1.2</span> C++の基本的な構成要素</h2>
+<p>C++言語の基本的な構成要素は「変数（オブジェクト）」「関数」「制御文」だと思います。それぞれの基本を以下では説明します。</p>
+<div id="変数オブジェクト" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> 変数（オブジェクト）</h3>
+<p>変数は値を保持します。Rとは異なり C++ ではある変数を使うには、使う前に必ず変数を作成する（C++では変数を宣言すると言います）必要があります。さらに、Rとは異なる点は、C++では変数の型は、その変数を宣言するときに必ず決める必要があるということです。そして、その変数の作成後には型を変えることはできません。このような特徴をもつ言語を <strong>静的型付言語</strong> と言います。これによりコンパイラーはその変数の値を保持するために必要なメモリの量があらかじめわかるので、最適化を効率よく行うことができるようになります。</p>
+<pre><code>int x;
+x = 1; </code></pre>
+<ul>
+<li>１行目 <code>int x;</code>：int 型の変数 x を宣言します（メモリの領域を確保する）</li>
+<li>２行目 <code>x = 1;</code>：変数 x に値を代入します（そのメモリ領域に値を書き込む）</li>
+<li>C++では全ての文の末尾にセミコロン <code>;</code> が必須です。</li>
+</ul>
+</div>
+<div id="関数" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> 関数</h3>
+<p>関数には入力と出力があるものですが、C++では次のように書きます。例えば、int 型（整数スカラー）の変数 x を入力として、その値を２倍にして int 型として返す関数 timesTwo を定義するコードは以下のようになります。</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> timesTwo(<span class="dt">int</span> x){
+  <span class="kw">return</span> <span class="dv">2</span> * x;
+}</code></pre></div>
+<ul>
+<li>１行目 <code>int timesTwo</code>：timesTwo 関数の返り値の型が int であることを示します。</li>
+<li>１行目 <code>(int x)</code>：この関数の入力（引数）x の型が int であることを示します。</li>
+<li>２行目 <code>return 2 * x;</code>：x を2倍した値を返しています。C++では（main関数ではない）普通の関数では return 文は必須です。また、全ての文の末尾にセミコロン <code>;</code> が必須です。</li>
+</ul>
+<hr />
+<p>（蛇足）</p>
+<p>C/C++の本を読むと必ず main 関数というのが出てきます。C/C++界では main 関数は特別な関数で、全てのアプリケーションは main 関数を必ず１つ持っています。ユーザーがアプリケーションを実行するときには、CUIからコマンドを入力してリターンキーを押したり、GUIからアイコンをダブルクリックすることで、OSがアプリケーション本体の実行ファイルを起動します。実行ファイルが起動されると main 関数が呼び出され、main 関数の実行が終了するということはそのアプリケーションの実行が終了するということを意味します。</p>
+<p>とはいえ、Rcppを使ってコードを書く際には、main関数を作成することはありません。なぜならmain関数はR側が持っているためです。Rcppの関数はRのmain関数から呼び出されるだけなのでmain関数が必要ないのです。順番としては、ユーザーがRを起動する → Rのmain関数が呼び出される → R内でのユーザーの入力に応じてRのその他の関数やRcppの関数が呼び出される → ユーザーがRを終了を指示する → Rのmain関数の実行が終了する、という感じです。</p>
+<hr />
+</div>
+<div id="制御文" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> 制御文</h3>
+<p>プログラミング言語の制御文には「条件分岐」と「繰り返し処理」があります。</p>
+<p><strong>条件分岐</strong></p>
+<p>C++ の条件分岐には次の３つの方法があります。</p>
+<ul>
+<li>if文</li>
+<li>switch 文</li>
+</ul>
+<p>ifは条件が true か false かに応じて処理を２つに分岐するときにし使用するのに対して、switch は条件の値に応じて多重に分岐する場合に用います。</p>
+<p><strong>繰り返し処理</strong></p>
+<p>C++ の繰り返し処理には次の２つの方法があります。</p>
+<ul>
+<li>for 文</li>
+<li>while 文</li>
+<li>do while 文</li>
+</ul>
+<p>これらは基本的に同一の処理を実現しますが、処理に応じてどれを使えばシンプルにかけるかという観点から使い分けます。このドキュメントではもっともよく使われるであろう for 文のみを説明します。</p>
+</div>
+<div id="標準ライブラリ" class="section level3">
+<h3><span class="header-section-number">1.2.4</span> 標準ライブラリ</h3>
+<p>関数・変数・制御文はプログラミングのコアな構成要素です。しかし、実用的なプログラムを作成するには、例えばテキストを画面に表示したり、ファイルを読み書きしたり、ユーザーからの入力を受け付けたり、数学的な計算を行ったりと様々な機能が必要になります。そのためにC++ではそのような機能を標準ライブラリとして提供しています。ライブラリとは特定の機能を提供するモジュールです。「標準」ライブラリとはRで例えるならデフォルトでRと一緒にインストールされるパッケージ（statパッケージなど）のようなものです。</p>
+<p>標準ライブラリについては以下のサイトなどを参考にしてください。</p>
+<p><a href="https://cpprefjp.github.io/reference.html">C++日本語リファレンス</a></p>
+<p>C++は産業や学術などの分野でのメジャーなプログラミング言語となっているので標準ライブラリの他にも、準標準ライブラリの位置づけにある boost ライブラリを始め、フリーや商用の様々なライブラリが多数存在しています。</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="020-title2.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/teuder/cpp4rcpp/edit/master/010_outline.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

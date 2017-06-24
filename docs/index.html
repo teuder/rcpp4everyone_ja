@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>RcppのためのC++入門</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Rcppを使うために最低限必要なC++の知識を紹介します。">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="RcppのためのC++入門" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Rcppを使うために最低限必要なC++の知識を紹介します。" />
+  <meta name="github-repo" content="<a href="https://github.com/teuder/cpp4rcpp" class="uri">https://github.com/teuder/cpp4rcpp</a>" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="RcppのためのC++入門" />
+  
+  <meta name="twitter:description" content="Rcppを使うために最低限必要なC++の知識を紹介します。" />
+  
+
+<meta name="author" content="Masaki E. Tsuda">
+
+
+<meta name="date" content="2017-03-26">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+<link rel="next" href="010_outline.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">RcppのためのC++入門</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#本書の構成"><i class="fa fa-check"></i><b>0.1</b> 本書の構成</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="010_outline.html"><a href="010_outline.html"><i class="fa fa-check"></i><b>1</b> C++の概要</a><ul>
+<li class="chapter" data-level="1.1" data-path="010_outline.html"><a href="010_outline.html#cの特徴"><i class="fa fa-check"></i><b>1.1</b> C++の特徴</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="010_outline.html"><a href="010_outline.html#コンパイル言語"><i class="fa fa-check"></i><b>1.1.1</b> コンパイル言語</a></li>
+<li class="chapter" data-level="1.1.2" data-path="010_outline.html"><a href="010_outline.html#静的型付け言語"><i class="fa fa-check"></i><b>1.1.2</b> 静的型付け言語</a></li>
+<li class="chapter" data-level="1.1.3" data-path="010_outline.html"><a href="010_outline.html#c言語の機能を包含している"><i class="fa fa-check"></i><b>1.1.3</b> C言語の機能を包含している</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="010_outline.html"><a href="010_outline.html#cの基本的な構成要素"><i class="fa fa-check"></i><b>1.2</b> C++の基本的な構成要素</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="010_outline.html"><a href="010_outline.html#変数オブジェクト"><i class="fa fa-check"></i><b>1.2.1</b> 変数（オブジェクト）</a></li>
+<li class="chapter" data-level="1.2.2" data-path="010_outline.html"><a href="010_outline.html#関数"><i class="fa fa-check"></i><b>1.2.2</b> 関数</a></li>
+<li class="chapter" data-level="1.2.3" data-path="010_outline.html"><a href="010_outline.html#制御文"><i class="fa fa-check"></i><b>1.2.3</b> 制御文</a></li>
+<li class="chapter" data-level="1.2.4" data-path="010_outline.html"><a href="010_outline.html#標準ライブラリ"><i class="fa fa-check"></i><b>1.2.4</b> 標準ライブラリ</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="020-title2.html"><a href="020-title2.html"><i class="fa fa-check"></i><b>2</b> 変数</a><ul>
+<li class="chapter" data-level="2.1" data-path="020-title2.html"><a href="020-title2.html#変数の宣言"><i class="fa fa-check"></i><b>2.1</b> 変数の宣言</a></li>
+<li class="chapter" data-level="2.2" data-path="020-title2.html"><a href="020-title2.html#変数の型"><i class="fa fa-check"></i><b>2.2</b> 変数の型</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">RcppのためのC++入門</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">RcppのためのC++入門</h1>
+<h4 class="author"><em>Masaki E. Tsuda</em></h4>
+<h4 class="date"><em>2017-03-26</em></h4>
+</div>
+<div id="はじめに" class="section level1 unnumbered">
+<h1>はじめに</h1>
+<p>このサイトは Rcpp を使うために最低限必要な C++ の知識を紹介することを目的としています。基本的にはC++11以降の標準にしたがって記述します。</p>
+<p>Rcppのそのものの解説については <a href="https://www.gitbook.com/book/teuder/introduction-to-rcpp/details/ja">Introduction to Rcpp（日本語）</a> を参照してください。</p>
+<div id="本書の構成" class="section level2">
+<h2><span class="header-section-number">0.1</span> 本書の構成</h2>
+<p>このドキュメントの構成は以下のようになる予定です。</p>
+<ul>
+<li>C++の概要</li>
+<li>C++の特徴 _ C++の構成要素</li>
+<li>変数
+<ul>
+<li>変数の宣言</li>
+<li>変数の型
+<ul>
+<li>基本型</li>
+<li>ユーザー定義型</li>
+<li>参照型</li>
+<li>配列型（優先度低）</li>
+<li>ポインタ型（優先度低）</li>
+</ul></li>
+<li>変数の初期化</li>
+<li>修飾子</li>
+<li>変数のスコープ</li>
+</ul></li>
+<li>関数
+<ul>
+<li>関数の宣言と定義</li>
+<li>引数
+<ul>
+<li>値渡し</li>
+<li>参照渡し</li>
+<li>ポインタ渡し</li>
+</ul></li>
+<li>関数の多重定義</li>
+<li>関数テンプレート</li>
+</ul></li>
+<li>制御文</li>
+<li>for文</li>
+<li>if文</li>
+<li>switch文</li>
+<li>列挙型</li>
+<li>構造体とクラス
+<ul>
+<li>メンバ変数</li>
+<li>メンバ関数</li>
+<li>静的メンバ変数・関数</li>
+<li>コンストラクタ</li>
+<li>デストラクタ</li>
+<li>継承</li>
+<li>クラステンプレート</li>
+</ul></li>
+<li>データ構造とアルゴリズム（STL）
+<ul>
+<li>データ構造</li>
+<li>イテレータ</li>
+<li>アルゴリズム</li>
+</ul></li>
+<li><p>名前空間</p></li>
+<li>ヘッダファイルの書き方</li>
+<li><p>複数ファイルにわけて書く方法</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="010_outline.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/teuder/cpp4rcpp/edit/master/index.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
