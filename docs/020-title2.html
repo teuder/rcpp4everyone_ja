@@ -5,28 +5,27 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>RcppのためのC++入門</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-  <meta name="description" content="Rcppを使うために最低限必要なC++の知識を紹介します。">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <title>みんなのRcpp</title>
+  <meta name="description" content="Rcppの使い方を解説します">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
 
-  <meta property="og:title" content="RcppのためのC++入門" />
+  <meta property="og:title" content="みんなのRcpp" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Rcppを使うために最低限必要なC++の知識を紹介します。" />
-  <meta name="github-repo" content="<a href="https://github.com/teuder/cpp4rcpp" class="uri">https://github.com/teuder/cpp4rcpp</a>" />
+  <meta property="og:description" content="Rcppの使い方を解説します" />
+  <meta name="github-repo" content="<a href="https://github.com/teuder/rcpp4everynone_ja" class="uri">https://github.com/teuder/rcpp4everynone_ja</a>" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="RcppのためのC++入門" />
+  <meta name="twitter:title" content="みんなのRcpp" />
   
-  <meta name="twitter:description" content="Rcppを使うために最低限必要なC++の知識を紹介します。" />
+  <meta name="twitter:description" content="Rcppの使い方を解説します" />
   
 
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-03-26">
+<meta name="date" content="2017-06-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,7 +33,6 @@
   
   
 <link rel="prev" href="010_outline.html">
-
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -95,13 +93,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <body>
 
 
+
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
 
     <div class="book-summary">
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">RcppのためのC++入門</a></li>
+<li><a href="./">みんなのRcpp</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
@@ -136,7 +135,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">RcppのためのC++入門</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">みんなのRcpp</a>
           </h1>
         </div>
 
@@ -158,59 +157,88 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <tr class="header">
 <th align="center">説明</th>
 <th align="center">型</th>
-<th align="left">値</th>
+<th align="center">値の例</th>
+<th align="left">値の範囲</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="center">論理値</td>
 <td align="center">bool</td>
+<td align="center">true</td>
 <td align="left">true または false</td>
 </tr>
 <tr class="even">
 <td align="center">文字</td>
 <td align="center">char</td>
-<td align="left">‘a’ ‘’ など英数記号文字（ASCII文字）</td>
+<td align="center">‘a’ ‘’</td>
+<td align="left">英数記号文字リテラル（ASCII文字）</td>
 </tr>
 <tr class="odd">
 <td align="center">文字列</td>
 <td align="center">char*</td>
-<td align="left">“abcd” などASCII文字の列</td>
+<td align="center">“abcd”</td>
+<td align="left">ASCII文字の列</td>
 </tr>
 <tr class="even">
 <td align="center">文字列</td>
 <td align="center">std::string</td>
-<td align="left">“abcd” などASCII文字の列、 u8“あいうえお” などUTF8のマルチバイト文字列</td>
+<td align="center">“abcd”, u8“あいうえお”</td>
+<td align="left">ASCII文字の列、UTF8のマルチバイト文字列</td>
 </tr>
 <tr class="odd">
-<td align="center">符号つき整数</td>
+<td align="center">整数（符号あり）</td>
 <td align="center">int</td>
+<td align="center">1</td>
 <td align="left">-2147483648 ~ 2147483647</td>
 </tr>
 <tr class="even">
-<td align="center">符号なし整数</td>
+<td align="center">整数（符号あり）</td>
+<td align="center">long</td>
+<td align="center">1</td>
+<td align="left">-2147483648 ~ 2147483647</td>
+</tr>
+<tr class="odd">
+<td align="center">整数（符号あり）</td>
+<td align="center">long long</td>
+<td align="center">1</td>
+<td align="left">-9223372036854775808 ~ 9223372036854775807</td>
+</tr>
+<tr class="even">
+<td align="center">整数（符号なし）</td>
 <td align="center">unsigned int</td>
+<td align="center">1</td>
 <td align="left">0 ~ 4294967295</td>
 </tr>
 <tr class="odd">
-<td align="center">符号つき整数</td>
-<td align="center">long</td>
-<td align="left"></td>
+<td align="center">整数（符号なし）</td>
+<td align="center">unsigned long</td>
+<td align="center">1</td>
+<td align="left">0 ~ 4294967295</td>
 </tr>
 <tr class="even">
-<td align="center">符号なし整数</td>
-<td align="center">unsigned long</td>
-<td align="left"></td>
+<td align="center">整数（符号なし）</td>
+<td align="center">unsigned long long</td>
+<td align="center">1</td>
+<td align="left">0 ~ 18446744073709551615</td>
 </tr>
 <tr class="odd">
-<td align="center">浮動小数点数（実数）</td>
+<td align="center">浮動小数点数（単精度）</td>
 <td align="center">float</td>
-<td align="left"></td>
+<td align="center">1.0</td>
+<td align="left">-3.40282e+38 ~ 3.40282e+38</td>
 </tr>
 <tr class="even">
-<td align="center">倍精度浮動小数点数（実数）</td>
+<td align="center">浮動小数点数（倍精度）</td>
+<td align="center">1.0</td>
 <td align="center">double</td>
-<td align="left"></td>
+<td align="left">-1.79769313486232e+308 ~ 1.79769313486232e+308</td>
+</tr>
+<tr class="odd">
+<td align="center">浮動小数点数（拡張倍精度）</td>
+<td align="center">1.0</td>
+<td align="center">double</td>
+<td align="left">-1.79769313486232e+308 ~ 1.79769313486232e+308</td>
 </tr>
 </tbody>
 </table>
@@ -226,6 +254,9 @@ aligned | aligned | aligned |</p>
 [1] 2147483647
 &gt; Rcpp::evalCpp(&quot;DBL_MAX&quot;)
 [1] 1.797693e+308</code></pre>
+<p>メモ：std::numeric_limitsクラスを利用しても同じことができる。</p>
+<pre><code>&gt; Rcpp::evalCpp(&quot;std::numeric_limits&lt;int&gt;::max()&quot;)
+[1] 2147483647</code></pre>
 
 </div>
 </div>
@@ -236,7 +267,8 @@ aligned | aligned | aligned |</p>
       </div>
 <a href="010_outline.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-
+    </div>
+  </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
@@ -266,7 +298,7 @@ gitbook.start({
 "link": "https://github.com/teuder/cpp4rcpp/edit/master/020-title2.Rmd",
 "text": "Edit"
 },
-"download": null,
+"download": ["rcpp4everyone_ja.epub"],
 "toc": {
 "collapse": "subsection"
 }

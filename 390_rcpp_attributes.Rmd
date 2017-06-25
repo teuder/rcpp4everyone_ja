@@ -1,0 +1,76 @@
+# Rcpp Attributes
+
+Rcpp Attributes はコンパイルに必要な情報をコンパイラに教えます。
+
+
+## Rcpp::export
+
+`// [[Rcpp::export]]` を記述した直下で定義した C++ の関数は R から利用可能になります。
+
+`// [[Rcpp::export]]` を記述した関数は `compileAttributes()` により処理され、改変された関数が `src/RcppExports.cpp` に生成されます。さらに、`src/RcppExports.cpp` で定義された C++ 関数を呼び出すRの関数が `R/RcppExports.R` に生成されます。
+
+また、デフォルトでは C++ で定義した関数名と同名の関数がRで利用可能になります。しかし、C++の関数名の命名規約とRの関数の命名規約が異なるために、Rの関数名として利用できる文字のうち、C++の関数名としては利用できない文字（`.`）もあります。その場合には下のように記述することで、Rで利用可能になる関数名を指定することができます。
+
+```
+// [[Rcpp::export(".myCppFunction")]]
+```
+
+
+```
+// [[Rcpp::export]]
+int fibonacci(const int x) {
+
+   if (x == 0) return(0);
+   if (x == 1) return(1);
+
+   return (fibonacci(x - 1)) + fibonacci(x - 2);
+}
+
+// [[Rcpp::export("convolveCpp")]]
+NumericVector convolve(NumericVector a, NumericVector b) {
+
+   int na = a.size(), nb = b.size();
+   int nab = na + nb - 1;
+   NumericVector xab(nab);
+
+   for (int i = 0; i < na; i++)
+      for (int j = 0; j < nb; j++)
+         xab[i + j] += a[i] * b[j];
+
+   return xab;
+}
+```
+
+## Rcpp::interfaces
+
+```
+// [[Rcpp::interfaces(r, cpp)]]
+```
+
+## Rcpp::depends
+
+
+```
+// [[Rcpp::depends(RcppArmadillo)]]
+// [[Rcpp::depends(Matrix, RcppGSL)]]
+```
+
+
+## Rcpp::plugins
+
+```
+// [[Rcpp::plugins(plugin1, plugin2)]]
+// [[Rcpp::plugins(cpp11)]]
+```
+
+# Rcpp Attributes を処理する Rcpp の関数
+
+## compileAttributes()
+
+ソースコード中の Rcpp Attributes を読み取り、定義した C++ 関数を呼び出す R 関数を自動で生成する。
+
+```
+compileAttributes(pkgdir = ".", verbose = getOption("verbose"))
+
+
+```

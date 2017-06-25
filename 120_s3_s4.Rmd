@@ -1,0 +1,116 @@
+# S3・S4 クラス
+
+## S3クラス
+
+R の S3 クラスの実体は、オブジェクト属性 `class` の値に独自の名前が設定されたリストです。 そのため、S3オブジェクトの作成や要素へのアクセスについては `List` の項を参照してください。
+
+下に　S3 のオブジェクトを扱う例として、R の関数`lm()` の返値を受け取り、学習データにおけるモデルの予測精度の指標として RMSE (Root Mean Square Error; ニ乗平均平方根誤差) を算出する関数の例を示します。
+
+```cpp
+//lm モデルオブジェクトを受け取り RMSE を計算します
+// [[Rcpp::export]]
+double rcpp_rmse(List lm_model) {
+    // S3 はリストなので引数の型には List を指定します。
+
+    //関数に与えられたオブジェクトが lm() オブジェクトではない場合は
+    //エラーメッセージを出力し実行を停止します。
+    if (! lm_model.inherits("lm")) stop("Input must be a lm() model object.");
+
+    //残差（実測値 - 予測値）を取り出します。
+    NumericVector resid  = lm_model["residuals"];
+
+    //残差の要素数
+    R_xlen_t n = resid.length();
+
+    //残差の平方和
+    double rmse(0.0);
+    for(double& r : resid){
+        rmse += r*r;
+    }
+
+    //残差平方和を要素数で割り、平方根を取る
+    return(sqrt((1.0/n)*rmse));
+}
+```
+
+実行例として、R のサンプルデータ mtcars を使って、車の燃費を線形回帰したモデルの RMSE を計算します。
+
+```R
+> mod <- lm(mpg ~ ., data = mtcars)
+> rcpp_rmse(mod)
+[1] 2.146905
+```
+
+
+
+## S4クラス
+
+
+### slot へのアクセス
+
+S4 クラスのオブジェクトのスロットへアクセスするには `slot()` メンバ関数を用います。また、特定の名前のスロットを持っているかどうか確かめるには `hasSlot()` メンバ関数を用います。
+
+```cpp
+x.slot("スロット名");
+x.hasSlot("スロット名");
+```
+
+### 新しい S4 クラスのオブジェクトを作成する
+
+Rcpp 単体では新しい S4 クラスを定義することができないですが、 R で定義した S4 クラスのオブジェクトを Rcpp で作成することはできます。
+
+次ののコード例では、R で新しい S4 クラス Person を定義して、その後、Rcpp で Person クラスのオブジェクトを作成する例を示します。
+
+まずは S4 クラスの Person を定義します。このクラスは、スロットとして、名前を表す name、誕生日を表す birth を保持しています。
+
+```R
+# R で S4クラス Person を定義します
+setClass (
+  # クラス名
+  "Person",
+  # スロットの型を指定
+  representation (
+    name = "character",
+    birth = "Date"
+  ),
+  # スロットの初期化
+  prototype = list(
+    name = as.character(NULL),
+    birth = as.Date(as.character(NULL))
+  )
+)
+
+# R で Person クラスのオブジェクトを作成する例
+person_01 <- new("Person",
+                 name = "Ronald Fisher",
+                 birth = as.Date("1890-02-17"))
+```
+
+次に Rcpp で Person クラスのオブジェクトを作成し、そのスロットに値を設定します。
+
+```cpp
+// [[Rcpp::export]]
+S4 rcpp_s4(){
+
+    // Person クラスのオブジェクトを作成します
+    S4 x("Person");
+
+    // スロットに値を設定します
+    x.slot("name")  = "Sewall Wright";
+    x.slot("birth") = Date("1889-12-21");
+
+    return(x);
+}
+```
+
+実行結果
+
+```
+> rcpp_s4()
+An object of class "Person"
+Slot "name":
+[1] "Sewall Wright"
+
+Slot "birth":
+[1] "1889-12-21"
+```

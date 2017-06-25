@@ -1,0 +1,157 @@
+# DataFrame
+
+##作成
+
+`DataFrame` の作成には `DataFrame::create()` を使用します。また、 `DataFrame` の作成時にカラム名を指定する場合には、`Named("名前")` または `_["名前"]` を使用します。
+
+
+```cpp
+// Vector v1, v2 から DataFrame df を作成します
+DataFrame df = DataFrame::create(v1, v2);
+//列に名前をつける場合
+DataFrame df = DataFrame::create(Named("V1") = v1 , _["V2"]=v2);
+```
+`DataFrame::create()` で `DataFrame` を作成すると、カラムには元の `Vector` の要素の値が複製されるのではなく、元の `Vector` への「参照」となります。そのため、元の `Vector` の値を変更すると `DataFrame` の値も変更されます。そうならないように `Vector` の要素の値を複製して`DataFrame` のカラムを作成する場合には `clone()` 関数を使います。
+
+`clone()` 関数を使った場合と使わなかった場合の違いを見るために、下のコード例を見てください。コード例では、`Vector` v から`DataFrame` df を作成しています。そこでは、カラム V1 は v への参照、カラム V2 は `clone()` 関数により v の値を複製しています。その後、`Vector`  v に変更操作を行うと、データフレーム df のカラム V1 は変更されていますが、V2 は影響を受けないことがわかります。
+
+
+``` cpp
+// [[Rcpp::export]]
+DataFrame rcpp_df(){
+    // ベクトル v を作成します
+    NumericVector v = {1,2};
+    // データフレムを作成します
+    DataFrame df = DataFrame::create( Named("V1") = v,
+                                      Named("V2") = clone(v));
+    // ベクトル v を変更します                                
+    v = v*2;
+    return df;
+}
+```
+
+実行結果
+
+```
+> rcpp_df()
+  V1 V2
+1  2  1
+2  4  2
+```
+
+
+
+
+##要素へのアクセス
+
+
+`DataFrame` の特定のカラムにアクセスする場合には、カラムを一旦 `Vector` に代入し、その`Vector` を介してアクセスします。ベクトルの要素の指定の場合と同様に、`DataFrame` のカラムは、数値ベクトル（カラム番号）、文字列ベクトル（カラム名）、論理値ベクトルにより指定できます。
+
+```
+NumericVector v1 = df[0];
+NumericVector v2 = df["V2"];
+```
+
+`DataFrame` 作成の時と同様に、上の方法で `Vector` に `DataFrame` のカラムを代入すると、`Vector` には カラムの値がコピーされるのではなく、カラムへの「参照」となります。そのため、`Vector` へ変更操作を行うと、df のカラムの内容も変更されます。
+
+元の `DataFrame` の値が変更されないようにカラムの値コピーして `Vector` を作成たい場合には `clone()` 関数を用います。
+
+```
+NumericVector v1 = df[0]; // v1 は dfの 0 列目への「参照」となります
+v1 = v1*2;                // v1 の値を変更すると df[0] の値も変更されます
+
+NumericVector v2 = clone(df[0]); // v2 には df[0] の要素の値を複製します
+v2 = v2*2;                       // v2 を変更しても df[0] の値は変わりません
+```
+
+
+
+##メンバ関数
+
+Rcpp では、`DataFrame` や `List` は、ある種のベクトルとして実装されています。つまり、`Vector` は、スカラー値を要素とするベクトル、`DataFrame` は同じ長さの `Vector` を要素とするベクトルです。そのため、`DataFrame` は `Vector` 共通するメンバ関数を多く持っています。
+
+
+#### length() size()
+
+列数を返します。
+
+
+####nrows()
+
+行数を返します。
+
+####names()
+
+カラム名を文字列ベクトルで返します。
+
+####offset(name) findName(name)
+
+文字列 name で指定された名前のカラムの列番号を返します。
+
+####findName(name)
+
+文字列 name で指定された名前のカラムの列番号を返します。
+
+
+####fill(v)
+
+この `DataFrame` の全てのカラムを `Vector` v で満たします。
+
+
+####assign( first_it, last_it)
+
+イテレーター first_it, last_it で指定された範囲のカラムを、この `DataFrame` に代入します。
+
+####push_back(v)
+
+この `DataFrame`  の末尾に `Vector` v を追加します。
+
+####push_back( v, name )
+
+この `DataFrame`  の末尾に `Vector` v を追加します。 追加したカラムの名前を文字列 name で指定します。
+
+####push_front(x)
+
+この `DataFrame`  の先頭に `Vector` v を追加します。
+
+
+####push_front( x, name )
+
+この `DataFrame`  の先頭に `Vector` v を追加します。追加したカラムの名前を文字列 name で指定します。
+
+#### begin()
+
+この `DataFrame` の先頭カラムへのイテレータを返します。
+
+#### end()
+
+この `DataFrame` の末尾へのイテレータを返します。
+
+#### insert( it, v )
+
+この `DataFrame` の、イテレータ it で示された位置に``Vector` ` v を追加し、その要素へのイテレータを返します。
+
+#### erase(i)
+
+この `DataFrame` の i 番目のカラムを削除し、削除した直後のカラムへのイテレータを返す。
+
+####erase(it)
+
+イテレータ it で指定されたカラムを削除し、削除した直後のカラムへのイテレータを返します。
+
+####erase(first_i, last_i)
+
+first_i 番目 から last_i -1 番目 までのカラムを削除し、削除した直後のカラムへのイテレータを返します。
+
+
+#### erase(first_it, last_it)
+
+イテレータ first_it から last_it -1 で指定されるカラムまでを削除し、削除した直後のカラムへのイテレータを返します。
+
+#### containsElementNamed(name)
+
+この `DataFrame` が文字列 name で指定された名前のカラムを持っている場合には true を返します。
+
+#### inherits(str)
+
+このオブジェクトの属性 class に文字列 str が含まれているかどうか。
