@@ -2,8 +2,11 @@
 
 Rcpp Attributes はコンパイルに必要な情報をコンパイラに教えます。
 
+## 利用可能な Rcpp Attributes
 
-## Rcpp::export
+以下では、Rcppパッケージで利用可能な Rcpp Attributes の一覧とその機能を解説します。
+
+### Rcpp::export
 
 `// [[Rcpp::export]]` を記述した直下で定義した C++ の関数は R から利用可能になります。
 
@@ -63,9 +66,9 @@ NumericVector convolve(NumericVector a, NumericVector b) {
 // [[Rcpp::plugins(cpp11)]]
 ```
 
-# Rcpp Attributes を処理する Rcpp の関数
+## Rcpp Attributes を処理する Rcpp の関数
 
-## compileAttributes()
+### compileAttributes()
 
 ソースコード中の Rcpp Attributes を読み取り、定義した C++ 関数を呼び出す R 関数を自動で生成する。
 

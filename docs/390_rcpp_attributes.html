@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="380_performance.html">
-<link rel="next" href="README.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -347,16 +347,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="38" data-path="370_link.html"><a href="370_link.html"><i class="fa fa-check"></i><b>38</b> リンク</a></li>
 <li class="chapter" data-level="39" data-path="380_performance.html"><a href="380_performance.html"><i class="fa fa-check"></i><b>39</b> パフォーマンス比較</a></li>
 <li class="chapter" data-level="40" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html"><i class="fa fa-check"></i><b>40</b> Rcpp Attributes</a><ul>
-<li class="chapter" data-level="40.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppexport"><i class="fa fa-check"></i><b>40.1</b> Rcpp::export</a></li>
+<li class="chapter" data-level="40.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#利用可能な-rcpp-attributes"><i class="fa fa-check"></i><b>40.1</b> 利用可能な Rcpp Attributes</a><ul>
+<li class="chapter" data-level="40.1.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppexport"><i class="fa fa-check"></i><b>40.1.1</b> Rcpp::export</a></li>
+</ul></li>
 <li class="chapter" data-level="40.2" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppinterfaces"><i class="fa fa-check"></i><b>40.2</b> Rcpp::interfaces</a></li>
 <li class="chapter" data-level="40.3" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppdepends"><i class="fa fa-check"></i><b>40.3</b> Rcpp::depends</a></li>
 <li class="chapter" data-level="40.4" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppplugins"><i class="fa fa-check"></i><b>40.4</b> Rcpp::plugins</a></li>
+<li class="chapter" data-level="40.5" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcpp-attributes-を処理する-rcpp-の関数"><i class="fa fa-check"></i><b>40.5</b> Rcpp Attributes を処理する Rcpp の関数</a><ul>
+<li class="chapter" data-level="40.5.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#compileattributes"><i class="fa fa-check"></i><b>40.5.1</b> compileAttributes()</a></li>
 </ul></li>
-<li class="chapter" data-level="41" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcpp-attributes-を処理する-rcpp-の関数"><i class="fa fa-check"></i><b>41</b> Rcpp Attributes を処理する Rcpp の関数</a><ul>
-<li class="chapter" data-level="41.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#compileattributes"><i class="fa fa-check"></i><b>41.1</b> compileAttributes()</a></li>
 </ul></li>
-<li class="chapter" data-level="42" data-path="README.html"><a href="README.html"><i class="fa fa-check"></i><b>42</b> みんなのRcpp</a></li>
-<li class="chapter" data-level="43" data-path="troublesome.html"><a href="troublesome.html"><i class="fa fa-check"></i><b>43</b> オブジェクトの扱いに関するややこしい話</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -380,8 +380,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="rcpp-attributes" class="section level1">
 <h1><span class="header-section-number">Chapter 40</span> Rcpp Attributes</h1>
 <p>Rcpp Attributes はコンパイルに必要な情報をコンパイラに教えます。</p>
-<div id="rcppexport" class="section level2">
-<h2><span class="header-section-number">40.1</span> Rcpp::export</h2>
+<div id="利用可能な-rcpp-attributes" class="section level2">
+<h2><span class="header-section-number">40.1</span> 利用可能な Rcpp Attributes</h2>
+<p>以下では、Rcppパッケージで利用可能な Rcpp Attributes の一覧とその機能を解説します。</p>
+<div id="rcppexport" class="section level3">
+<h3><span class="header-section-number">40.1.1</span> Rcpp::export</h3>
 <p><code>// [[Rcpp::export]]</code> を記述した直下で定義した C++ の関数は R から利用可能になります。</p>
 <p><code>// [[Rcpp::export]]</code> を記述した関数は <code>compileAttributes()</code> により処理され、改変された関数が <code>src/RcppExports.cpp</code> に生成されます。さらに、<code>src/RcppExports.cpp</code> で定義された C++ 関数を呼び出すRの関数が <code>R/RcppExports.R</code> に生成されます。</p>
 <p>また、デフォルトでは C++ で定義した関数名と同名の関数がRで利用可能になります。しかし、C++の関数名の命名規約とRの関数の命名規約が異なるために、Rの関数名として利用できる文字のうち、C++の関数名としては利用できない文字（<code>.</code>）もあります。その場合には下のように記述することで、Rで利用可能になる関数名を指定することができます。</p>
@@ -409,6 +412,7 @@ NumericVector convolve(NumericVector a, NumericVector b) {
    return xab;
 }</code></pre>
 </div>
+</div>
 <div id="rcppinterfaces" class="section level2">
 <h2><span class="header-section-number">40.2</span> Rcpp::interfaces</h2>
 <pre><code>// [[Rcpp::interfaces(r, cpp)]]</code></pre>
@@ -423,11 +427,10 @@ NumericVector convolve(NumericVector a, NumericVector b) {
 <pre><code>// [[Rcpp::plugins(plugin1, plugin2)]]
 // [[Rcpp::plugins(cpp11)]]</code></pre>
 </div>
-</div>
-<div id="rcpp-attributes-を処理する-rcpp-の関数" class="section level1">
-<h1><span class="header-section-number">Chapter 41</span> Rcpp Attributes を処理する Rcpp の関数</h1>
-<div id="compileattributes" class="section level2">
-<h2><span class="header-section-number">41.1</span> compileAttributes()</h2>
+<div id="rcpp-attributes-を処理する-rcpp-の関数" class="section level2">
+<h2><span class="header-section-number">40.5</span> Rcpp Attributes を処理する Rcpp の関数</h2>
+<div id="compileattributes" class="section level3">
+<h3><span class="header-section-number">40.5.1</span> compileAttributes()</h3>
 <p>ソースコード中の Rcpp Attributes を読み取り、定義した C++ 関数を呼び出す R 関数を自動で生成する。</p>
 <pre><code>compileAttributes(pkgdir = &quot;.&quot;, verbose = getOption(&quot;verbose&quot;))
 
@@ -435,13 +438,14 @@ NumericVector convolve(NumericVector a, NumericVector b) {
 
 </div>
 </div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="380_performance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="README.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="380_performance.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
