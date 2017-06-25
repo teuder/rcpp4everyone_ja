@@ -5,7 +5,6 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
-github-repo: https://github.com/teuder/rcpp4everynone_ja
 description: "Rcppの使い方を解説します"
 ---
 
