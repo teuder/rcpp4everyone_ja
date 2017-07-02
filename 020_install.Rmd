@@ -1,20 +1,40 @@
 # インストール
 
-まずは C++ のコンパイラをインストールします。
+Rcppを使って開発を行うためには C++ のコンパイラをインストールする必要があります。
 
-##開発ツールのインストール
+## C++コンパイラのインストール
 
-**Windows**：[Rtools](https://cran.r-project.org/bin/windows/Rtools/index.html) をインストールします。すると、C:\\Rtools 以下にgccなどが配置されます。
+### Windows
 
-**Mac**：ターミナルで次のコマンドを打ち Xcode command line tools をインストールします。 `xcode-select --install`
+[Rtools](https://cran.r-project.org/bin/windows/Rtools/index.html) をインストールします。Rtoolsをインストールする際には、自分がインストールしているRのバージョンにあったものをインストールするように気をつけてください。
 
-**Linux**：例えば `sudo apt-get install r-base-dev`
+### Mac
 
-自分でインストールした gcc や clang などのコンパイラを使いたい場合には、ユーザーのホームディレクトリ以下に次のファイルを作成し、そこに環境変数の設定を記述します。
+ターミナルで次のコマンドを打ち Xcode command line tools をインストールします。
 
+`xcode-select --install`
 
-* `.R/Makevars` Linux, Mac
-* `.R/Makevars.win` Windows
+### Linux
+
+ディストリビューションにより方法が異なります。
+
+例えば、Ubuntu であれば以下のコマンドを打ちます。
+
+`sudo apt-get install r-base-dev`
+
+### その他の自分でインストールしたコンパイラを使いたい場合
+
+自分でインストールした g++ や clang++ などのコンパイラを使いたい場合には、ユーザーのホームディレクトリ以下に次のファイルを作成し、そこに環境変数の設定を記述します。
+
+**Linux, Mac**
+
+* `.R/Makevars`
+
+**Windows**
+
+* `.R/Makevars.win` 
+
+**環境変数の設定例**
 
 ```
 CC=/opt/local/bin/gcc-mp-4.7
@@ -25,7 +45,9 @@ CXXFLAGS= -g0 -O3 -Wall
 MAKE=make -j4
 ```
 
-ちなみに、ユーザーのホームディレクトリは R で次のコードを実行することで調べることができます。
+**ユーザーのホームディレクトリ**
+
+ちなみに、ユーザーのホームディレクトリは R から次のコードを実行することで調べることができます。
 
 ```
 path.expand("~")

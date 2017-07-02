@@ -53,49 +53,49 @@ bool b = dt2 > dt1; // true
 **注意**：これらのメンバ関数を使って出力される時刻の値は、世界協定時で解釈した時刻の値になっています。そのため、ユーザーのタイムゾーンの日時とは異なって見えます。（出力結果はこの章の末尾に記載したのコードの実行結果を参照してください）
 
 
-####getFractionalTimestamp()
+###getFractionalTimestamp()
 
 世界協定時の基準日（1970-01-01 00:00:00 UTC）からの秒数（実数値）を返します
 
-####getMicroSeconds()
+###getMicroSeconds()
 
 世界協定時の日時のマイクロ秒を返します。これは秒の小数点以下の値を 1/1000000 秒単位で表記した値です。（0.1 秒 = 100000 マイクロ秒）
 
-####getSeconds()
+###getSeconds()
 
 世界協定時の日時の秒を返します。
 
-####getMinutes()
+###getMinutes()
 
 世界協定時の日時の分を返します。
 
-####getHours()
+###getHours()
 
 世界協定時の日時の時を返します。
 
-####getDay()
+###getDay()
 
 世界協定時の日時の日を返します。
 
-####getMonth()
+###getMonth()
 
 世界協定時の日時の月を返します。
 
-####getYear()
+###getYear()
 
 世界協定時の日時の年を返します。
 
-####getWeekday()
+###getWeekday()
 
 世界協定時の曜日
 
 世界協定時の日時の曜日を int で返します。1=Sun 2=Mon 3=Tue 4=Wed 5=Thu 6=Sat
 
-####getYearday()
+###getYearday()
 
 1月1日を 1 、12月31日を 365 とした年間を通した日付の番号を返します。
 
-####is_na()
+###is_na()
 
 このオブジェクトが NA である場合には true を返します。
 

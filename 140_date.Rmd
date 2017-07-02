@@ -43,30 +43,30 @@ DateVector rcpp_date1(){
 
 
 
-##メソッド
+##メンバ関数
 
 
-####getDay()
+###getDay()
 
 日付の日を返します。
 
-####getMonth()
+###getMonth()
 
 日付のの月を返します。
 
-####getYear()
+###getYear()
 
 日付の年を返します。
 
-####getWeekday()
+###getWeekday()
 
 日付の曜日を int で返します。返値は 1=Sun 2=Mon 3=Tue 4=Wed 5=Thu 6=Sat に対応します。
 
-####getYearday()
+###getYearday()
 
 1月1日を 1 、12月31日を 365 とした年間を通した日付の番号を返します。
 
-####is_na()
+###is_na()
 
 このオブジェクトが NA であるなら `true` を返します。
 

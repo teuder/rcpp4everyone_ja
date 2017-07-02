@@ -39,41 +39,41 @@ Rcout << s << "\n"; //"AB"
 
 注：メンバ関数 `replace_first()`, `replace_last()`, `replace_all()` は単に文字を置き換えた文字列を返すわけではなく、このオブジェクトの値をそのものを書き換えます。
 
-#### replace_first( str, new_str)
+### replace_first( str, new_str)
 
 この String オブジェクトの中で文字列 str と一致する最初に見つけた部分文字列を文字列 new_str に置き換えます。
 
 
-#### replace_last( str, new_str) 
+### replace_last( str, new_str) 
 
 この String オブジェクトの中で、文字列 str と一致する最後に見つけた部分文字列 str を 文字列 new_str に置き換えます。
 
-#### replace_all( str, new_str) 
+### replace_all( str, new_str) 
 
 この String オブジェクトの中で、文字列 str と一致する全ての部分文字列 str を 文字列 new_str に置き換えます。
 
-#### push_back(str)
+### push_back(str)
 
 この String オブジェクトの末尾に文字列 str を結合します。（ += 演算子と同じ機能）
 
 
-#### push_back(str)
+### push_back(str)
 
 この String オブジェクトの先頭に文字列 str を結合します。
 
-#### set_na()
+### set_na()
 
 NA 値をセットします。
 
-#### get_cstring()
+### get_cstring()
 
 String オブジェクトの文字列を C 言語の文字列定数（const char*）に変換して返します。
 
-#### get_encoding()
+### get_encoding()
 
 文字コード（"bytes", "latin1", "UTF-8", "unknown"のいずれか）を返します。
 
-#### set_encoding(str)
+### set_encoding(str)
 
 文字列 str で指定する文字コード設定します。
 

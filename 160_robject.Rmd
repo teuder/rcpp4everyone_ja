@@ -7,44 +7,44 @@
 
 `RObject` は以下のメンバー関数を持ちます。これらのメンバー関数は Rcpp が提供する、他の全ての API クラス（`Vector`など）でも同じものを共通して持っています。
 
-#### inherits(str)
+### inherits(str)
 
 このオブジェクトが文字列 str で指定したクラスを継承している場合は `true` を返します。
 
-#### slot(name)
+### slot(name)
 
 このオブジェクトが `S4` の場合、文字列 name で指定したスロットにアクセスします。
 
 
-#### hasSlot(name)
+### hasSlot(name)
 
 このオブジェクトが `S4` の場合、文字列 name で指定したスロットがある場合は `true` を返します。
 
-#### attr(name)
+### attr(name)
 
 このオブジェクトの文字列 name で指定した属性にアクセスします。
 
-#### attributeNames()
+### attributeNames()
 
 このオブジェクトが持つ全ての属性の名前を `std::vector<std::string>` 型で返します。
 
-#### hasAttribute(name)
+### hasAttribute(name)
 
 このオブジェクトが文字列 name で指定した名前の属性を持っている場合は `true` を返します。
 
-#### isNULL()
+### isNULL()
 
 このオブジェクトが NULL である場合は true を返します。
 
-#### sexp_type()
+### sexp_type()
 
 このオブジェクトの `SXPTYPE` を `int` 型で返します。 R で定義された全ての[`SEXPTYPE`のリストはRのマニュアル](https://cran.r-project.org/doc/manuals/r-release/R-ints.html#SEXPTYPEs)を参照してください。
 
-#### isObject()
+### isObject()
 
 このオブジェクトが "class" 属性を持っている場合には `true` を返します。
 
-#### isS4()
+### isS4()
 
 このオブジェクトが `S4` オブジェクトである場合には `true` を返します。
 

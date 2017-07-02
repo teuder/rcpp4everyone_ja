@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="271_Rmath.html">
-<link rel="next" href="290_R_in_Rcpp.html">
+<link rel="prev" href="160_robject.html">
+<link rel="next" href="170_calculation.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -484,57 +484,67 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rのコード中にrcppのコードを埋め込む" class="section level1">
-<h1><span class="header-section-number">Chapter 29</span> Rのコード中にRcppのコードを埋め込む</h1>
-<p>Rcppのコードをファイルに保存せずに、Rのコードの中で記述することもできます。そのためには <code>sourceCpp()</code> <code>cppFunction()</code> <code>evalCpp()</code> を使う。</p>
-<div id="sourcecpp" class="section level3">
-<h3><span class="header-section-number">29.0.1</span> sourceCpp()</h3>
-<p>sourceCpp() に対しては、Rcpp コードを記述したファイルへのパスを与える代わりに、RcppのコードをRの文字列として記述して与えることもできます。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">src&lt;-
-<span class="st">&quot;#include &lt;Rcpp.h&gt;</span>
-<span class="st">using namespace Rcpp;</span>
-<span class="st">// [[Rcpp::export]]</span>
-<span class="st">double rcpp_sum(NumericVector v){</span>
-<span class="st">  double sum = 0;</span>
-<span class="st">  for(int i=0; i&lt;v.length(); ++i){</span>
-<span class="st">    sum += v[i];</span>
-<span class="st">  }</span>
-<span class="st">  return(sum);</span>
-<span class="st">}&quot;</span>
+<div id="rのオブジェクトを扱う際の注意点" class="section level1">
+<h1><span class="header-section-number">Chapter 17</span> Rのオブジェクトを扱う際の注意点</h1>
+<ul>
+<li><a href="161_notification_vector.html#ベクトル同士の代入">ベクトル同士の代入</a></li>
+<li><a href="#">要素番号の型</a></li>
+<li><a href="#%5B%5D演算子の返値">[]演算子の返値</a></li>
+</ul>
+<div id="ベクトル同士の代入" class="section level2">
+<h2><span class="header-section-number">17.1</span> ベクトル同士の代入</h2>
+<p>ベクトルや行列同士で代入する際に、単純に <code>v2 = v1</code> で代入すると v1 の要素の値が v2 にコピーされるのではなく、v1 と v2 は同じオブジェクトに対する別名となります。そのため v1 の値を変更すると v2 の値も変更されてしまいます。それを避けるためには <code>clone()</code> 関数を使用します。すると v1 の値を変更しても、v2 の値は変更されません。</p>
+<p>C++ に詳しい人のために説明すると、Rcpp のデータ型は内部にオブジェクトの値そのものではなく、オブジェクトへのポインタを保持しています。そのため、単純に <code>v2 = v1</code> で代入すると v1 が指し示すオブジェクトへのポインターの値がコピーされるので v1 と v2 は同じオブジェクトを指し示す結果となります。これをシャロー（浅い）コピーと呼びます。それに対して、<code>v2 = clone(v1)</code> を用いた場合には、<code>v1</code> が持つポインタが指し示すオブジェクトの値を複製して、新たに別のオブジェクトを作成します。これをディープ（深い）コピーと呼びます。</p>
+<p>下のコード例では、浅いコピーと深いコピーの後に代入した元のベクトルの値を変更した時の結果の違いを示します。</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector v1 = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>};
+NumericVector v2 = v1;        <span class="co">// v2 は単純な代入（浅いコピー）</span>
+NumericVector v3 = clone(v1); <span class="co">// v3 は clone() で代入（深いコピー）</span>
 
-<span class="kw">sourceCpp</span>(<span class="dt">code =</span> src)
-<span class="kw">rcpp_sum</span>(<span class="dv">1</span>:<span class="dv">10</span>)</code></pre></div>
-</div>
-<div id="cppfunction" class="section level3">
-<h3><span class="header-section-number">29.0.2</span> cppFunction()</h3>
-<p><code>cppFunction()</code>を使うと「単一のRcpp関数」を手軽に作成することができます。その際には <code>#include&lt;Rcpp.h&gt;</code>と<code>using namespase Rcpp</code>の記述を省略できます。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">src &lt;-
-<span class="st">&quot;double rcpp_sum(NumericVector v){</span>
-<span class="st">  double sum = 0;</span>
-<span class="st">  for(int i=0; i&lt;v.length(); ++i){</span>
-<span class="st">    sum += v[i];</span>
-<span class="st">  }</span>
-<span class="st">  return(sum);</span>
-<span class="st">}</span>
-<span class="st">&quot;</span>
-Rcpp::<span class="kw">cppFunction</span>(src)
-<span class="kw">rcpp_sum</span>(<span class="dv">1</span>:<span class="dv">10</span>)</code></pre></div>
-</div>
-<div id="evalcpp" class="section level3">
-<h3><span class="header-section-number">29.0.3</span> evalCpp()</h3>
-<p><code>evalCpp()</code> を使うと手軽にRcppの式を評価することができます。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># double の最大値を調べる</span>
-&gt;<span class="st"> </span>Rcpp::<span class="kw">evalCpp</span>(<span class="st">&#39;std::numeric_limits&lt;double&gt;::max()&#39;</span>)
-[<span class="dv">1</span>] <span class="fl">1.797693e+308</span></code></pre></div>
+v1[<span class="dv">0</span>] = <span class="dv">100</span>; <span class="co">// v1 の値を変更します</span>
 
+<span class="co">// 値を確認すると v2 には v1 への変更が影響していますが</span>
+<span class="co">// v3 には影響していないことがわかります</span>
+Rcout &lt;&lt; <span class="st">&quot;v1 = &quot;</span> &lt;&lt; v1 &lt;&lt; endl; <span class="co">// 100 2 3</span>
+Rcout &lt;&lt; <span class="st">&quot;v2 = &quot;</span> &lt;&lt; v2 &lt;&lt; endl; <span class="co">// 100 2 3</span>
+Rcout &lt;&lt; <span class="st">&quot;v3 = &quot;</span> &lt;&lt; v3 &lt;&lt; endl; <span class="co">// 1 2 3</span></code></pre></div>
+<p>C++に詳しい人のために説明すると、Rcppのデータ型は内部にオブジェクトの値そのものではなく、オブジェクトへのポインタを保持しています。そのため、単純に <code>v2 = v1</code> で代入するとすると内部のポインターの値がコピーされてしまうので、このような現象が起きる。</p>
+</div>
+<div id="要素番号の型" class="section level2">
+<h2><span class="header-section-number">17.2</span> 要素番号の型</h2>
+<p>32 bit システムやバージョン 2 以前の R ではベクトルの要素番号には <code>int</code> 型が使われていたため、ベクトルの要素数の最大値は 2^31 - 1 となっていました。しかし、現在一般的となっている 64 bit システムにおけるバージョン3以降のRではこれよりも要素数の大きいベクトル（Long Vector）を扱うことができます。Rcpp で Long Vector をサポートするためには、要素数や要素番号を変数として保持する場合に <code>int</code> 型ではなく <code>R_xlen_t</code> 型を用います。64 bit システムでも要素番号として <code>int</code> 型を用いることもできますが、その場合には長さが 2^31 - 1 を超えるベクトルを渡された時に処理ができなくなります。</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// 要素数 n を R_xlen_t 型として宣言する</span>
+R_xlen_t n = v.length();
+<span class="dt">double</span> sum = <span class="dv">0</span>;
+<span class="co">// 要素番号 i を R_xlen_t 型として宣言する</span>
+<span class="kw">for</span>(R_xlen_t i=<span class="dv">0</span>; i&lt;n; ++i){
+  sum += v[i];
+}</code></pre></div>
+</div>
+<div id="演算子の返値" class="section level2">
+<h2><span class="header-section-number">17.3</span> []演算子の返値</h2>
+<p><code>[]</code> や <code>()</code> 演算子でベクトルの要素へアクセスした時の返値は、<code>Vector</code>そのものではなく <code>Vector::Proxy</code> という型となっています。そのため、<code>v[]</code> を他の関数の引数として与えるとコンパイルエラーになることがあります。その場合には、<code>as&lt;T&gt;()</code> を用いて、目的の型 <code>T</code> (<code>NumericVector</code> など) に変換します。</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector v {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};
+IntegerVector i {<span class="dv">1</span>,<span class="dv">3</span>};
+
+<span class="co">// これはコンパイルエラーとなる</span>
+<span class="co">//double x1 = sum(v[i]);</span>
+
+<span class="co">// 変数として保持する</span>
+NumericVector vi = v[i];
+<span class="dt">double</span>   x2 = sum(vi);
+
+<span class="co">// as&lt;T&gt;() で変換する</span>
+<span class="dt">double</span>   x3 = sum(as&lt;NumericVector&gt;(v[i]));</code></pre></div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="271_Rmath.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="290_R_in_Rcpp.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="160_robject.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="170_calculation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

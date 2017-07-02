@@ -71,87 +71,87 @@ v2 = v2*2;                       // v2 を変更しても df[0] の値は変わ�
 Rcpp では、`DataFrame` や `List` は、ある種のベクトルとして実装されています。つまり、`Vector` は、スカラー値を要素とするベクトル、`DataFrame` は同じ長さの `Vector` を要素とするベクトルです。そのため、`DataFrame` は `Vector` 共通するメンバ関数を多く持っています。
 
 
-#### length() size()
+### length() size()
 
 列数を返します。
 
 
-####nrows()
+###nrows()
 
 行数を返します。
 
-####names()
+###names()
 
 カラム名を文字列ベクトルで返します。
 
-####offset(name) findName(name)
+###offset(name) findName(name)
 
 文字列 name で指定された名前のカラムの列番号を返します。
 
-####findName(name)
+###findName(name)
 
-文字列 name で指定された名前のカラムの列番号を返します。
+文字列 name で指定された名前のカラムの列番号を返します。
 
 
-####fill(v)
+###fill(v)
 
 この `DataFrame` の全てのカラムを `Vector` v で満たします。
 
 
-####assign( first_it, last_it)
+###assign( first_it, last_it)
 
 イテレーター first_it, last_it で指定された範囲のカラムを、この `DataFrame` に代入します。
 
-####push_back(v)
+###push_back(v)
 
 この `DataFrame`  の末尾に `Vector` v を追加します。
 
-####push_back( v, name )
+###push_back( v, name )
 
 この `DataFrame`  の末尾に `Vector` v を追加します。 追加したカラムの名前を文字列 name で指定します。
 
-####push_front(x)
+###push_front(x)
 
 この `DataFrame`  の先頭に `Vector` v を追加します。
 
 
-####push_front( x, name )
+###push_front( x, name )
 
 この `DataFrame`  の先頭に `Vector` v を追加します。追加したカラムの名前を文字列 name で指定します。
 
-#### begin()
+### begin()
 
 この `DataFrame` の先頭カラムへのイテレータを返します。
 
-#### end()
+### end()
 
 この `DataFrame` の末尾へのイテレータを返します。
 
-#### insert( it, v )
+### insert( it, v )
 
 この `DataFrame` の、イテレータ it で示された位置に``Vector` ` v を追加し、その要素へのイテレータを返します。
 
-#### erase(i)
+### erase(i)
 
 この `DataFrame` の i 番目のカラムを削除し、削除した直後のカラムへのイテレータを返す。
 
-####erase(it)
+###erase(it)
 
 イテレータ it で指定されたカラムを削除し、削除した直後のカラムへのイテレータを返します。
 
-####erase(first_i, last_i)
+###erase(first_i, last_i)
 
 first_i 番目 から last_i -1 番目 までのカラムを削除し、削除した直後のカラムへのイテレータを返します。
 
 
-#### erase(first_it, last_it)
+### erase(first_it, last_it)
 
 イテレータ first_it から last_it -1 で指定されるカラムまでを削除し、削除した直後のカラムへのイテレータを返します。
 
-#### containsElementNamed(name)
+### containsElementNamed(name)
 
-この `DataFrame` が文字列 name で指定された名前のカラムを持っている場合には true を返します。
+この `DataFrame` が文字列 name で指定された名前のカラムを持っている場合には true を返します。
 
-#### inherits(str)
+### inherits(str)
 
 このオブジェクトの属性 class に文字列 str が含まれているかどうか。

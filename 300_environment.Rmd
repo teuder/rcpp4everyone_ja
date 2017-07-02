@@ -42,11 +42,11 @@ x[0] = 100;
 
 関数 `new_env()` 関数を用いることで新しい空の環境を作成することができます。
 
-#### new_env(size = 29)
+### new_env(size = 29)
 
 新しい環境を返します。size は作成される環境のハッシュテーブルの初期サイズを指定します。
 
-#### new_env(parent, size = 29)
+### new_env(parent, size = 29)
 
 parent を親環境とする新しい環境を返します。size は作成される環境のハッシュテーブルの初期サイズを指定します。
 
@@ -54,90 +54,90 @@ parent を親環境とする新しい環境を返します。size は作成さ�
 
 ## メンバ関数
 
-#### get(name)
+### get(name)
 
 name で指定された名前のオブジェクトを取得します。見つからない場合は `R_NilValue` を返します。
 
-#### ls(all)
+### ls(all)
 
 この環境にあるオブジェクトの一覧を文字列ベクトル返します。引数 all が true なら全てのオブジェクトを、false なら名前が `.` から始まるオブジェクトは除外します。
 
-#### find(name)
+### find(name)
 
 この環境、あるいは、その親環境から文字列 name で指定した名前のオブジェクトを取得します。見つからない場合は binding_not_found 例外が thow されます。
 
-#### exists(name)
+### exists(name)
 
 この環境に文字列 name で指定した名前のオブジェクトが存在する場合には true を返します。
 
-#### assign( name, x )
+### assign( name, x )
 
 この環境にある文字列 name で指定した名前のオブジェクトに値 x を代入します。成功した場合には true を返します。
 
-#### isLocked()
+### isLocked()
 
 この環境がロックされている場合には true を返します。
 
-#### remove(name)
+### remove(name)
 
 この環境から文字列 name で指定した名前のオブジェクトを削除します。成功した場合には true を返します。
 
-#### lock(bindings = false)
+### lock(bindings = false)
 
 この環境をロックします。binding = true の場合は、この環境の binding （Rのオブジェクト名とメモリ上のオブジェクト値の対応関係）もロックします。
 
-#### lockBinding(name)
+### lockBinding(name)
 
 この環境にある文字列 name で指定した binding をロックします。
 
-#### unlockBinding(name){
+### unlockBinding(name){
 
 この環境にある文字列 name で指定した binding のロックを解除します。
 
-#### bindingIsLocked(name)
+### bindingIsLocked(name)
 
 この環境にある文字列 name で指定した binding がロックされている場合には true を返します。
 
-#### bindingIsActive(name)
+### bindingIsActive(name)
 
 この環境にある文字列 name で指定した binding がアクティブである場合には true を返します。
 
 
-#### is_user_database()
+### is_user_database()
 
 この環境がユーザーが定義したデータベース（"UserDefinedDatabase"）を継承している場合には true を返します。
 
-#### parent()
+### parent()
 
 この環境の親環境を返します。
 
-#### new_child(hashed)
+### new_child(hashed)
 
 この環境を親とする新しい環境を作成します。hashed = true の場合は、作成した環境はハッシュテーブルを使用します。
 
 
 ## static メンバ関数
 
-####Environment::global_env()
+###Environment::global_env()
 
 グローバル環境を返します。
 
-####Environment::empty_env()
+###Environment::empty_env()
 
 ルート環境である空環境を返します。
 
-####Environment::base_env()
+###Environment::base_env()
 
 base パッケージの環境を返します。
 
-####Environment::base_namespace()
+###Environment::base_namespace()
 
 baseパッケージの名前空間を返す。
 
-#### Environment::Rcpp_namespace()
+### Environment::Rcpp_namespace()
 
 Rcpp パッケージの名前空間を返します。
 
-#### Environment::namespace_env(package)
+### Environment::namespace_env(package)
 
 文字列 package で指定した名前のパッケージの名前空間を返します。`Environment::namespace_env()` を使った場合には、R であらかじめ `library()` 関数でパッケージをロードしていなくてもパッケージ内の関数を呼び出すことができますこれは R で `パッケージ名::関数()` という形式で呼び出した場合と同等です。それに加えて、パッケージ内で export されていない関数にもアクセスすることができます。これは Rで `パッケージ名:::関数()` という形式で呼び出した場合と同等です。
