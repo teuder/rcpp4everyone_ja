@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -498,16 +498,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">29.1</span> C++のソースにRのコードを埋め込む</h2>
 <p>C++ のコード内に R のコードを記述することもできます。</p>
 <p>C++ コード内で <code>/*** R</code>で始まるコメントの内に R のコードを書くと、<code>sourceCpp()</code> した時に、それが実行されます。・</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include&lt;Rcpp.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include</span><span class="im">&lt;Rcpp.h&gt;</span>
 <span class="kw">using</span> <span class="kw">namespace</span> Rcpp;
 
 <span class="co">// [[Rcpp::export]]</span>
 <span class="dt">double</span> rcpp_sum(NumericVector v){
     <span class="dt">double</span> sum = <span class="dv">0</span>;
-    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.length(); ++i){
+    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.length(); ++i){
         sum += v[i];
     }
-    <span class="kw">return</span>(sum);
+    <span class="cf">return</span>(sum);
 }
 
 <span class="co">/*** R</span>

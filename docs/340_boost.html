@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -524,11 +524,11 @@ return V;
 }</code></pre>
 <p>R, Rcpp, C++11, Boost で乱数生成器のパフォーマンス比較</p>
 <p>Rの乱数生成器を呼び出す</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;Rcpp.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span>
 <span class="kw">using</span> <span class="kw">namespace</span> Rcpp;
 <span class="co">// [[Rcpp::export]]</span>
 NumericVector rcppNormals(<span class="dt">int</span> n) {
-<span class="kw">return</span> rnorm(n);
+<span class="cf">return</span> rnorm(n);
 }</code></pre></div>
 <p>ベンチマーク</p>
 <pre><code>library(rbenchmark)
@@ -547,22 +547,22 @@ print(res[,1:4])</code></pre>
 1  rcppNormals(n)          500   0.505    1.256
 4        rnorm(n)          500   0.675    1.679</code></pre>
 <p>C++11やBoost のネイティブ乱数生成器が早いが、Rcpp版も健闘しています。どれも、ただのR関数よりは早い。</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;Rcpp.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span>
 
 <span class="co">// [[Rcpp::depends(BH)]]</span>
 
 <span class="co">// One include file from Boost</span>
-<span class="ot">#include &lt;boost/date_time/gregorian/gregorian_types.hpp&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;boost/date_time/gregorian/gregorian_types.hpp&gt;</span>
 
-<span class="kw">using</span> <span class="kw">namespace</span> boost::gregorian;
+<span class="kw">using</span> <span class="kw">namespace</span> <span class="ex">boost::</span>gregorian;
 
 <span class="co">// [[Rcpp::export]]</span>
 Rcpp::Date getIMMDate(<span class="dt">int</span> mon, <span class="dt">int</span> year) {
 <span class="co">// compute third Wednesday of given month / year</span>
 date d = nth_day_of_the_week_in_month(nth_day_of_the_week_in_month::third,
 Wednesday, mon).get_date(year);
-date::ymd_type ymd = d.year_month_day();
-<span class="kw">return</span> Rcpp::wrap(Rcpp::Date(ymd.year, ymd.month, ymd.day));
+date::<span class="dt">ymd_type</span> ymd = d.year_month_day();
+<span class="cf">return</span> Rcpp::wrap(Rcpp::Date(ymd.year, ymd.month, ymd.day));
 }</code></pre></div>
 <p>IMM date は、毎月の３番目の水曜日のことを指す。Boost には mon 月 の N 週目の M 曜日を返す関数があります。<code>nth_day_of_the_week_in_month(M, N, mon)</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getIMMDate</span>(<span class="dv">3</span>, <span class="dv">2013</span>)</code></pre></div>

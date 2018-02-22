@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -556,11 +556,11 @@ Rcout &lt;&lt; s &lt;&lt; &quot;\n&quot;; //&quot;AB&quot;</code></pre>
 </div>
 <div id="get_encoding" class="section level3">
 <h3><span class="header-section-number">13.3.8</span> get_encoding()</h3>
-<p>文字コード（“bytes”, “latin1”, “UTF-8”, “unknown”のいずれか）を返します。</p>
+<p><a href="https://github.com/wch/r-source/blob/bf0a0a9d12f2ce5d66673dc32cd253524f3270bf/src/include/Rinternals.h#L928-L935"><code>cetype_t</code></a>で表される文字コードを返します。</p>
 </div>
-<div id="set_encodingstr" class="section level3">
-<h3><span class="header-section-number">13.3.9</span> set_encoding(str)</h3>
-<p>文字列 str で指定する文字コード設定します。</p>
+<div id="set_encodingenc" class="section level3">
+<h3><span class="header-section-number">13.3.9</span> set_encoding(enc)</h3>
+<p><code>enc</code>（<code>cetype_t</code>）で指定する文字コード設定します。</p>
 </div>
 <div id="コード例" class="section level3">
 <h3><span class="header-section-number">13.3.10</span> コード例</h3>

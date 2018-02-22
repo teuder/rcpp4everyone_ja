@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -509,7 +509,7 @@ DataFrame matix_rows_cols(NumericMatrix m){
     <span class="dt">int</span> J = m.cols();
 
     <span class="co">// 結果を標準 C++ コンテナの vector に格納します。</span>
-    std::vector&lt;<span class="dt">int</span>&gt; rows, cols; <span class="co">//行番号と列番号を格納する変数</span>
+    <span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; rows, cols; <span class="co">//行番号と列番号を格納する変数</span>
 
     <span class="co">// 要素の数は最大で行列 m の要素数になり得るので</span>
     <span class="co">// その分のメモリを先に確保します。</span>
@@ -518,9 +518,9 @@ DataFrame matix_rows_cols(NumericMatrix m){
 
     <span class="co">// 行列 m の全ての要素にアクセスして</span>
     <span class="co">// 値が 0 ではない要素の行番号と列番号を保存します。</span>
-    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;I; ++i){
-        <span class="kw">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>; j&lt;J; ++j){
-            <span class="kw">if</span>(m(i,j)!=<span class="fl">0.0</span>){
+    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;I; ++i){
+        <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>; j&lt;J; ++j){
+            <span class="cf">if</span>(m(i,j)!=<span class="fl">0.0</span>){
                 rows.push_back(i<span class="dv">+1</span>);
                 cols.push_back(j<span class="dv">+1</span>);
             }
@@ -528,7 +528,7 @@ DataFrame matix_rows_cols(NumericMatrix m){
     }
 
     <span class="co">// 結果をデータフレームとして返します。</span>
-    <span class="kw">return</span> DataFrame::create(Named(<span class="st">&quot;rows&quot;</span>, rows),
+    <span class="cf">return</span> DataFrame::create(Named(<span class="st">&quot;rows&quot;</span>, rows),
                              Named(<span class="st">&quot;cols&quot;</span>, cols));
 }</code></pre></div>
 <p>下に、いくつかの主要な標準 C++ データ構造の概要を示します。</p>
@@ -607,7 +607,7 @@ DataFrame matix_rows_cols(NumericMatrix m){
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector   rcpp_vector = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};
 
 <span class="co">// Rcpp::Vector から std::vector への変換  </span>
-std::vector&lt;<span class="dt">double</span>&gt;  cpp_vector = as&lt; std::vector&lt;<span class="dt">double</span>&gt; &gt;(rcpp_vector);
+<span class="bu">std::</span>vector&lt;<span class="dt">double</span>&gt;  cpp_vector = as&lt; <span class="bu">std::</span>vector&lt;<span class="dt">double</span>&gt; &gt;(rcpp_vector);
 
 <span class="co">// std::vector から Rcpp::Vector への変換  </span>
 NumericVector v1 = wrap(cpp_vector);</code></pre></div>
@@ -625,15 +625,15 @@ DataFrame df = wrap(cpp_vector_2d_01);
 vector&lt;vector&lt;<span class="dt">double</span>&gt;&gt; cpp_vector_2d_02 = {{<span class="dv">1</span>,<span class="dv">2</span>},{<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>}};
 List li = wrap(cpp_vector_2d_02);</code></pre></div>
 <p>次のコード例では、標準 C++ の <code>map&lt;key, value&gt;</code> と <code>unordered_map&lt;key, value&gt;</code> は <code>key</code> を要素の名前、<code>value</code> を要素の型とした、名前付き Vector に変換されることを示します。</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include&lt;map&gt;</span>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include</span><span class="im">&lt;map&gt;</span>
 <span class="co">// [[Rcpp::export]]</span>
 NumericVector std_map(){
-    std::map&lt;std::string, <span class="dt">double</span>&gt; cpp_num_map;
+    <span class="bu">std::</span>map&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; cpp_num_map;
     cpp_num_map[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    
     cpp_num_map[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;
     cpp_num_map[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;
 
-    std::un&lt;std::string, <span class="dt">double</span>&gt; cpp_num_map;
+    <span class="bu">std::</span>un&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; cpp_num_map;
     cpp_num_map[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    
     cpp_num_map[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;
     cpp_num_map[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;
@@ -657,10 +657,10 @@ A C B
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span>
 <span class="co">// [[Rcpp::export]]</span>
 vector&lt;<span class="dt">double</span>&gt; times_two_std_vector(vector&lt;<span class="dt">double</span>&gt; v){ <span class="co">//暗黙的に as() が呼ばれる</span>
-    <span class="kw">for</span>(<span class="dt">double</span> &amp;x : v){
+    <span class="cf">for</span>(<span class="dt">double</span> &amp;x : v){
         x *= <span class="dv">2</span>;
     }
-    <span class="kw">return</span> v; <span class="co">//暗黙的に wrap() が呼ばれる</span>
+    <span class="cf">return</span> v; <span class="co">//暗黙的に wrap() が呼ばれる</span>
 }</code></pre></div>
 
 </div>

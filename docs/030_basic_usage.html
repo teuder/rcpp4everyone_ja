@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -505,16 +505,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="rcppコードを書く" class="section level2">
 <h2><span class="header-section-number">3.1</span> Rcppコードを書く</h2>
 <p>まずは、Rcppのファイルを作成します。下の例では、数値ベクターの要素の総和を計算する関数 <code>rcpp_sum()</code> を定義しています。このコードを sum.cpp という名前で保存します。</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;Rcpp.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span>
 <span class="kw">using</span> <span class="kw">namespace</span> Rcpp;
 
 <span class="co">// [[Rcpp::export]]</span>
 <span class="dt">double</span> rcpp_sum(NumericVector v){
     <span class="dt">double</span> sum = <span class="dv">0</span>;
-    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.length(); ++i){
+    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.length(); ++i){
         sum += v[i];
     }
-    <span class="kw">return</span>(sum);
+    <span class="cf">return</span>(sum);
 }</code></pre></div>
 </div>
 <div id="コンパイル" class="section level2">
@@ -525,10 +525,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="実行結果" class="section level2">
 <h2><span class="header-section-number">3.3</span> 実行結果</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">rcpp_sum</span>(<span class="dv">1</span>:<span class="dv">10</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rcpp_sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
 [<span class="dv">1</span>] <span class="dv">55</span>
 
-&gt;<span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span>:<span class="dv">10</span>)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
 [<span class="dv">1</span>] <span class="dv">55</span></code></pre></div>
 
 </div>

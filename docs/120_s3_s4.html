@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -507,26 +507,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
     <span class="co">//関数に与えられたオブジェクトが lm() オブジェクトではない場合は</span>
     <span class="co">//エラーメッセージを出力し実行を停止します。</span>
-    <span class="kw">if</span> (! lm_model.inherits(<span class="st">&quot;lm&quot;</span>)) stop(<span class="st">&quot;Input must be a lm() model object.&quot;</span>);
+    <span class="cf">if</span> (! lm_model.inherits(<span class="st">&quot;lm&quot;</span>)) stop(<span class="st">&quot;Input must be a lm() model object.&quot;</span>);
 
     <span class="co">//残差（実測値 - 予測値）を取り出します。</span>
     NumericVector resid  = lm_model[<span class="st">&quot;residuals&quot;</span>];
 
     <span class="co">//残差の要素数</span>
-    R_xlen_t n = resid.length();
+    <span class="dt">R_xlen_t</span> n = resid.length();
 
     <span class="co">//残差の平方和</span>
     <span class="dt">double</span> rmse(<span class="fl">0.0</span>);
-    <span class="kw">for</span>(<span class="dt">double</span>&amp; r : resid){
+    <span class="cf">for</span>(<span class="dt">double</span>&amp; r : resid){
         rmse += r*r;
     }
 
     <span class="co">//残差平方和を要素数で割り、平方根を取る</span>
-    <span class="kw">return</span>(sqrt((<span class="fl">1.0</span>/n)*rmse));
+    <span class="cf">return</span>(sqrt((<span class="fl">1.0</span>/n)*rmse));
 }</code></pre></div>
 <p>実行例として、R のサンプルデータ mtcars を使って、車の燃費を線形回帰したモデルの RMSE を計算します。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span>., <span class="dt">data =</span> mtcars)
-&gt;<span class="st"> </span><span class="kw">rcpp_rmse</span>(mod)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> mtcars)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">rcpp_rmse</span>(mod)
 [<span class="dv">1</span>] <span class="fl">2.146905</span></code></pre></div>
 </div>
 <div id="s4クラス" class="section level2">
@@ -559,7 +559,7 @@ x.hasSlot(<span class="st">&quot;スロット名&quot;</span>);</code></pre></di
 )
 
 <span class="co"># R で Person クラスのオブジェクトを作成する例</span>
-person_01 &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;Person&quot;</span>,
+person_<span class="dv">01</span> &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;Person&quot;</span>,
                  <span class="dt">name =</span> <span class="st">&quot;Ronald Fisher&quot;</span>,
                  <span class="dt">birth =</span> <span class="kw">as.Date</span>(<span class="st">&quot;1890-02-17&quot;</span>))</code></pre></div>
 <p>次に Rcpp で Person クラスのオブジェクトを作成し、そのスロットに値を設定します。</p>
@@ -573,7 +573,7 @@ S4 rcpp_s4(){
     x.slot(<span class="st">&quot;name&quot;</span>)  = <span class="st">&quot;Sewall Wright&quot;</span>;
     x.slot(<span class="st">&quot;birth&quot;</span>) = Date(<span class="st">&quot;1889-12-21&quot;</span>);
 
-    <span class="kw">return</span>(x);
+    <span class="cf">return</span>(x);
 }</code></pre></div>
 <p>実行結果</p>
 <pre><code>&gt; rcpp_s4()

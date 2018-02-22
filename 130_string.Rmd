@@ -71,11 +71,11 @@ String オブジェクトの文字列を C 言語の文字列定数（const char
 
 ### get_encoding()
 
-文字コード（"bytes", "latin1", "UTF-8", "unknown"のいずれか）を返します。
+[`cetype_t`](https://github.com/wch/r-source/blob/bf0a0a9d12f2ce5d66673dc32cd253524f3270bf/src/include/Rinternals.h#L928-L935)で表される文字コードを返します。
 
-### set_encoding(str)
+### set_encoding(enc)
 
-文字列 str で指定する文字コード設定します。
+`enc`（`cetype_t`）で指定する文字コード設定します。
 
 
 

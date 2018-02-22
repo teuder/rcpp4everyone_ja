@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -513,7 +513,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">}&quot;</span>
 
 <span class="kw">sourceCpp</span>(<span class="dt">code =</span> src)
-<span class="kw">rcpp_sum</span>(<span class="dv">1</span>:<span class="dv">10</span>)</code></pre></div>
+<span class="kw">rcpp_sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="cppfunction" class="section level3">
 <h3><span class="header-section-number">29.0.2</span> cppFunction()</h3>
@@ -527,14 +527,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  return(sum);</span>
 <span class="st">}</span>
 <span class="st">&quot;</span>
-Rcpp::<span class="kw">cppFunction</span>(src)
-<span class="kw">rcpp_sum</span>(<span class="dv">1</span>:<span class="dv">10</span>)</code></pre></div>
+Rcpp<span class="op">::</span><span class="kw">cppFunction</span>(src)
+<span class="kw">rcpp_sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="evalcpp" class="section level3">
 <h3><span class="header-section-number">29.0.3</span> evalCpp()</h3>
 <p><code>evalCpp()</code> を使うと手軽にRcppの式を評価することができます。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># double の最大値を調べる</span>
-&gt;<span class="st"> </span>Rcpp::<span class="kw">evalCpp</span>(<span class="st">&#39;std::numeric_limits&lt;double&gt;::max()&#39;</span>)
+<span class="op">&gt;</span><span class="st"> </span>Rcpp<span class="op">::</span><span class="kw">evalCpp</span>(<span class="st">&#39;std::numeric_limits&lt;double&gt;::max()&#39;</span>)
 [<span class="dv">1</span>] <span class="fl">1.797693e+308</span></code></pre></div>
 
 </div>

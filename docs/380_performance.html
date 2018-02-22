@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -501,16 +501,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><a href="http://gallery.rcpp.org/articles/gibbs-sampler/" class="uri">http://gallery.rcpp.org/articles/gibbs-sampler/</a></p>
 <p>この例では、２重の for ループの中で乱数を生成し、結果を行列に格納しています。</p>
 <p><strong>Rバージョン</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gibbsR &lt;-<span class="st"> </span>function(N,thin){
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gibbsR &lt;-<span class="st"> </span><span class="cf">function</span>(N,thin){
 
   mat&lt;-<span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">nrow=</span>N,<span class="dt">ncol=</span><span class="dv">2</span>)
   x &lt;-<span class="st"> </span><span class="dv">0</span>
   y &lt;-<span class="st"> </span><span class="dv">0</span>
 
-  for(i in <span class="dv">1</span>:N){
-    for(j in <span class="dv">1</span>:thin){
-      x &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>/(y*y<span class="dv">+4</span>))
-      y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">1</span>/(x<span class="dv">+1</span>), <span class="dv">1</span>/<span class="kw">sqrt</span>(<span class="dv">2</span>*x<span class="dv">+2</span>))
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N){
+    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>thin){
+      x &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span><span class="op">/</span>(y<span class="op">*</span>y<span class="op">+</span><span class="dv">4</span>))
+      y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span>(x<span class="op">+</span><span class="dv">1</span>), <span class="dv">1</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">2</span><span class="op">*</span>x<span class="op">+</span><span class="dv">2</span>))
     }
     mat[i,] &lt;-<span class="st"> </span><span class="kw">c</span>(x,y)
   }
@@ -519,7 +519,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><strong>Rcppバージョン</strong></p>
 <p>以下のコードを “gibbs.cpp” というファイル名で保存します。</p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//gibbs.cpp</span>
-<span class="ot">#include &lt;Rcpp.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span>
 <span class="kw">using</span> <span class="kw">namespace</span> Rcpp;
 
 <span class="co">// [[Rcpp::export]]</span>
@@ -528,8 +528,8 @@ NumericMatrix gibbsCpp(<span class="dt">int</span> N, <span class="dt">int</span
   NumericMatrix mat(N, <span class="dv">2</span>);
   <span class="dt">double</span> x = <span class="dv">0</span>, y = <span class="dv">0</span>;
 
-  <span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; N; i++) {
-    <span class="kw">for</span>(<span class="dt">int</span> j = <span class="dv">0</span>; j &lt; thin; j++) {
+  <span class="cf">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; N; i++) {
+    <span class="cf">for</span>(<span class="dt">int</span> j = <span class="dv">0</span>; j &lt; thin; j++) {
       x = R::rgamma(<span class="fl">3.0</span>, <span class="fl">1.0</span> / (y * y + <span class="dv">4</span>));
       y = R::rnorm(<span class="fl">1.0</span> / (x + <span class="dv">1</span>), <span class="fl">1.0</span> / sqrt(<span class="dv">2</span> * x + <span class="dv">2</span>));
     }
@@ -537,7 +537,7 @@ NumericMatrix gibbsCpp(<span class="dt">int</span> N, <span class="dt">int</span
     mat(i, <span class="dv">1</span>) = y;
   }
 
-  <span class="kw">return</span>(mat);
+  <span class="cf">return</span>(mat);
 }</code></pre></div>
 <p><strong>コンパイル &amp; 実行</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rcpp)

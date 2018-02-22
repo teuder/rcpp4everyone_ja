@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -557,9 +557,9 @@ LogicalVector   v4 = LogicalVector::create( <span class="kw">true</span>, NA_LOG
 LogicalVector l1 = is_na(v);
 LogicalVector l2 = is_nan(v);
 LogicalVector l3 = is_infinite(v);
-Rcout &lt;&lt; l1 &lt;&lt; <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>; <span class="co">// 0 1 1 0 0</span>
-Rcout &lt;&lt; l2 &lt;&lt; <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>; <span class="co">// 0 0 1 0 0</span>
-Rcout &lt;&lt; l3 &lt;&lt; <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>; <span class="co">// 0 0 0 1 1</span></code></pre></div>
+Rcout &lt;&lt; l1 &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 0 1 1 0 0</span>
+Rcout &lt;&lt; l2 &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 0 0 1 0 0</span>
+Rcout &lt;&lt; l3 &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 0 0 0 1 1</span></code></pre></div>
 <p>これらの関数を使うことでベクトルから <code>NA</code> <code>NaN</code> <code>Inf</code> を取り除くことができます。また <code>NA</code> を取り除くためには <code>na_omit()</code> を使うこともできます。</p>
 <p>下のコード例では、関数 <code>is_na()</code> と <code>na_omit()</code> を使ってベクトルから <code>NA</code> を取り除く方法を示します。</p>
 <pre><code>// NA を含むベクトルの作成
@@ -581,13 +581,13 @@ NumericVector v2 = na_omit(v);</code></pre>
 
     <span class="co">// ベクトルの要素ごとに値を判定します</span>
     <span class="dt">int</span> n = v.length();
-    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; ++i) {
-        <span class="kw">if</span>(NumericVector::is_na(v[i]))
-            Rprintf(<span class="st">&quot;v[</span><span class="ch">%i</span><span class="st">] is NA.</span><span class="ch">\n</span><span class="st">&quot;</span>, i);
-        <span class="kw">if</span>(Rcpp::traits::is_nan&lt;REALSXP&gt;(v[i]))
-            Rprintf(<span class="st">&quot;v[</span><span class="ch">%i</span><span class="st">] is NaN.</span><span class="ch">\n</span><span class="st">&quot;</span>, i);
-        <span class="kw">if</span>(Rcpp::traits::is_infinite&lt;REALSXP&gt;(v[i]))
-            Rprintf(<span class="st">&quot;v[</span><span class="ch">%i</span><span class="st">] is Inf or -Inf.</span><span class="ch">\n</span><span class="st">&quot;</span>, i);
+    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; ++i) {
+        <span class="cf">if</span>(NumericVector::is_na(v[i]))
+            Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is NA.</span><span class="sc">\n</span><span class="st">&quot;</span>, i);
+        <span class="cf">if</span>(Rcpp::traits::is_nan&lt;REALSXP&gt;(v[i]))
+            Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is NaN.</span><span class="sc">\n</span><span class="st">&quot;</span>, i);
+        <span class="cf">if</span>(Rcpp::traits::is_infinite&lt;REALSXP&gt;(v[i]))
+            Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is Inf or -Inf.</span><span class="sc">\n</span><span class="st">&quot;</span>, i);
     }
 }</code></pre></div>
 <p>以下に主要なベクトルの <code>SEXPTYPE</code> のリストを示します。</p>
@@ -743,12 +743,12 @@ List rcpp_na_sum(){
 
     <span class="co">// 標準 C++ で定義された int と int の + 演算子を適用します</span>
     IntegerVector res2(<span class="dv">3</span>);
-    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v1.length(); ++i){
+    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v1.length(); ++i){
         res2[i] = v1[i] + <span class="dv">1</span>;
     }
 
     <span class="co">// 結果をリストで出力します</span>
-    <span class="kw">return</span> List::create(Named(<span class="st">&quot;Rcpp plus&quot;</span>, res1),
+    <span class="cf">return</span> List::create(Named(<span class="st">&quot;Rcpp plus&quot;</span>, res1),
                         Named(<span class="st">&quot;C++  plus&quot;</span>, res2));
 }</code></pre></div>
 <p>実行結果</p>

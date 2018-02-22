@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -501,10 +501,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
 <span class="dt">void</span> rcpp_rcout(NumericVector v){
   <span class="co">// Rcout にベクトル変数を与えると全要素を表示します</span>
-  Rcout &lt;&lt; <span class="st">&quot;The value of v : &quot;</span> &lt;&lt; v &lt;&lt; <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>;
+  Rcout &lt;&lt; <span class="st">&quot;The value of v : &quot;</span> &lt;&lt; v &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;
 
   <span class="co">// エラーメッセージを表示する際は Rcerr を用いる</span>
-  Rcerr &lt;&lt; <span class="st">&quot;Error message&quot;</span> &lt;&lt; <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>;
+  Rcerr &lt;&lt; <span class="st">&quot;Error message&quot;</span> &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;
 }</code></pre></div>
 <p><code>Rprintf()</code> 関数と <code>REprintf()</code> 関数の使い方は標準 C にある <code>printf()</code> 関数と同じで、書式を指定して変数の値を出力します。</p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rprintf( 書式文字列, 変数)</code></pre></div>
@@ -548,8 +548,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
 <span class="dt">void</span> rcpp_rprintf(NumericVector v){
     <span class="co">// Rprintf でベクトルの全要素を表示する</span>
-    <span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.length(); ++i){
-        Rprintf(<span class="st">&quot;the value of v[</span><span class="ch">%i</span><span class="st">] : </span><span class="ch">%f</span><span class="st"> </span><span class="ch">\n</span><span class="st">&quot;</span>, i, v[i]);
+    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.length(); ++i){
+        Rprintf(<span class="st">&quot;the value of v[</span><span class="sc">%i</span><span class="st">] : </span><span class="sc">%f</span><span class="st"> </span><span class="sc">\n</span><span class="st">&quot;</span>, i, v[i]);
     }
 }</code></pre></div>
 

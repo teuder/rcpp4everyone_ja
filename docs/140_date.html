@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -502,7 +502,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Date d;       <span class="co">//&quot;1970-01-01&quot;</span>
 Date d(<span class="dv">1</span>);    <span class="co">//&quot;1970-01-01&quot; + 1day</span>
 Date d(<span class="fl">1.1</span>);  <span class="co">//&quot;1970-01-01&quot; + ceil(1.1)day </span>
-Date( <span class="st">&quot;2000-01-01&quot;</span>, <span class="st">&quot;</span><span class="ch">%Y-%</span><span class="st">m-</span><span class="ch">%d</span><span class="st">&quot;</span>); <span class="co">//default format is &quot;%Y-%m-%d&quot;</span>
+Date( <span class="st">&quot;2000-01-01&quot;</span>, <span class="st">&quot;</span><span class="sc">%Y-%</span><span class="st">m-</span><span class="sc">%d</span><span class="st">&quot;</span>); <span class="co">//default format is &quot;%Y-%m-%d&quot;</span>
 Date( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2000</span>); <span class="co">// 2000-01-02 Date(mon, day, year)</span>
 Date( <span class="dv">2000</span>, <span class="dv">1</span>, <span class="dv">2</span>); <span class="co">// 2000-01-02 Date(year, mon, day)</span></code></pre></div>
 </div>

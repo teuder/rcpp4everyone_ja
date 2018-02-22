@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.3.6" data-path="130_string.html"><a href="130_string.html#set_na"><i class="fa fa-check"></i><b>13.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="13.3.7" data-path="130_string.html"><a href="130_string.html#get_cstring"><i class="fa fa-check"></i><b>13.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="13.3.8" data-path="130_string.html"><a href="130_string.html#get_encoding"><i class="fa fa-check"></i><b>13.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingstr"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="13.3.9" data-path="130_string.html"><a href="130_string.html#set_encodingenc"><i class="fa fa-check"></i><b>13.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="13.3.10" data-path="130_string.html"><a href="130_string.html#コード例"><i class="fa fa-check"></i><b>13.3.10</b> コード例</a></li>
 </ul></li>
 </ul></li>
@@ -511,14 +511,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">install_github</span>(<span class="st">&quot;RcppParallel&quot;</span>,<span class="st">&quot;RcppCore&quot;</span>)</code></pre></div>
 <p>Rcppソースに以下を追加</p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::depends(RcppParallel)]]</span>
-<span class="ot">#include &lt;RcppParallel.h&gt;</span></code></pre></div>
+<span class="pp">#include </span><span class="im">&lt;RcppParallel.h&gt;</span></code></pre></div>
 <div id="parallelfor-parallelreduce" class="section level3">
 <h3><span class="header-section-number">36.2.1</span> parallelFor, parallelReduce</h3>
 <p>RcppParallel は <code>parallelFor()</code> と <code>parallelReduce()</code> の２つの関数を提供します。</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> parallelFor(std::size_t begin, std::size_t end, 
-                    Worker&amp; worker, std::size_t grainSize = <span class="dv">1</span>)
-<span class="dt">void</span> parallelReduce(std::size_t begin, std::size_t end, 
-                        Reducer&amp; reducer, std::size_t grainSize = <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> parallelFor(<span class="bu">std::</span>size_t begin, <span class="bu">std::</span>size_t end, 
+                    Worker&amp; worker, <span class="bu">std::</span>size_t grainSize = <span class="dv">1</span>)
+<span class="dt">void</span> parallelReduce(<span class="bu">std::</span>size_t begin, <span class="bu">std::</span>size_t end, 
+                        Reducer&amp; reducer, <span class="bu">std::</span>size_t grainSize = <span class="dv">1</span>)</code></pre></div>
 <p><code>parallelFor``parallelReduce</code> は <code>Vector</code>と <code>Matrix</code> の <code>begin</code> から <code>end-1</code> までの要素に対して <code>worker</code> <code>reducer</code> で定義された処理を並列で実行します。</p>
 <p><strong>parallelFor</strong> は入力データの各要素と出力データの各要素が１対１で対応するような処理 （例えば sqrt() や log()） を並列化する場合に用います。</p>
 <p><strong>parallelReduce</strong> は入力データの全要素を１つの値に集約するような処理 （例えば sum()やmean()） を並列化する場合に用います。</p>
@@ -533,8 +533,8 @@ IntegerVector v_int;
 RVector&lt;<span class="dt">int</span>&gt; vp_int(v_int);
 
 <span class="co">//実数行列を Rmatrix&lt;double&gt; に変換します。</span>
-NumericMatrix m_num;
-Rmatrix&lt;<span class="dt">double</span>&gt; mp_num(m_num);</code></pre></div>
+NumericMatrix <span class="va">m_num</span>;
+Rmatrix&lt;<span class="dt">double</span>&gt; mp_num(<span class="va">m_num</span>);</code></pre></div>
 </div>
 </div>
 <div id="worker" class="section level2">
@@ -546,28 +546,28 @@ Rmatrix&lt;<span class="dt">double</span>&gt; mp_num(m_num);</code></pre></div>
 <h2><span class="header-section-number">36.4</span> 例：parallelFor()</h2>
 <p><code>parallelFor</code> を使って、<code>Matrix</code> の各要素の平方根を計算します。 <a href="http://gallery.rcpp.org/articles/parallel-matrix-transform/" class="uri">http://gallery.rcpp.org/articles/parallel-matrix-transform/</a></p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::depends(RcppParallel)]]</span>
-<span class="ot">#include &lt;RcppParallel.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;RcppParallel.h&gt;</span>
 <span class="kw">using</span> <span class="kw">namespace</span> RcppParallel;
 
 <span class="co">// Worker を継承して関数オブジェクト SquareRoot を定義する</span>
 <span class="kw">struct</span> SquareRoot : <span class="kw">public</span> Worker
 {
   <span class="co">// 入力データを保持する内部変数</span>
-  <span class="dt">const</span> RMatrix&lt;<span class="dt">double</span>&gt; input_data;
+  <span class="at">const</span> RMatrix&lt;<span class="dt">double</span>&gt; input_data;
   
   <span class="co">// 出力データを保持する内部変数</span>
   RMatrix&lt;<span class="dt">double</span>&gt; output_data;
   
   <span class="co">//関数オブジェクトをインスタンス化するときに</span>
   <span class="co">//入力データ・出力データを与えて内部変数を初期化する</span>
-  SquareRoot(<span class="dt">const</span> NumericMatrix input, NumericMatrix output) 
+  SquareRoot(<span class="at">const</span> NumericMatrix input, NumericMatrix output) 
     : input_data(input), output_data(output) {}
   
   <span class="co">// 関数オブジェクトの処理内容を定義する</span>
   <span class="co">// parallelFor により、ある１つのスレッドで処理する範囲が</span>
   <span class="co">// begin, end で与えられる </span>
-  <span class="dt">void</span> <span class="kw">operator</span>()(std::size_t begin, std::size_t end) {
-    std::transform(input_data.begin() + begin,
+  <span class="dt">void</span> <span class="kw">operator</span>()(<span class="bu">std::</span>size_t begin, <span class="bu">std::</span>size_t end) {
+    <span class="bu">std::</span>transform(input_data.begin() + begin,
                    input_data.begin() + end, 
                    output_data.begin() + begin, 
                    ::sqrt);
@@ -594,38 +594,38 @@ NumericMatrix parallelMatrixSqrt(NumericMatrix x) {
   <span class="co">// output = parallelFor(0, x.length(), squareRoot);</span>
   
   <span class="co">// 結果を出力</span>
-  <span class="kw">return</span> output;
+  <span class="cf">return</span> output;
 }</code></pre></div>
 </div>
 <div id="例parallelreduce" class="section level2">
 <h2><span class="header-section-number">36.5</span> 例：parallelReduce()</h2>
 <p>ベクターの要素の合計値を計算する <a href="http://gallery.rcpp.org/articles/parallel-vector-sum/" class="uri">http://gallery.rcpp.org/articles/parallel-vector-sum/</a></p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::depends(RcppParallel)]]</span>
-<span class="ot">#include &lt;RcppParallel.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;RcppParallel.h&gt;</span>
 <span class="kw">using</span> <span class="kw">namespace</span> RcppParallel;
 
 <span class="kw">struct</span> Sum : <span class="kw">public</span> Worker
 {   
   <span class="co">// 入力値</span>
-  <span class="dt">const</span> RVector&lt;<span class="dt">double</span>&gt; input_data;
+  <span class="at">const</span> RVector&lt;<span class="dt">double</span>&gt; input_data;
   
   <span class="co">// 合計値</span>
   <span class="co">// この変数の型は RVector&lt;T&gt; の要素の型 T と一致している必要がある</span>
   <span class="dt">double</span> value;
   
   <span class="co">//最初に入力データを取得するためのコンストラクタ</span>
-  Sum(<span class="dt">const</span> NumericVector input) : input_data(input), value(<span class="dv">0</span>) {}
+  Sum(<span class="at">const</span> NumericVector input) : input_data(input), value(<span class="dv">0</span>) {}
   <span class="co">//分割された入力データ(sum.input_data)を受け取って、スレッドに渡すときに使われるコンストラクタ</span>
-  Sum(<span class="dt">const</span> Sum&amp; sum, Split) : input_data(sum.input_data), value(<span class="dv">0</span>) {} 
+  Sum(<span class="at">const</span> Sum&amp; sum, Split) : input_data(sum.input_data), value(<span class="dv">0</span>) {} 
   
   
   <span class="co">// input_data の要素番号 begin から要素番号 (end - 1) までの要素の合計値を計算する </span>
-  <span class="dt">void</span> <span class="kw">operator</span>()(std::size_t begin, std::size_t end) {
-    value += std::accumulate(input_data.begin() + begin, input_data.begin() + end, <span class="fl">0.0</span>);
+  <span class="dt">void</span> <span class="kw">operator</span>()(<span class="bu">std::</span>size_t begin, <span class="bu">std::</span>size_t end) {
+    value += <span class="bu">std::</span>accumulate(input_data.begin() + begin, input_data.begin() + end, <span class="fl">0.0</span>);
   }
   
   <span class="co">// 他のスレッドで計算された結果を、このスレッドで計算された結果と、合体させるための処理</span>
-  <span class="dt">void</span> join(<span class="dt">const</span> Sum&amp; rhs) { 
+  <span class="dt">void</span> join(<span class="at">const</span> Sum&amp; rhs) { 
     value += rhs.value; 
   }
 };
@@ -642,7 +642,7 @@ NumericMatrix parallelMatrixSqrt(NumericMatrix x) {
   parallelReduce(<span class="dv">0</span>, x.length(), sum);
   
   <span class="co">// 合計値を返す</span>
-  <span class="kw">return</span> sum.value;
+  <span class="cf">return</span> sum.value;
 }</code></pre></div>
 </div>
 <div id="パッケージで利用する場合" class="section level2">
