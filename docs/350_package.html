@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2018-02-22">
+<meta name="date" content="2018-10-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -519,7 +519,7 @@ Imports: Rcpp</code></pre>
 <ul>
 <li><code>NAMESPACE</code>ファイルに以下の記述を追加する</li>
 </ul>
-<pre><code>useDynLib(myPackage)
+<pre><code>useDynLib(myPackage, .registration=TRUE)
 exportPattern(&quot;^[[:alpha:]]+&quot;)
 importFrom(Rcpp, sourceCpp)</code></pre>
 <p><code>useDynLib(myPackage)</code>は、この自作パッケージ自身に含まれるコンパイルされた関数を、この自作パッケージ自身の R 関数から利用可能にします。（このパッケージのコンパイルされた関数のポインタ（アドレス）がこのパッケージのRの関数からアクセスできるようにする？）</p>
@@ -588,13 +588,13 @@ Adding Rcpp to LinkingTo and Imports
 * Ignoring generated binary files.
 Next, include the following roxygen tags somewhere in your package:
 
-#&#39; @useDynLib myPackage
+#&#39; @useDynLib myPackage, .registration=TRUE
 #&#39; @importFrom Rcpp sourceCpp
 NULL
 
 Then run document()</code></pre>
 <p>この方法を用いた場合には、<code>NAMESPACE</code> には設定が追加されません。そこで、このパッケージのRコードのどこかに次の記述を追加してから <code>devtools::document()</code>を実行します。 詳しくは次のセクションを参照ください。</p>
-<pre><code>#&#39; @useDynLib myPackage
+<pre><code>#&#39; @useDynLib myPackage, .registration=TRUE
 #&#39; @importFrom Rcpp sourceCpp
 NULL</code></pre>
 </div>
@@ -603,7 +603,7 @@ NULL</code></pre>
 <h2><span class="header-section-number">35.2</span> roxygen2 パッケージを用いてパッケージのパッケージのドキュメントを作成する</h2>
 <p>RコードやC++コードの中にroxygenタグと呼ばれる特殊な文字列を記述することで、パッケージ関数のヘルプやNAMESPACEファイルの内容を生成させることができます。  roxygenタグからドキュメントのソースファイルを生成するには <code>devtools::document()</code> を実行します。</p>
 <p>例えば、下の記述をパッケージ内のRコードのどこかに記述してから <code>devtools::document()</code> を実行すると、</p>
-<pre><code>#&#39; @useDynLib myPackage
+<pre><code>#&#39; @useDynLib myPackage, .registration=TRUE
 #&#39; @importFrom Rcpp sourceCpp
 NULL</code></pre>
 <p><code>NAMESPACE</code> ファイルに次の記述が加えられます。</p>
