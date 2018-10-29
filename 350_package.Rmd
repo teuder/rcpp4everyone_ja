@@ -35,7 +35,7 @@ Imports: Rcpp
 * `NAMESPACE`ファイルに以下の記述を追加する
 
 ```
-useDynLib(myPackage)
+useDynLib(myPackage, .registration=TRUE)
 exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, sourceCpp)
 ```
@@ -127,7 +127,7 @@ Adding Rcpp to LinkingTo and Imports
 * Ignoring generated binary files.
 Next, include the following roxygen tags somewhere in your package:
 
-#' @useDynLib myPackage
+#' @useDynLib myPackage, .registration=TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 
@@ -138,7 +138,7 @@ Then run document()
 詳しくは次のセクションを参照ください。
 
 ```
-#' @useDynLib myPackage
+#' @useDynLib myPackage, .registration=TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 ```
@@ -153,7 +153,7 @@ roxygenタグからドキュメントのソースファイルを生成するに�
 例えば、下の記述をパッケージ内のRコードのどこかに記述してから `devtools::document()` を実行すると、
 
 ```
-#' @useDynLib myPackage
+#' @useDynLib myPackage, .registration=TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 ```
