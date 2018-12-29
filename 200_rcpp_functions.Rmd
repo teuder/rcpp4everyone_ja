@@ -24,6 +24,8 @@ NumericVector res = mean(noNA(v));
 - [NA、Inf、NaNに関連する関数](#NA、Inf、NaNに関連する関数)
 - [apply関数](#apply関数)
 - [cbind関数](#cbind関数)
+- [サンプリング関数](#サンプリング関数)
+
 
 ### ベクトルに関連する関数
 
@@ -205,7 +207,21 @@ match(v, table) の v と table に同じベクトルを渡した場合と同義
 
 ベクトル v のユニークな要素の値それぞれについて、値の等しい要素がいくつあるか集計した名前付き整数ベクトルを返す。
 
+**rowSums(m , na.rm = false)**
 
+行列 m の各行の総和をとったベクトルを返す。na.rm = true なら総和を計算する際にNAを無視する。
+
+**colSums(m , na.rm = false)**
+
+行列 m の各列の総和をとったベクトルを返す。na.rm = true なら総和を計算する際にNAを無視する。
+
+**rowMeans(m , na.rm = false)**
+
+行列 m の各行の平均をとったベクトルを返す。na.rm = true なら総和を計算する際にNAを無視する。
+
+**colMeans(m , na.rm = false)**
+
+行列 m の各列の平均をとったベクトルを返す。na.rm = true なら総和を計算する際にNAを無視する。
 
 ### 端数処理に関連する関数
 
@@ -440,4 +456,18 @@ match(v, table) の v と table に同じベクトルを渡した場合と同義
 **cbind(v1,v2,...)**
 
 引数として渡した `Vector` または `Matrix` を列方向に結合した `Matrix` または `DataFrame` を返します。渡せる引数の数は50個まで。
+
+### サンプリング関数
+
+**sample(x, size, replace = false, prob = R_NilValue)**
+
+`Vector` x から size 個の要素をランダムに抽出した `Vector` を返す。replace = true の場合は要素の重複を許して抽出する。 prob には x の各要素を抽出する重みを指定するベクトルを渡す。
+
+**sample(n, size, replace = true, prob = R_NilValue, one_based = true)**
+
+n 個の要素から size 個の要素をランダムに抽出した時の、要素のインデックスを整数ベクトルで返す。replace = true の場合は要素の重複を許して抽出する。 prob には n 個の各要素を抽出する重みを指定するベクトルを渡す。one_based = true の場合には最初の要素のインデックスは 1、false の場合には最初の要素のインデックスは 0 で表現される。
+
+// Adapted from `do_sample`
+inline Vector<INTSXP>
+sample(int n, int size, bool replace = false, sugar::probs_t probs = R_NilValue, bool one_based = true)
 

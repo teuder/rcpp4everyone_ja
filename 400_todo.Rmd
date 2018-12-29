@@ -1,0 +1,35 @@
+
+# 書き加える可能性のある項目リスト
+
+RCPP_RETURN_VECTOR、RCPP_RETURN_MATRIX、Rcppの関数でポリモーフィズムを実現するためのマクロ。[参考](http://gallery.rcpp.org/articles/rcpp-return-macros/)
+
+NumericVectorベースの DatetimeVector DateVector の固有の機能、あれば
+
+シュガー関数、 rowSums(), colSums(), rowMeans(), colMeans(), sample(), Arg(), upper_tri(), lower_tri(), trimws()
+
+Added static methods eye(), ones(), and zeros() for select matrix types
+
+Date and Datetime object and vector now have format methods and operator<< support 
+
+DataFrameの行数と列数のメソッドをMatrixと共通化されたらしい、.nrow(),.rows()、.ncol(),.cols()
+
+Added printf-like syntax support for exception classes and variadic templating for Rcpp::stop and Rcpp::warning (James Balamuta in #676).
+
+New const iterators functions cbegin() and cend() have been added to several vector and matrix classes (Dan Dillon and James Balamuta in #748) starting to address #741).
+
+New const iterators functions cbegin() and cend() added to MatrixRow as well (Dan Dillon in #750). Matrix に ConstRow ConstColumn が追加された
+
+Improve support for NVCC, the CUDA compiler (Iñaki Ucar in #798 addressing #797).
+
+The 'new' Date and Datetime vectors now have is_na methods too. (Dirk in #783 fixing #781).
+
+Added [[Rcpp::init]] attribute for registering C++ functions to run during package initialization (JJ in #903 addressing #902).
+
+Added [[Rcpp::init]] attribute for registering C++ functions to run during package initialization (JJ in #903 addressing #902).
+
+
+# 済み
+
+シュガー関数、 rowSums(), colSums(), rowMeans(), colMeans(), sample()
+
+
