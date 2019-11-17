@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.17)  17 NOV 2019 14:57
+This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.17)  17 NOV 2019 15:00
  restricted system commands enabled.
 **rcpp4everyone_ja.tex
 (./rcpp4everyone_ja.tex
@@ -55,7 +55,7 @@ Lua module: luaotfload-multiscript 2019-09-13 3.00 luaotfload submodule / multis
 cript
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.112 seconds
+luaotfload | main : initialization completed in 0.103 seconds
 (/Users/tsuda/Library/TinyTeX/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2019/08/27 v1.4j Standard LaTeX document class
 (/Users/tsuda/Library/TinyTeX/texmf-dist/tex/latex/base/bk10.clo

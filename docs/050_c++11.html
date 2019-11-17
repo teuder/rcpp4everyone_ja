@@ -157,12 +157,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="040_function.html"><a href="040_function.html"><i class="fa fa-check"></i><b>4</b> Rcppにおける関数定義の基本形</a></li>
 <li class="chapter" data-level="5" data-path="050_c++11.html"><a href="050_c++11.html"><i class="fa fa-check"></i><b>5</b> C++11</a><ul>
-<li class="chapter" data-level="5.1" data-path="050_c++11.html"><a href="050_c++11.html#c11-を有効にする"><i class="fa fa-check"></i><b>5.1</b> C++11 を有効にする</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="050_c++11.html"><a href="050_c++11.html#初期化リスト"><i class="fa fa-check"></i><b>5.1.1</b> 初期化リスト</a></li>
-<li class="chapter" data-level="5.1.2" data-path="050_c++11.html"><a href="050_c++11.html#auto"><i class="fa fa-check"></i><b>5.1.2</b> auto</a></li>
-<li class="chapter" data-level="5.1.3" data-path="050_c++11.html"><a href="050_c++11.html#decltype"><i class="fa fa-check"></i><b>5.1.3</b> decltype</a></li>
-<li class="chapter" data-level="5.1.4" data-path="050_c++11.html"><a href="050_c++11.html#範囲-for"><i class="fa fa-check"></i><b>5.1.4</b> 範囲 for</a></li>
-<li class="chapter" data-level="5.1.5" data-path="050_c++11.html"><a href="050_c++11.html#ラムダ式"><i class="fa fa-check"></i><b>5.1.5</b> ラムダ式</a></li>
+<li class="chapter" data-level="5.1" data-path="050_c++11.html"><a href="050_c++11.html#c11-を有効にする"><i class="fa fa-check"></i><b>5.1</b> C++11 を有効にする</a></li>
+<li class="chapter" data-level="5.2" data-path="050_c++11.html"><a href="050_c++11.html#おすすめ-c11-機能"><i class="fa fa-check"></i><b>5.2</b> おすすめ C++11 機能</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="050_c++11.html"><a href="050_c++11.html#初期化リスト"><i class="fa fa-check"></i><b>5.2.1</b> 初期化リスト</a></li>
+<li class="chapter" data-level="5.2.2" data-path="050_c++11.html"><a href="050_c++11.html#auto"><i class="fa fa-check"></i><b>5.2.2</b> auto</a></li>
+<li class="chapter" data-level="5.2.3" data-path="050_c++11.html"><a href="050_c++11.html#decltype"><i class="fa fa-check"></i><b>5.2.3</b> decltype</a></li>
+<li class="chapter" data-level="5.2.4" data-path="050_c++11.html"><a href="050_c++11.html#範囲-for"><i class="fa fa-check"></i><b>5.2.4</b> 範囲 for</a></li>
+<li class="chapter" data-level="5.2.5" data-path="050_c++11.html"><a href="050_c++11.html#ラムダ式"><i class="fa fa-check"></i><b>5.2.5</b> ラムダ式</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="060_utility.html"><a href="060_utility.html"><i class="fa fa-check"></i><b>6</b> コンソール画面への出力</a></li>
@@ -456,9 +457,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></a></code></pre></div>
 <p>あなたのパッケージでC++11を有効にするには <code>DESCRIPTION</code> ファイルに以下の記述を追加します。</p>
 <pre><code>SystemRequirements: C++11</code></pre>
-<p>##おすすめ C++11 機能</p>
+</div>
+<div id="おすすめ-c11-機能" class="section level2">
+<h2><span class="header-section-number">5.2</span> おすすめ C++11 機能</h2>
 <div id="初期化リスト" class="section level3">
-<h3><span class="header-section-number">5.1.1</span> 初期化リスト</h3>
+<h3><span class="header-section-number">5.2.1</span> 初期化リスト</h3>
 <p><code>{}</code>を使った変数の初期化。</p>
 <pre><code>// Vector の初期化
 //次の3つは同じ値 c(1,2,3) となります。
@@ -467,7 +470,7 @@ NumericVector v2 = {1.0, 2.0, 3.0};
 NumericVector v3   {1.0, 2.0, 3.0}; // = は省略できます。</code></pre>
 </div>
 <div id="auto" class="section level3">
-<h3><span class="header-section-number">5.1.2</span> auto</h3>
+<h3><span class="header-section-number">5.2.2</span> auto</h3>
 <p><code>auto</code> を使うと、宣言する変数の型を、代入する値に合わせて、自動的に設定してくれます。</p>
 <pre><code>// i は int
 auto  i  = 4;
@@ -477,13 +480,13 @@ NumericVector v;
 auto it = v.begin();</code></pre>
 </div>
 <div id="decltype" class="section level3">
-<h3><span class="header-section-number">5.1.3</span> decltype</h3>
+<h3><span class="header-section-number">5.2.3</span> decltype</h3>
 <p><code>decltype</code>を使うと、既存の変数や式と同じ型の変数を宣言することができます。</p>
 <pre><code>int i;
 decltype(i) x; // x は int型 となる</code></pre>
 </div>
 <div id="範囲-for" class="section level3">
-<h3><span class="header-section-number">5.1.4</span> 範囲 for</h3>
+<h3><span class="header-section-number">5.2.4</span> 範囲 for</h3>
 <p>R と同じスタイルで for 文を記述できます。</p>
 <pre><code>IntegerVector v{1,2,3};
 int sum=0;
@@ -492,7 +495,7 @@ for(auto&amp; x : v) {
 }</code></pre>
 </div>
 <div id="ラムダ式" class="section level3">
-<h3><span class="header-section-number">5.1.5</span> ラムダ式</h3>
+<h3><span class="header-section-number">5.2.5</span> ラムダ式</h3>
 <p>ラムダ式は関数オブジェクトを簡単に作成するための記法です。</p>
 <p>ラムダ式は <code>[](){}</code> の書式で記述します。</p>
 <ul>
