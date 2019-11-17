@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>みんなのRcpp</title>
-  <meta name="description" content="Rcppの使い方を解説します">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>18.5 Rライクな関数の一覧 | みんなのRcpp</title>
+  <meta name="description" content="Rcppの使い方を解説します" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="みんなのRcpp" />
+  <meta property="og:title" content="18.5 Rライクな関数の一覧 | みんなのRcpp" />
   <meta property="og:type" content="book" />
   
   
@@ -17,29 +16,33 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="みんなのRcpp" />
+  <meta name="twitter:title" content="18.5 Rライクな関数の一覧 | みんなのRcpp" />
   
   <meta name="twitter:description" content="Rcppの使い方を解説します" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2018-10-29">
+<meta name="date" content="2019-11-17" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="180_logical.html">
-<link rel="next" href="210_dpqr_functions.html">
+<link rel="prev" href="180_logical.html"/>
+<link rel="next" href="210_dpqr_functions.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -60,41 +63,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -126,18 +154,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3" data-path="030_basic_usage.html"><a href="030_basic_usage.html"><i class="fa fa-check"></i><b>3</b> 基本的な使い方</a><ul>
 <li class="chapter" data-level="3.1" data-path="030_basic_usage.html"><a href="030_basic_usage.html#rcppコードを書く"><i class="fa fa-check"></i><b>3.1</b> Rcppコードを書く</a></li>
-<li class="chapter" data-level="3.2" data-path="030_basic_usage.html"><a href="030_basic_usage.html#コンパイル"><i class="fa fa-check"></i><b>3.2</b> コンパイル</a></li>
-<li class="chapter" data-level="3.3" data-path="030_basic_usage.html"><a href="030_basic_usage.html#実行結果"><i class="fa fa-check"></i><b>3.3</b> 実行結果</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="040_function.html"><a href="040_function.html"><i class="fa fa-check"></i><b>4</b> Rcppにおける関数定義の基本形</a></li>
 <li class="chapter" data-level="5" data-path="050_c++11.html"><a href="050_c++11.html"><i class="fa fa-check"></i><b>5</b> C++11</a><ul>
-<li class="chapter" data-level="5.1" data-path="050_c++11.html"><a href="050_c++11.html#c11-を有効にする"><i class="fa fa-check"></i><b>5.1</b> C++11 を有効にする</a></li>
-<li class="chapter" data-level="5.2" data-path="050_c++11.html"><a href="050_c++11.html#おすすめ-c11-機能"><i class="fa fa-check"></i><b>5.2</b> おすすめ C++11 機能</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="050_c++11.html"><a href="050_c++11.html#初期化リスト"><i class="fa fa-check"></i><b>5.2.1</b> 初期化リスト</a></li>
-<li class="chapter" data-level="5.2.2" data-path="050_c++11.html"><a href="050_c++11.html#auto"><i class="fa fa-check"></i><b>5.2.2</b> auto</a></li>
-<li class="chapter" data-level="5.2.3" data-path="050_c++11.html"><a href="050_c++11.html#decltype"><i class="fa fa-check"></i><b>5.2.3</b> decltype</a></li>
-<li class="chapter" data-level="5.2.4" data-path="050_c++11.html"><a href="050_c++11.html#範囲-for"><i class="fa fa-check"></i><b>5.2.4</b> 範囲 for</a></li>
-<li class="chapter" data-level="5.2.5" data-path="050_c++11.html"><a href="050_c++11.html#ラムダ式"><i class="fa fa-check"></i><b>5.2.5</b> ラムダ式</a></li>
+<li class="chapter" data-level="5.1" data-path="050_c++11.html"><a href="050_c++11.html#c11-を有効にする"><i class="fa fa-check"></i><b>5.1</b> C++11 を有効にする</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="050_c++11.html"><a href="050_c++11.html#初期化リスト"><i class="fa fa-check"></i><b>5.1.1</b> 初期化リスト</a></li>
+<li class="chapter" data-level="5.1.2" data-path="050_c++11.html"><a href="050_c++11.html#auto"><i class="fa fa-check"></i><b>5.1.2</b> auto</a></li>
+<li class="chapter" data-level="5.1.3" data-path="050_c++11.html"><a href="050_c++11.html#decltype"><i class="fa fa-check"></i><b>5.1.3</b> decltype</a></li>
+<li class="chapter" data-level="5.1.4" data-path="050_c++11.html"><a href="050_c++11.html#範囲-for"><i class="fa fa-check"></i><b>5.1.4</b> 範囲 for</a></li>
+<li class="chapter" data-level="5.1.5" data-path="050_c++11.html"><a href="050_c++11.html#ラムダ式"><i class="fa fa-check"></i><b>5.1.5</b> ラムダ式</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="060_utility.html"><a href="060_utility.html"><i class="fa fa-check"></i><b>6</b> コンソール画面への出力</a></li>
@@ -179,55 +204,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="9" data-path="090_matrix.html"><a href="090_matrix.html"><i class="fa fa-check"></i><b>9</b> Matrix</a><ul>
 <li class="chapter" data-level="9.0.1" data-path="090_matrix.html"><a href="090_matrix.html#作成"><i class="fa fa-check"></i><b>9.0.1</b> 作成</a></li>
-<li class="chapter" data-level="9.0.2" data-path="090_matrix.html"><a href="090_matrix.html#要素へのアクセス"><i class="fa fa-check"></i><b>9.0.2</b> 要素へのアクセス</a></li>
-<li class="chapter" data-level="9.0.3" data-path="090_matrix.html"><a href="090_matrix.html#行列部分行列への参照"><i class="fa fa-check"></i><b>9.0.3</b> 行・列・部分行列への参照</a></li>
-<li class="chapter" data-level="9.1" data-path="090_matrix.html"><a href="090_matrix.html#メンバ関数-1"><i class="fa fa-check"></i><b>9.1</b> メンバ関数</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="090_matrix.html"><a href="090_matrix.html#nrow-rows"><i class="fa fa-check"></i><b>9.1.1</b> nrow() rows()</a></li>
-<li class="chapter" data-level="9.1.2" data-path="090_matrix.html"><a href="090_matrix.html#ncolcols"><i class="fa fa-check"></i><b>9.1.2</b> ncol()　cols()</a></li>
-<li class="chapter" data-level="9.1.3" data-path="090_matrix.html"><a href="090_matrix.html#row-i"><i class="fa fa-check"></i><b>9.1.3</b> row( i )</a></li>
-<li class="chapter" data-level="9.1.4" data-path="090_matrix.html"><a href="090_matrix.html#column-i"><i class="fa fa-check"></i><b>9.1.4</b> column( i )</a></li>
-<li class="chapter" data-level="9.1.5" data-path="090_matrix.html"><a href="090_matrix.html#fill_diag-x"><i class="fa fa-check"></i><b>9.1.5</b> fill_diag( x )</a></li>
-<li class="chapter" data-level="9.1.6" data-path="090_matrix.html"><a href="090_matrix.html#offsetij"><i class="fa fa-check"></i><b>9.1.6</b> offset(i,j)</a></li>
-</ul></li>
-<li class="chapter" data-level="9.2" data-path="090_matrix.html"><a href="090_matrix.html#静的メンバ関数-1"><i class="fa fa-check"></i><b>9.2</b> 静的メンバ関数</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="090_matrix.html"><a href="090_matrix.html#matrixdiag-size-x"><i class="fa fa-check"></i><b>9.2.1</b> Matrix::diag( size, x )</a></li>
-</ul></li>
-<li class="chapter" data-level="9.3" data-path="090_matrix.html"><a href="090_matrix.html#その他の関数"><i class="fa fa-check"></i><b>9.3</b> その他の関数</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="090_matrix.html"><a href="090_matrix.html#rownames-m"><i class="fa fa-check"></i><b>9.3.1</b> rownames( m )</a></li>
-<li class="chapter" data-level="9.3.2" data-path="090_matrix.html"><a href="090_matrix.html#colnames-m"><i class="fa fa-check"></i><b>9.3.2</b> colnames( m )</a></li>
-<li class="chapter" data-level="9.3.3" data-path="090_matrix.html"><a href="090_matrix.html#transpose-m"><i class="fa fa-check"></i><b>9.3.3</b> transpose( m )</a></li>
-</ul></li>
+<li class="chapter" data-level="9.0.2" data-path="090_matrix.html"><a href="090_matrix.html#nrow-rows"><i class="fa fa-check"></i><b>9.0.2</b> nrow() rows()</a></li>
+<li class="chapter" data-level="9.0.3" data-path="090_matrix.html"><a href="090_matrix.html#ncolcols"><i class="fa fa-check"></i><b>9.0.3</b> ncol()　cols()</a></li>
+<li class="chapter" data-level="9.0.4" data-path="090_matrix.html"><a href="090_matrix.html#fill_diag-x"><i class="fa fa-check"></i><b>9.0.4</b> fill_diag( x )</a></li>
+<li class="chapter" data-level="9.0.5" data-path="090_matrix.html"><a href="090_matrix.html#offsetij"><i class="fa fa-check"></i><b>9.0.5</b> offset(i,j)</a></li>
+<li class="chapter" data-level="9.0.6" data-path="090_matrix.html"><a href="090_matrix.html#colnames-m"><i class="fa fa-check"></i><b>9.0.6</b> colnames( m )</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="100_dataframe.html"><a href="100_dataframe.html"><i class="fa fa-check"></i><b>10</b> DataFrame</a><ul>
-<li class="chapter" data-level="10.1" data-path="100_dataframe.html"><a href="100_dataframe.html#作成-1"><i class="fa fa-check"></i><b>10.1</b> 作成</a></li>
-<li class="chapter" data-level="10.2" data-path="100_dataframe.html"><a href="100_dataframe.html#要素へのアクセス-1"><i class="fa fa-check"></i><b>10.2</b> 要素へのアクセス</a></li>
-<li class="chapter" data-level="10.3" data-path="100_dataframe.html"><a href="100_dataframe.html#メンバ関数-2"><i class="fa fa-check"></i><b>10.3</b> メンバ関数</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="100_dataframe.html"><a href="100_dataframe.html#length-size-1"><i class="fa fa-check"></i><b>10.3.1</b> length() size()</a></li>
-<li class="chapter" data-level="10.3.2" data-path="100_dataframe.html"><a href="100_dataframe.html#nrows"><i class="fa fa-check"></i><b>10.3.2</b> nrows()</a></li>
-<li class="chapter" data-level="10.3.3" data-path="100_dataframe.html"><a href="100_dataframe.html#names-1"><i class="fa fa-check"></i><b>10.3.3</b> names()</a></li>
-<li class="chapter" data-level="10.3.4" data-path="100_dataframe.html"><a href="100_dataframe.html#offsetname-findnamename-1"><i class="fa fa-check"></i><b>10.3.4</b> offset(name) findName(name)</a></li>
-<li class="chapter" data-level="10.3.5" data-path="100_dataframe.html"><a href="100_dataframe.html#findnamename"><i class="fa fa-check"></i><b>10.3.5</b> findName(name)</a></li>
-<li class="chapter" data-level="10.3.6" data-path="100_dataframe.html"><a href="100_dataframe.html#fillv"><i class="fa fa-check"></i><b>10.3.6</b> fill(v)</a></li>
-<li class="chapter" data-level="10.3.7" data-path="100_dataframe.html"><a href="100_dataframe.html#assign-first_it-last_it-1"><i class="fa fa-check"></i><b>10.3.7</b> assign( first_it, last_it)</a></li>
-<li class="chapter" data-level="10.3.8" data-path="100_dataframe.html"><a href="100_dataframe.html#push_backv"><i class="fa fa-check"></i><b>10.3.8</b> push_back(v)</a></li>
-<li class="chapter" data-level="10.3.9" data-path="100_dataframe.html"><a href="100_dataframe.html#push_back-v-name"><i class="fa fa-check"></i><b>10.3.9</b> push_back( v, name )</a></li>
-<li class="chapter" data-level="10.3.10" data-path="100_dataframe.html"><a href="100_dataframe.html#push_frontx-1"><i class="fa fa-check"></i><b>10.3.10</b> push_front(x)</a></li>
-<li class="chapter" data-level="10.3.11" data-path="100_dataframe.html"><a href="100_dataframe.html#push_front-x-name-1"><i class="fa fa-check"></i><b>10.3.11</b> push_front( x, name )</a></li>
-<li class="chapter" data-level="10.3.12" data-path="100_dataframe.html"><a href="100_dataframe.html#begin-1"><i class="fa fa-check"></i><b>10.3.12</b> begin()</a></li>
-<li class="chapter" data-level="10.3.13" data-path="100_dataframe.html"><a href="100_dataframe.html#end-1"><i class="fa fa-check"></i><b>10.3.13</b> end()</a></li>
-<li class="chapter" data-level="10.3.14" data-path="100_dataframe.html"><a href="100_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>10.3.14</b> insert( it, v )</a></li>
-<li class="chapter" data-level="10.3.15" data-path="100_dataframe.html"><a href="100_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>10.3.15</b> erase(i)</a></li>
-<li class="chapter" data-level="10.3.16" data-path="100_dataframe.html"><a href="100_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>10.3.16</b> erase(it)</a></li>
-<li class="chapter" data-level="10.3.17" data-path="100_dataframe.html"><a href="100_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>10.3.17</b> erase(first_i, last_i)</a></li>
-<li class="chapter" data-level="10.3.18" data-path="100_dataframe.html"><a href="100_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>10.3.18</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="10.3.19" data-path="100_dataframe.html"><a href="100_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>10.3.19</b> containsElementNamed(name)</a></li>
-<li class="chapter" data-level="10.3.20" data-path="100_dataframe.html"><a href="100_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>10.3.20</b> inherits(str)</a></li>
-</ul></li>
+<li class="chapter" data-level="10.0.1" data-path="100_dataframe.html"><a href="100_dataframe.html#length-size-1"><i class="fa fa-check"></i><b>10.0.1</b> length() size()</a></li>
+<li class="chapter" data-level="10.0.2" data-path="100_dataframe.html"><a href="100_dataframe.html#begin-1"><i class="fa fa-check"></i><b>10.0.2</b> begin()</a></li>
+<li class="chapter" data-level="10.0.3" data-path="100_dataframe.html"><a href="100_dataframe.html#end-1"><i class="fa fa-check"></i><b>10.0.3</b> end()</a></li>
+<li class="chapter" data-level="10.0.4" data-path="100_dataframe.html"><a href="100_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>10.0.4</b> insert( it, v )</a></li>
+<li class="chapter" data-level="10.0.5" data-path="100_dataframe.html"><a href="100_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>10.0.5</b> erase(i)</a></li>
+<li class="chapter" data-level="10.0.6" data-path="100_dataframe.html"><a href="100_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>10.0.6</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="10.0.7" data-path="100_dataframe.html"><a href="100_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>10.0.7</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="10.0.8" data-path="100_dataframe.html"><a href="100_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>10.0.8</b> inherits(str)</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="110_list.html"><a href="110_list.html"><i class="fa fa-check"></i><b>11</b> List</a><ul>
 <li class="chapter" data-level="11.1" data-path="110_list.html"><a href="110_list.html#オブジェクトの作成"><i class="fa fa-check"></i><b>11.1</b> オブジェクトの作成</a></li>
-<li class="chapter" data-level="11.2" data-path="110_list.html"><a href="110_list.html#要素へのアクセス-2"><i class="fa fa-check"></i><b>11.2</b> 要素へのアクセス</a></li>
-<li class="chapter" data-level="11.3" data-path="110_list.html"><a href="110_list.html#メンバ関数-3"><i class="fa fa-check"></i><b>11.3</b> メンバ関数</a></li>
+<li class="chapter" data-level="11.2" data-path="110_list.html"><a href="110_list.html#要素へのアクセス"><i class="fa fa-check"></i><b>11.2</b> 要素へのアクセス</a></li>
+<li class="chapter" data-level="11.3" data-path="110_list.html"><a href="110_list.html#メンバ関数-1"><i class="fa fa-check"></i><b>11.3</b> メンバ関数</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="120_s3_s4.html"><a href="120_s3_s4.html"><i class="fa fa-check"></i><b>12</b> S3・S4 クラス</a><ul>
 <li class="chapter" data-level="12.1" data-path="120_s3_s4.html"><a href="120_s3_s4.html#s3クラス"><i class="fa fa-check"></i><b>12.1</b> S3クラス</a></li>
@@ -239,7 +235,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13" data-path="130_string.html"><a href="130_string.html"><i class="fa fa-check"></i><b>13</b> String</a><ul>
 <li class="chapter" data-level="13.1" data-path="130_string.html"><a href="130_string.html#string-オブジェクトの作成"><i class="fa fa-check"></i><b>13.1</b> String オブジェクトの作成</a></li>
 <li class="chapter" data-level="13.2" data-path="130_string.html"><a href="130_string.html#演算子"><i class="fa fa-check"></i><b>13.2</b> 演算子</a></li>
-<li class="chapter" data-level="13.3" data-path="130_string.html"><a href="130_string.html#メンバ関数-4"><i class="fa fa-check"></i><b>13.3</b> メンバ関数</a><ul>
+<li class="chapter" data-level="13.3" data-path="130_string.html"><a href="130_string.html#メンバ関数-2"><i class="fa fa-check"></i><b>13.3</b> メンバ関数</a><ul>
 <li class="chapter" data-level="13.3.1" data-path="130_string.html"><a href="130_string.html#replace_first-str-new_str"><i class="fa fa-check"></i><b>13.3.1</b> replace_first( str, new_str)</a></li>
 <li class="chapter" data-level="13.3.2" data-path="130_string.html"><a href="130_string.html#replace_last-str-new_str"><i class="fa fa-check"></i><b>13.3.2</b> replace_last( str, new_str)</a></li>
 <li class="chapter" data-level="13.3.3" data-path="130_string.html"><a href="130_string.html#replace_all-str-new_str"><i class="fa fa-check"></i><b>13.3.3</b> replace_all( str, new_str)</a></li>
@@ -253,227 +249,183 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="140_date.html"><a href="140_date.html"><i class="fa fa-check"></i><b>14</b> Date</a><ul>
-<li class="chapter" data-level="14.1" data-path="140_date.html"><a href="140_date.html#作成-2"><i class="fa fa-check"></i><b>14.1</b> 作成</a></li>
-<li class="chapter" data-level="14.2" data-path="140_date.html"><a href="140_date.html#演算子-1"><i class="fa fa-check"></i><b>14.2</b> 演算子</a></li>
-<li class="chapter" data-level="14.3" data-path="140_date.html"><a href="140_date.html#メンバ関数-5"><i class="fa fa-check"></i><b>14.3</b> メンバ関数</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="140_date.html"><a href="140_date.html#getday"><i class="fa fa-check"></i><b>14.3.1</b> getDay()</a></li>
-<li class="chapter" data-level="14.3.2" data-path="140_date.html"><a href="140_date.html#getmonth"><i class="fa fa-check"></i><b>14.3.2</b> getMonth()</a></li>
-<li class="chapter" data-level="14.3.3" data-path="140_date.html"><a href="140_date.html#getyear"><i class="fa fa-check"></i><b>14.3.3</b> getYear()</a></li>
-<li class="chapter" data-level="14.3.4" data-path="140_date.html"><a href="140_date.html#getweekday"><i class="fa fa-check"></i><b>14.3.4</b> getWeekday()</a></li>
-<li class="chapter" data-level="14.3.5" data-path="140_date.html"><a href="140_date.html#getyearday"><i class="fa fa-check"></i><b>14.3.5</b> getYearday()</a></li>
-<li class="chapter" data-level="14.3.6" data-path="140_date.html"><a href="140_date.html#is_na"><i class="fa fa-check"></i><b>14.3.6</b> is_na()</a></li>
-</ul></li>
-<li class="chapter" data-level="14.4" data-path="140_date.html"><a href="140_date.html#実行例"><i class="fa fa-check"></i><b>14.4</b> 実行例</a></li>
+<li class="chapter" data-level="14.1" data-path="140_date.html"><a href="140_date.html#演算子-1"><i class="fa fa-check"></i><b>14.1</b> 演算子</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="150_datetime.html"><a href="150_datetime.html"><i class="fa fa-check"></i><b>15</b> Datetime</a><ul>
 <li class="chapter" data-level="15.1" data-path="150_datetime.html"><a href="150_datetime.html#datetime-オブジェクトの作成"><i class="fa fa-check"></i><b>15.1</b> Datetime オブジェクトの作成</a></li>
 <li class="chapter" data-level="15.2" data-path="150_datetime.html"><a href="150_datetime.html#タイムゾーン"><i class="fa fa-check"></i><b>15.2</b> タイムゾーン</a></li>
 <li class="chapter" data-level="15.3" data-path="150_datetime.html"><a href="150_datetime.html#演算子-2"><i class="fa fa-check"></i><b>15.3</b> 演算子</a></li>
-<li class="chapter" data-level="15.4" data-path="150_datetime.html"><a href="150_datetime.html#メンバ関数-6"><i class="fa fa-check"></i><b>15.4</b> メンバ関数</a><ul>
-<li class="chapter" data-level="15.4.1" data-path="150_datetime.html"><a href="150_datetime.html#getfractionaltimestamp"><i class="fa fa-check"></i><b>15.4.1</b> getFractionalTimestamp()</a></li>
-<li class="chapter" data-level="15.4.2" data-path="150_datetime.html"><a href="150_datetime.html#getmicroseconds"><i class="fa fa-check"></i><b>15.4.2</b> getMicroSeconds()</a></li>
-<li class="chapter" data-level="15.4.3" data-path="150_datetime.html"><a href="150_datetime.html#getseconds"><i class="fa fa-check"></i><b>15.4.3</b> getSeconds()</a></li>
-<li class="chapter" data-level="15.4.4" data-path="150_datetime.html"><a href="150_datetime.html#getminutes"><i class="fa fa-check"></i><b>15.4.4</b> getMinutes()</a></li>
-<li class="chapter" data-level="15.4.5" data-path="150_datetime.html"><a href="150_datetime.html#gethours"><i class="fa fa-check"></i><b>15.4.5</b> getHours()</a></li>
-<li class="chapter" data-level="15.4.6" data-path="150_datetime.html"><a href="150_datetime.html#getday-1"><i class="fa fa-check"></i><b>15.4.6</b> getDay()</a></li>
-<li class="chapter" data-level="15.4.7" data-path="150_datetime.html"><a href="150_datetime.html#getmonth-1"><i class="fa fa-check"></i><b>15.4.7</b> getMonth()</a></li>
-<li class="chapter" data-level="15.4.8" data-path="150_datetime.html"><a href="150_datetime.html#getyear-1"><i class="fa fa-check"></i><b>15.4.8</b> getYear()</a></li>
-<li class="chapter" data-level="15.4.9" data-path="150_datetime.html"><a href="150_datetime.html#getweekday-1"><i class="fa fa-check"></i><b>15.4.9</b> getWeekday()</a></li>
-<li class="chapter" data-level="15.4.10" data-path="150_datetime.html"><a href="150_datetime.html#getyearday-1"><i class="fa fa-check"></i><b>15.4.10</b> getYearday()</a></li>
-<li class="chapter" data-level="15.4.11" data-path="150_datetime.html"><a href="150_datetime.html#is_na-1"><i class="fa fa-check"></i><b>15.4.11</b> is_na()</a></li>
-</ul></li>
-<li class="chapter" data-level="15.5" data-path="150_datetime.html"><a href="150_datetime.html#コード例-1"><i class="fa fa-check"></i><b>15.5</b> コード例</a></li>
+<li class="chapter" data-level="15.4" data-path="150_datetime.html"><a href="150_datetime.html#メンバ関数-3"><i class="fa fa-check"></i><b>15.4</b> メンバ関数</a></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="160_robject.html"><a href="160_robject.html"><i class="fa fa-check"></i><b>16</b> RObject</a><ul>
-<li class="chapter" data-level="16.1" data-path="160_robject.html"><a href="160_robject.html#メンバー関数"><i class="fa fa-check"></i><b>16.1</b> メンバー関数</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="160_robject.html"><a href="160_robject.html#inheritsstr-1"><i class="fa fa-check"></i><b>16.1.1</b> inherits(str)</a></li>
-<li class="chapter" data-level="16.1.2" data-path="160_robject.html"><a href="160_robject.html#slotname"><i class="fa fa-check"></i><b>16.1.2</b> slot(name)</a></li>
-<li class="chapter" data-level="16.1.3" data-path="160_robject.html"><a href="160_robject.html#hasslotname"><i class="fa fa-check"></i><b>16.1.3</b> hasSlot(name)</a></li>
-<li class="chapter" data-level="16.1.4" data-path="160_robject.html"><a href="160_robject.html#attrname"><i class="fa fa-check"></i><b>16.1.4</b> attr(name)</a></li>
-<li class="chapter" data-level="16.1.5" data-path="160_robject.html"><a href="160_robject.html#attributenames"><i class="fa fa-check"></i><b>16.1.5</b> attributeNames()</a></li>
-<li class="chapter" data-level="16.1.6" data-path="160_robject.html"><a href="160_robject.html#hasattributename"><i class="fa fa-check"></i><b>16.1.6</b> hasAttribute(name)</a></li>
-<li class="chapter" data-level="16.1.7" data-path="160_robject.html"><a href="160_robject.html#isnull"><i class="fa fa-check"></i><b>16.1.7</b> isNULL()</a></li>
-<li class="chapter" data-level="16.1.8" data-path="160_robject.html"><a href="160_robject.html#sexp_type"><i class="fa fa-check"></i><b>16.1.8</b> sexp_type()</a></li>
-<li class="chapter" data-level="16.1.9" data-path="160_robject.html"><a href="160_robject.html#isobject"><i class="fa fa-check"></i><b>16.1.9</b> isObject()</a></li>
-<li class="chapter" data-level="16.1.10" data-path="160_robject.html"><a href="160_robject.html#iss4"><i class="fa fa-check"></i><b>16.1.10</b> isS4()</a></li>
-</ul></li>
-<li class="chapter" data-level="16.2" data-path="160_robject.html"><a href="160_robject.html#a.20.2-robject-を利用した型の判別"><i class="fa fa-check"></i><b>16.2</b> A.20.2 RObject を利用した型の判別</a></li>
+<li class="chapter" data-level="16.0.1" data-path="160_robject.html"><a href="160_robject.html#inheritsstr-1"><i class="fa fa-check"></i><b>16.0.1</b> inherits(str)</a></li>
+<li class="chapter" data-level="16.0.2" data-path="160_robject.html"><a href="160_robject.html#slotname"><i class="fa fa-check"></i><b>16.0.2</b> slot(name)</a></li>
+<li class="chapter" data-level="16.0.3" data-path="160_robject.html"><a href="160_robject.html#hasslotname"><i class="fa fa-check"></i><b>16.0.3</b> hasSlot(name)</a></li>
+<li class="chapter" data-level="16.0.4" data-path="160_robject.html"><a href="160_robject.html#attrname"><i class="fa fa-check"></i><b>16.0.4</b> attr(name)</a></li>
+<li class="chapter" data-level="16.0.5" data-path="160_robject.html"><a href="160_robject.html#attributenames"><i class="fa fa-check"></i><b>16.0.5</b> attributeNames()</a></li>
+<li class="chapter" data-level="16.0.6" data-path="160_robject.html"><a href="160_robject.html#hasattributename"><i class="fa fa-check"></i><b>16.0.6</b> hasAttribute(name)</a></li>
+<li class="chapter" data-level="16.0.7" data-path="160_robject.html"><a href="160_robject.html#isnull"><i class="fa fa-check"></i><b>16.0.7</b> isNULL()</a></li>
+<li class="chapter" data-level="16.0.8" data-path="160_robject.html"><a href="160_robject.html#sexp_type"><i class="fa fa-check"></i><b>16.0.8</b> sexp_type()</a></li>
+<li class="chapter" data-level="16.0.9" data-path="160_robject.html"><a href="160_robject.html#isobject"><i class="fa fa-check"></i><b>16.0.9</b> isObject()</a></li>
+<li class="chapter" data-level="16.0.10" data-path="160_robject.html"><a href="160_robject.html#iss4"><i class="fa fa-check"></i><b>16.0.10</b> isS4()</a></li>
+<li class="chapter" data-level="16.1" data-path="160_robject.html"><a href="160_robject.html#a.20.2-robject-を利用した型の判別"><i class="fa fa-check"></i><b>16.1</b> A.20.2 RObject を利用した型の判別</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="161_notification_vector.html"><a href="161_notification_vector.html"><i class="fa fa-check"></i><b>17</b> Rのオブジェクトを扱う際の注意点</a><ul>
 <li class="chapter" data-level="17.1" data-path="161_notification_vector.html"><a href="161_notification_vector.html#ベクトル同士の代入"><i class="fa fa-check"></i><b>17.1</b> ベクトル同士の代入</a></li>
 <li class="chapter" data-level="17.2" data-path="161_notification_vector.html"><a href="161_notification_vector.html#要素番号の型"><i class="fa fa-check"></i><b>17.2</b> 要素番号の型</a></li>
 <li class="chapter" data-level="17.3" data-path="161_notification_vector.html"><a href="161_notification_vector.html#演算子の返値"><i class="fa fa-check"></i><b>17.3</b> []演算子の返値</a></li>
+<li class="chapter" data-level="17.4" data-path="170_calculation.html"><a href="170_calculation.html"><i class="fa fa-check"></i><b>17.4</b> 四則演算</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="170_calculation.html"><a href="170_calculation.html"><i class="fa fa-check"></i><b>18</b> 四則演算と比較演算</a><ul>
-<li class="chapter" data-level="18.1" data-path="170_calculation.html"><a href="170_calculation.html#四則演算"><i class="fa fa-check"></i><b>18.1</b> 四則演算</a></li>
-<li class="chapter" data-level="18.2" data-path="170_calculation.html"><a href="170_calculation.html#比較演算"><i class="fa fa-check"></i><b>18.2</b> 比較演算</a></li>
+<li class="chapter" data-level="18" data-path="180_logical.html"><a href="180_logical.html"><i class="fa fa-check"></i><b>18</b> 論理演算</a><ul>
+<li class="chapter" data-level="18.1" data-path="180_logical.html"><a href="180_logical.html#logicalvector-の正体"><i class="fa fa-check"></i><b>18.1</b> LogicalVector の正体</a></li>
+<li class="chapter" data-level="18.2" data-path="180_logical.html"><a href="180_logical.html#論理演算-1"><i class="fa fa-check"></i><b>18.2</b> 論理演算</a></li>
+<li class="chapter" data-level="18.3" data-path="180_logical.html"><a href="180_logical.html#logicalvector-を受け取る関数"><i class="fa fa-check"></i><b>18.3</b> LogicalVector を受け取る関数</a><ul>
+<li class="chapter" data-level="18.3.1" data-path="180_logical.html"><a href="180_logical.html#all-と-any"><i class="fa fa-check"></i><b>18.3.1</b> all() と any()</a></li>
+<li class="chapter" data-level="18.3.2" data-path="180_logical.html"><a href="180_logical.html#ifelse"><i class="fa fa-check"></i><b>18.3.2</b> ifelse()</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="180_logical.html"><a href="180_logical.html"><i class="fa fa-check"></i><b>19</b> 論理演算</a><ul>
-<li class="chapter" data-level="19.1" data-path="180_logical.html"><a href="180_logical.html#logicalvector-の正体"><i class="fa fa-check"></i><b>19.1</b> LogicalVector の正体</a></li>
-<li class="chapter" data-level="19.2" data-path="180_logical.html"><a href="180_logical.html#論理演算-1"><i class="fa fa-check"></i><b>19.2</b> 論理演算</a></li>
-<li class="chapter" data-level="19.3" data-path="180_logical.html"><a href="180_logical.html#logicalvector-を受け取る関数"><i class="fa fa-check"></i><b>19.3</b> LogicalVector を受け取る関数</a><ul>
-<li class="chapter" data-level="19.3.1" data-path="180_logical.html"><a href="180_logical.html#all-と-any"><i class="fa fa-check"></i><b>19.3.1</b> all() と any()</a></li>
-<li class="chapter" data-level="19.3.2" data-path="180_logical.html"><a href="180_logical.html#ifelse"><i class="fa fa-check"></i><b>19.3.2</b> ifelse()</a></li>
-</ul></li>
-<li class="chapter" data-level="19.4" data-path="180_logical.html"><a href="180_logical.html#logicalvector-の要素の評価"><i class="fa fa-check"></i><b>19.4</b> LogicalVector の要素の評価</a></li>
-</ul></li>
-<li class="chapter" data-level="20" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html"><i class="fa fa-check"></i><b>20</b> R ライクな関数</a><ul>
-<li class="chapter" data-level="20.1" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#rライクな関数の一覧"><i class="fa fa-check"></i><b>20.1</b> Rライクな関数の一覧</a><ul>
-<li class="chapter" data-level="20.1.1" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#ベクトルに関連する関数"><i class="fa fa-check"></i><b>20.1.1</b> ベクトルに関連する関数</a></li>
-<li class="chapter" data-level="20.1.2" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#文字列に関連する関数"><i class="fa fa-check"></i><b>20.1.2</b> 文字列に関連する関数</a></li>
-<li class="chapter" data-level="20.1.3" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#値の検索に関連する関数"><i class="fa fa-check"></i><b>20.1.3</b> 値の検索に関連する関数</a></li>
-<li class="chapter" data-level="20.1.4" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#重複の値に関連する関数"><i class="fa fa-check"></i><b>20.1.4</b> 重複の値に関連する関数</a></li>
-<li class="chapter" data-level="20.1.5" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#集合演算に関連する関数"><i class="fa fa-check"></i><b>20.1.5</b> 集合演算に関連する関数</a></li>
-<li class="chapter" data-level="20.1.6" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#最大値最小値に関連する関数"><i class="fa fa-check"></i><b>20.1.6</b> 最大値・最小値に関連する関数</a></li>
-<li class="chapter" data-level="20.1.7" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#集計に関連する関数"><i class="fa fa-check"></i><b>20.1.7</b> 集計に関連する関数</a></li>
-<li class="chapter" data-level="20.1.8" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#端数処理に関連する関数"><i class="fa fa-check"></i><b>20.1.8</b> 端数処理に関連する関数</a></li>
-<li class="chapter" data-level="20.1.9" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#数学に関連する関数"><i class="fa fa-check"></i><b>20.1.9</b> 数学に関連する関数</a></li>
-<li class="chapter" data-level="20.1.10" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#論理値に関連する関数"><i class="fa fa-check"></i><b>20.1.10</b> 論理値に関連する関数</a></li>
-<li class="chapter" data-level="20.1.11" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#nainfnanに関連する関数"><i class="fa fa-check"></i><b>20.1.11</b> NA、Inf、NaNに関連する関数</a></li>
-<li class="chapter" data-level="20.1.12" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#apply関数"><i class="fa fa-check"></i><b>20.1.12</b> apply関数</a></li>
-<li class="chapter" data-level="20.1.13" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#cbind関数"><i class="fa fa-check"></i><b>20.1.13</b> cbind関数</a></li>
+<li class="chapter" data-level="18.4" data-path="180_logical.html"><a href="180_logical.html#logicalvector-の要素の評価"><i class="fa fa-check"></i><b>18.4</b> LogicalVector の要素の評価</a></li>
+<li class="chapter" data-level="18.5" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html"><i class="fa fa-check"></i><b>18.5</b> Rライクな関数の一覧</a><ul>
+<li class="chapter" data-level="18.5.1" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#ベクトルに関連する関数"><i class="fa fa-check"></i><b>18.5.1</b> ベクトルに関連する関数</a></li>
+<li class="chapter" data-level="18.5.2" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#文字列に関連する関数"><i class="fa fa-check"></i><b>18.5.2</b> 文字列に関連する関数</a></li>
+<li class="chapter" data-level="18.5.3" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#値の検索に関連する関数"><i class="fa fa-check"></i><b>18.5.3</b> 値の検索に関連する関数</a></li>
+<li class="chapter" data-level="18.5.4" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#重複の値に関連する関数"><i class="fa fa-check"></i><b>18.5.4</b> 重複の値に関連する関数</a></li>
+<li class="chapter" data-level="18.5.5" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#集合演算に関連する関数"><i class="fa fa-check"></i><b>18.5.5</b> 集合演算に関連する関数</a></li>
+<li class="chapter" data-level="18.5.6" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#最大値最小値に関連する関数"><i class="fa fa-check"></i><b>18.5.6</b> 最大値・最小値に関連する関数</a></li>
+<li class="chapter" data-level="18.5.7" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#集計に関連する関数"><i class="fa fa-check"></i><b>18.5.7</b> 集計に関連する関数</a></li>
+<li class="chapter" data-level="18.5.8" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#端数処理に関連する関数"><i class="fa fa-check"></i><b>18.5.8</b> 端数処理に関連する関数</a></li>
+<li class="chapter" data-level="18.5.9" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#数学に関連する関数"><i class="fa fa-check"></i><b>18.5.9</b> 数学に関連する関数</a></li>
+<li class="chapter" data-level="18.5.10" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#論理値に関連する関数"><i class="fa fa-check"></i><b>18.5.10</b> 論理値に関連する関数</a></li>
+<li class="chapter" data-level="18.5.11" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#nainfnanに関連する関数"><i class="fa fa-check"></i><b>18.5.11</b> NA、Inf、NaNに関連する関数</a></li>
+<li class="chapter" data-level="18.5.12" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#apply関数"><i class="fa fa-check"></i><b>18.5.12</b> apply関数</a></li>
+<li class="chapter" data-level="18.5.13" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#cbind関数"><i class="fa fa-check"></i><b>18.5.13</b> cbind関数</a></li>
+<li class="chapter" data-level="18.5.14" data-path="200_rcpp_functions.html"><a href="200_rcpp_functions.html#サンプリング関数"><i class="fa fa-check"></i><b>18.5.14</b> サンプリング関数</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html"><i class="fa fa-check"></i><b>21</b> 確率分布</a><ul>
-<li class="chapter" data-level="21.1" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#確率分布関数の基本構造"><i class="fa fa-check"></i><b>21.1</b> 確率分布関数の基本構造</a></li>
-<li class="chapter" data-level="21.2" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#確率分布関数の一覧"><i class="fa fa-check"></i><b>21.2</b> 確率分布関数の一覧</a><ul>
-<li class="chapter" data-level="21.2.1" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#連続分布"><i class="fa fa-check"></i><b>21.2.1</b> 連続分布</a></li>
-<li class="chapter" data-level="21.2.2" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#離散分布"><i class="fa fa-check"></i><b>21.2.2</b> 離散分布</a></li>
+<li class="chapter" data-level="19" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html"><i class="fa fa-check"></i><b>19</b> 確率分布</a><ul>
+<li class="chapter" data-level="19.1" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#確率分布関数の基本構造"><i class="fa fa-check"></i><b>19.1</b> 確率分布関数の基本構造</a><ul>
+<li class="chapter" data-level="19.1.1" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#連続分布"><i class="fa fa-check"></i><b>19.1.1</b> 連続分布</a></li>
+<li class="chapter" data-level="19.1.2" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#離散分布"><i class="fa fa-check"></i><b>19.1.2</b> 離散分布</a></li>
+<li class="chapter" data-level="19.1.3" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#一様分布"><i class="fa fa-check"></i><b>19.1.3</b> 一様分布</a></li>
+<li class="chapter" data-level="19.1.4" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#正規分布"><i class="fa fa-check"></i><b>19.1.4</b> 正規分布</a></li>
+<li class="chapter" data-level="19.1.5" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#対数正規分布"><i class="fa fa-check"></i><b>19.1.5</b> 対数正規分布</a></li>
+<li class="chapter" data-level="19.1.6" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ガンマ分布"><i class="fa fa-check"></i><b>19.1.6</b> ガンマ分布</a></li>
+<li class="chapter" data-level="19.1.7" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ベータ分布"><i class="fa fa-check"></i><b>19.1.7</b> ベータ分布</a></li>
+<li class="chapter" data-level="19.1.8" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#非心ベータ分布"><i class="fa fa-check"></i><b>19.1.8</b> 非心ベータ分布</a></li>
+<li class="chapter" data-level="19.1.9" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#カイ乗分布"><i class="fa fa-check"></i><b>19.1.9</b> カイ２乗分布</a></li>
+<li class="chapter" data-level="19.1.10" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#非心カイ乗分布"><i class="fa fa-check"></i><b>19.1.10</b> 非心カイ２乗分布</a></li>
+<li class="chapter" data-level="19.1.11" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#t分布"><i class="fa fa-check"></i><b>19.1.11</b> t分布</a></li>
+<li class="chapter" data-level="19.1.12" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#非心t分布"><i class="fa fa-check"></i><b>19.1.12</b> 非心t分布</a></li>
+<li class="chapter" data-level="19.1.13" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#f分布"><i class="fa fa-check"></i><b>19.1.13</b> F分布</a></li>
+<li class="chapter" data-level="19.1.14" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#非心f分布"><i class="fa fa-check"></i><b>19.1.14</b> 非心F分布</a></li>
+<li class="chapter" data-level="19.1.15" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#コーシー分布"><i class="fa fa-check"></i><b>19.1.15</b> コーシー分布</a></li>
+<li class="chapter" data-level="19.1.16" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#指数分布"><i class="fa fa-check"></i><b>19.1.16</b> 指数分布</a></li>
+<li class="chapter" data-level="19.1.17" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ロジスティック分布"><i class="fa fa-check"></i><b>19.1.17</b> ロジスティック分布</a></li>
+<li class="chapter" data-level="19.1.18" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ワイブル分布"><i class="fa fa-check"></i><b>19.1.18</b> ワイブル分布</a></li>
 </ul></li>
-<li class="chapter" data-level="21.3" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#連続分布-1"><i class="fa fa-check"></i><b>21.3</b> 連続分布</a><ul>
-<li class="chapter" data-level="21.3.1" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#一様分布"><i class="fa fa-check"></i><b>21.3.1</b> 一様分布</a></li>
-<li class="chapter" data-level="21.3.2" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#正規分布"><i class="fa fa-check"></i><b>21.3.2</b> 正規分布</a></li>
-<li class="chapter" data-level="21.3.3" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#対数正規分布"><i class="fa fa-check"></i><b>21.3.3</b> 対数正規分布</a></li>
-<li class="chapter" data-level="21.3.4" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ガンマ分布"><i class="fa fa-check"></i><b>21.3.4</b> ガンマ分布</a></li>
-<li class="chapter" data-level="21.3.5" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ベータ分布"><i class="fa fa-check"></i><b>21.3.5</b> ベータ分布</a></li>
-<li class="chapter" data-level="21.3.6" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#非心ベータ分布"><i class="fa fa-check"></i><b>21.3.6</b> 非心ベータ分布</a></li>
-<li class="chapter" data-level="21.3.7" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#カイ乗分布"><i class="fa fa-check"></i><b>21.3.7</b> カイ２乗分布</a></li>
-<li class="chapter" data-level="21.3.8" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#非心カイ乗分布"><i class="fa fa-check"></i><b>21.3.8</b> 非心カイ２乗分布</a></li>
-<li class="chapter" data-level="21.3.9" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#t分布"><i class="fa fa-check"></i><b>21.3.9</b> t分布</a></li>
-<li class="chapter" data-level="21.3.10" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#非心t分布"><i class="fa fa-check"></i><b>21.3.10</b> 非心t分布</a></li>
-<li class="chapter" data-level="21.3.11" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#f分布"><i class="fa fa-check"></i><b>21.3.11</b> F分布</a></li>
-<li class="chapter" data-level="21.3.12" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#非心f分布"><i class="fa fa-check"></i><b>21.3.12</b> 非心F分布</a></li>
-<li class="chapter" data-level="21.3.13" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#コーシー分布"><i class="fa fa-check"></i><b>21.3.13</b> コーシー分布</a></li>
-<li class="chapter" data-level="21.3.14" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#指数分布"><i class="fa fa-check"></i><b>21.3.14</b> 指数分布</a></li>
-<li class="chapter" data-level="21.3.15" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ロジスティック分布"><i class="fa fa-check"></i><b>21.3.15</b> ロジスティック分布</a></li>
-<li class="chapter" data-level="21.3.16" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ワイブル分布"><i class="fa fa-check"></i><b>21.3.16</b> ワイブル分布</a></li>
-</ul></li>
-<li class="chapter" data-level="21.4" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#離散分布-1"><i class="fa fa-check"></i><b>21.4</b> 離散分布</a><ul>
-<li class="chapter" data-level="21.4.1" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#二項分布"><i class="fa fa-check"></i><b>21.4.1</b> 二項分布</a></li>
-<li class="chapter" data-level="21.4.2" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#負の二項分布成功確率を指定するバージョン"><i class="fa fa-check"></i><b>21.4.2</b> 負の二項分布（成功確率を指定するバージョン）</a></li>
-<li class="chapter" data-level="21.4.3" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#負の二項分布平均値を指定するバージョン"><i class="fa fa-check"></i><b>21.4.3</b> 負の二項分布（平均値を指定するバージョン）</a></li>
-<li class="chapter" data-level="21.4.4" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ポワソン分布"><i class="fa fa-check"></i><b>21.4.4</b> ポワソン分布</a></li>
-<li class="chapter" data-level="21.4.5" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#幾何分布"><i class="fa fa-check"></i><b>21.4.5</b> 幾何分布</a></li>
-<li class="chapter" data-level="21.4.6" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#超幾何分布"><i class="fa fa-check"></i><b>21.4.6</b> 超幾何分布</a></li>
-<li class="chapter" data-level="21.4.7" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ウィルコクソン順位和検定統計量の分布"><i class="fa fa-check"></i><b>21.4.7</b> ウィルコクソン順位和検定統計量の分布</a></li>
-<li class="chapter" data-level="21.4.8" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ウィルコクソン符号順位検定統計量の分布"><i class="fa fa-check"></i><b>21.4.8</b> ウィルコクソン符号順位検定統計量の分布</a></li>
+<li class="chapter" data-level="19.2" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#離散分布-1"><i class="fa fa-check"></i><b>19.2</b> 離散分布</a><ul>
+<li class="chapter" data-level="19.2.1" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#二項分布"><i class="fa fa-check"></i><b>19.2.1</b> 二項分布</a></li>
+<li class="chapter" data-level="19.2.2" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#負の二項分布成功確率を指定するバージョン"><i class="fa fa-check"></i><b>19.2.2</b> 負の二項分布（成功確率を指定するバージョン）</a></li>
+<li class="chapter" data-level="19.2.3" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#負の二項分布平均値を指定するバージョン"><i class="fa fa-check"></i><b>19.2.3</b> 負の二項分布（平均値を指定するバージョン）</a></li>
+<li class="chapter" data-level="19.2.4" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ポワソン分布"><i class="fa fa-check"></i><b>19.2.4</b> ポワソン分布</a></li>
+<li class="chapter" data-level="19.2.5" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#幾何分布"><i class="fa fa-check"></i><b>19.2.5</b> 幾何分布</a></li>
+<li class="chapter" data-level="19.2.6" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#超幾何分布"><i class="fa fa-check"></i><b>19.2.6</b> 超幾何分布</a></li>
+<li class="chapter" data-level="19.2.7" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ウィルコクソン順位和検定統計量の分布"><i class="fa fa-check"></i><b>19.2.7</b> ウィルコクソン順位和検定統計量の分布</a></li>
+<li class="chapter" data-level="19.2.8" data-path="210_dpqr_functions.html"><a href="210_dpqr_functions.html#ウィルコクソン符号順位検定統計量の分布"><i class="fa fa-check"></i><b>19.2.8</b> ウィルコクソン符号順位検定統計量の分布</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="220_R_function.html"><a href="220_R_function.html"><i class="fa fa-check"></i><b>22</b> Rの関数を利用する</a><ul>
-<li class="chapter" data-level="22.1" data-path="220_R_function.html"><a href="220_R_function.html#function-を用いた方法"><i class="fa fa-check"></i><b>22.1</b> Function を用いた方法</a></li>
-<li class="chapter" data-level="22.2" data-path="220_R_function.html"><a href="220_R_function.html#environment-を用いた方法"><i class="fa fa-check"></i><b>22.2</b> Environment を用いた方法</a></li>
+<li class="chapter" data-level="20" data-path="220_R_function.html"><a href="220_R_function.html"><i class="fa fa-check"></i><b>20</b> Rの関数を利用する</a><ul>
+<li class="chapter" data-level="20.1" data-path="220_R_function.html"><a href="220_R_function.html#function-を用いた方法"><i class="fa fa-check"></i><b>20.1</b> Function を用いた方法</a></li>
+<li class="chapter" data-level="20.2" data-path="220_R_function.html"><a href="220_R_function.html#environment-を用いた方法"><i class="fa fa-check"></i><b>20.2</b> Environment を用いた方法</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html"><i class="fa fa-check"></i><b>23</b> NA NaN Inf NULL</a><ul>
-<li class="chapter" data-level="23.1" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#na-nan-inf-の値"><i class="fa fa-check"></i><b>23.1</b> NA NaN Inf の値</a></li>
-<li class="chapter" data-level="23.2" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#na-nan-inf-の判定"><i class="fa fa-check"></i><b>23.2</b> NA NaN Inf の判定</a><ul>
-<li class="chapter" data-level="23.2.1" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#ベクトルの要素をまとめて判定する場合"><i class="fa fa-check"></i><b>23.2.1</b> ベクトルの要素をまとめて判定する場合</a></li>
-<li class="chapter" data-level="23.2.2" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#ベクトルの要素つに対して判定する場合"><i class="fa fa-check"></i><b>23.2.2</b> ベクトルの要素１つに対して判定する場合</a></li>
+<li class="chapter" data-level="21" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html"><i class="fa fa-check"></i><b>21</b> NA NaN Inf NULL</a><ul>
+<li class="chapter" data-level="21.1" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#na-nan-inf-の値"><i class="fa fa-check"></i><b>21.1</b> NA NaN Inf の値</a></li>
+<li class="chapter" data-level="21.2" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#na-nan-inf-の判定"><i class="fa fa-check"></i><b>21.2</b> NA NaN Inf の判定</a><ul>
+<li class="chapter" data-level="21.2.1" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#ベクトルの要素をまとめて判定する場合"><i class="fa fa-check"></i><b>21.2.1</b> ベクトルの要素をまとめて判定する場合</a></li>
+<li class="chapter" data-level="21.2.2" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#ベクトルの要素つに対して判定する場合"><i class="fa fa-check"></i><b>21.2.2</b> ベクトルの要素１つに対して判定する場合</a></li>
 </ul></li>
-<li class="chapter" data-level="23.3" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#null"><i class="fa fa-check"></i><b>23.3</b> NULL</a></li>
-<li class="chapter" data-level="23.4" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#rcpp-で-na-を扱う際の注意点"><i class="fa fa-check"></i><b>23.4</b> Rcpp で NA を扱う際の注意点</a></li>
+<li class="chapter" data-level="21.3" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#null"><i class="fa fa-check"></i><b>21.3</b> NULL</a></li>
+<li class="chapter" data-level="21.4" data-path="230_na_nan_inf.html"><a href="230_na_nan_inf.html#rcpp-で-na-を扱う際の注意点"><i class="fa fa-check"></i><b>21.4</b> Rcpp で NA を扱う際の注意点</a></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="240_attributes.html"><a href="240_attributes.html"><i class="fa fa-check"></i><b>24</b> 属性値</a><ul>
-<li class="chapter" data-level="24.1" data-path="240_attributes.html"><a href="240_attributes.html#主要な属性値"><i class="fa fa-check"></i><b>24.1</b> 主要な属性値</a></li>
+<li class="chapter" data-level="22" data-path="240_attributes.html"><a href="240_attributes.html"><i class="fa fa-check"></i><b>22</b> 属性値</a></li>
+<li class="chapter" data-level="23" data-path="250_factor.html"><a href="250_factor.html"><i class="fa fa-check"></i><b>23</b> factor</a></li>
+<li class="chapter" data-level="24" data-path="260_error.html"><a href="260_error.html"><i class="fa fa-check"></i><b>24</b> エラー処理</a><ul>
+<li class="chapter" data-level="24.1" data-path="260_error.html"><a href="260_error.html#stopとwarning"><i class="fa fa-check"></i><b>24.1</b> stop()とwarning()</a></li>
+<li class="chapter" data-level="24.2" data-path="260_error.html"><a href="260_error.html#c-例外を投げる"><i class="fa fa-check"></i><b>24.2</b> C++ 例外を投げる</a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="250_factor.html"><a href="250_factor.html"><i class="fa fa-check"></i><b>25</b> factor</a></li>
-<li class="chapter" data-level="26" data-path="260_error.html"><a href="260_error.html"><i class="fa fa-check"></i><b>26</b> エラー処理</a><ul>
-<li class="chapter" data-level="26.1" data-path="260_error.html"><a href="260_error.html#stopとwarning"><i class="fa fa-check"></i><b>26.1</b> stop()とwarning()</a></li>
-<li class="chapter" data-level="26.2" data-path="260_error.html"><a href="260_error.html#c-例外を投げる"><i class="fa fa-check"></i><b>26.2</b> C++ 例外を投げる</a></li>
+<li class="chapter" data-level="25" data-path="270_miscellaneous.html"><a href="270_miscellaneous.html"><i class="fa fa-check"></i><b>25</b> キャンセル処理</a><ul>
+<li class="chapter" data-level="25.0.1" data-path="270_miscellaneous.html"><a href="270_miscellaneous.html#ユーザーからのキャンセルを受け付ける"><i class="fa fa-check"></i><b>25.0.1</b> ユーザーからのキャンセルを受け付ける。</a></li>
 </ul></li>
-<li class="chapter" data-level="27" data-path="270_miscellaneous.html"><a href="270_miscellaneous.html"><i class="fa fa-check"></i><b>27</b> キャンセル処理</a><ul>
-<li class="chapter" data-level="27.0.1" data-path="270_miscellaneous.html"><a href="270_miscellaneous.html#ユーザーからのキャンセルを受け付ける"><i class="fa fa-check"></i><b>27.0.1</b> ユーザーからのキャンセルを受け付ける。</a></li>
+<li class="chapter" data-level="26" data-path="271_Rmath.html"><a href="271_Rmath.html"><i class="fa fa-check"></i><b>26</b> R Math Library</a></li>
+<li class="chapter" data-level="27" data-path="280_Rcpp_in_R.html"><a href="280_Rcpp_in_R.html"><i class="fa fa-check"></i><b>27</b> Rのコード中にRcppのコードを埋め込む</a></li>
+<li class="chapter" data-level="28" data-path="300_environment.html"><a href="300_environment.html"><i class="fa fa-check"></i><b>28</b> Environment</a><ul>
+<li class="chapter" data-level="28.1" data-path="300_environment.html"><a href="300_environment.html#environment-オブジェクトの作成"><i class="fa fa-check"></i><b>28.1</b> Environment オブジェクトの作成</a></li>
+<li class="chapter" data-level="28.2" data-path="300_environment.html"><a href="300_environment.html#環境にあるオブジェクトにアクセスする"><i class="fa fa-check"></i><b>28.2</b> 環境にあるオブジェクトにアクセスする</a></li>
+<li class="chapter" data-level="28.3" data-path="300_environment.html"><a href="300_environment.html#新しい環境を作成する"><i class="fa fa-check"></i><b>28.3</b> 新しい環境を作成する</a><ul>
+<li class="chapter" data-level="28.3.1" data-path="300_environment.html"><a href="300_environment.html#new_envsize-29"><i class="fa fa-check"></i><b>28.3.1</b> new_env(size = 29)</a></li>
+<li class="chapter" data-level="28.3.2" data-path="300_environment.html"><a href="300_environment.html#new_envparent-size-29"><i class="fa fa-check"></i><b>28.3.2</b> new_env(parent, size = 29)</a></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="271_Rmath.html"><a href="271_Rmath.html"><i class="fa fa-check"></i><b>28</b> R Math Library</a></li>
-<li class="chapter" data-level="29" data-path="280_Rcpp_in_R.html"><a href="280_Rcpp_in_R.html"><i class="fa fa-check"></i><b>29</b> Rのコード中にRcppのコードを埋め込む</a><ul>
-<li class="chapter" data-level="29.0.1" data-path="280_Rcpp_in_R.html"><a href="280_Rcpp_in_R.html#sourcecpp"><i class="fa fa-check"></i><b>29.0.1</b> sourceCpp()</a></li>
-<li class="chapter" data-level="29.0.2" data-path="280_Rcpp_in_R.html"><a href="280_Rcpp_in_R.html#cppfunction"><i class="fa fa-check"></i><b>29.0.2</b> cppFunction()</a></li>
-<li class="chapter" data-level="29.0.3" data-path="280_Rcpp_in_R.html"><a href="280_Rcpp_in_R.html#evalcpp"><i class="fa fa-check"></i><b>29.0.3</b> evalCpp()</a></li>
-<li class="chapter" data-level="29.1" data-path="290_R_in_Rcpp.html"><a href="290_R_in_Rcpp.html"><i class="fa fa-check"></i><b>29.1</b> C++のソースにRのコードを埋め込む</a></li>
+<li class="chapter" data-level="28.4" data-path="300_environment.html"><a href="300_environment.html#メンバ関数-4"><i class="fa fa-check"></i><b>28.4</b> メンバ関数</a><ul>
+<li class="chapter" data-level="28.4.1" data-path="300_environment.html"><a href="300_environment.html#getname"><i class="fa fa-check"></i><b>28.4.1</b> get(name)</a></li>
+<li class="chapter" data-level="28.4.2" data-path="300_environment.html"><a href="300_environment.html#lsall"><i class="fa fa-check"></i><b>28.4.2</b> ls(all)</a></li>
+<li class="chapter" data-level="28.4.3" data-path="300_environment.html"><a href="300_environment.html#findname"><i class="fa fa-check"></i><b>28.4.3</b> find(name)</a></li>
+<li class="chapter" data-level="28.4.4" data-path="300_environment.html"><a href="300_environment.html#existsname"><i class="fa fa-check"></i><b>28.4.4</b> exists(name)</a></li>
+<li class="chapter" data-level="28.4.5" data-path="300_environment.html"><a href="300_environment.html#assign-name-x"><i class="fa fa-check"></i><b>28.4.5</b> assign( name, x )</a></li>
+<li class="chapter" data-level="28.4.6" data-path="300_environment.html"><a href="300_environment.html#islocked"><i class="fa fa-check"></i><b>28.4.6</b> isLocked()</a></li>
+<li class="chapter" data-level="28.4.7" data-path="300_environment.html"><a href="300_environment.html#removename"><i class="fa fa-check"></i><b>28.4.7</b> remove(name)</a></li>
+<li class="chapter" data-level="28.4.8" data-path="300_environment.html"><a href="300_environment.html#lockbindings-false"><i class="fa fa-check"></i><b>28.4.8</b> lock(bindings = false)</a></li>
+<li class="chapter" data-level="28.4.9" data-path="300_environment.html"><a href="300_environment.html#lockbindingname"><i class="fa fa-check"></i><b>28.4.9</b> lockBinding(name)</a></li>
+<li class="chapter" data-level="28.4.10" data-path="300_environment.html"><a href="300_environment.html#unlockbindingname"><i class="fa fa-check"></i><b>28.4.10</b> unlockBinding(name){</a></li>
+<li class="chapter" data-level="28.4.11" data-path="300_environment.html"><a href="300_environment.html#bindingislockedname"><i class="fa fa-check"></i><b>28.4.11</b> bindingIsLocked(name)</a></li>
+<li class="chapter" data-level="28.4.12" data-path="300_environment.html"><a href="300_environment.html#bindingisactivename"><i class="fa fa-check"></i><b>28.4.12</b> bindingIsActive(name)</a></li>
+<li class="chapter" data-level="28.4.13" data-path="300_environment.html"><a href="300_environment.html#is_user_database"><i class="fa fa-check"></i><b>28.4.13</b> is_user_database()</a></li>
+<li class="chapter" data-level="28.4.14" data-path="300_environment.html"><a href="300_environment.html#parent"><i class="fa fa-check"></i><b>28.4.14</b> parent()</a></li>
+<li class="chapter" data-level="28.4.15" data-path="300_environment.html"><a href="300_environment.html#new_childhashed"><i class="fa fa-check"></i><b>28.4.15</b> new_child(hashed)</a></li>
 </ul></li>
-<li class="chapter" data-level="30" data-path="300_environment.html"><a href="300_environment.html"><i class="fa fa-check"></i><b>30</b> Environment</a><ul>
-<li class="chapter" data-level="30.1" data-path="300_environment.html"><a href="300_environment.html#environment-オブジェクトの作成"><i class="fa fa-check"></i><b>30.1</b> Environment オブジェクトの作成</a></li>
-<li class="chapter" data-level="30.2" data-path="300_environment.html"><a href="300_environment.html#環境にあるオブジェクトにアクセスする"><i class="fa fa-check"></i><b>30.2</b> 環境にあるオブジェクトにアクセスする</a></li>
-<li class="chapter" data-level="30.3" data-path="300_environment.html"><a href="300_environment.html#新しい環境を作成する"><i class="fa fa-check"></i><b>30.3</b> 新しい環境を作成する</a><ul>
-<li class="chapter" data-level="30.3.1" data-path="300_environment.html"><a href="300_environment.html#new_envsize-29"><i class="fa fa-check"></i><b>30.3.1</b> new_env(size = 29)</a></li>
-<li class="chapter" data-level="30.3.2" data-path="300_environment.html"><a href="300_environment.html#new_envparent-size-29"><i class="fa fa-check"></i><b>30.3.2</b> new_env(parent, size = 29)</a></li>
-</ul></li>
-<li class="chapter" data-level="30.4" data-path="300_environment.html"><a href="300_environment.html#メンバ関数-7"><i class="fa fa-check"></i><b>30.4</b> メンバ関数</a><ul>
-<li class="chapter" data-level="30.4.1" data-path="300_environment.html"><a href="300_environment.html#getname"><i class="fa fa-check"></i><b>30.4.1</b> get(name)</a></li>
-<li class="chapter" data-level="30.4.2" data-path="300_environment.html"><a href="300_environment.html#lsall"><i class="fa fa-check"></i><b>30.4.2</b> ls(all)</a></li>
-<li class="chapter" data-level="30.4.3" data-path="300_environment.html"><a href="300_environment.html#findname"><i class="fa fa-check"></i><b>30.4.3</b> find(name)</a></li>
-<li class="chapter" data-level="30.4.4" data-path="300_environment.html"><a href="300_environment.html#existsname"><i class="fa fa-check"></i><b>30.4.4</b> exists(name)</a></li>
-<li class="chapter" data-level="30.4.5" data-path="300_environment.html"><a href="300_environment.html#assign-name-x"><i class="fa fa-check"></i><b>30.4.5</b> assign( name, x )</a></li>
-<li class="chapter" data-level="30.4.6" data-path="300_environment.html"><a href="300_environment.html#islocked"><i class="fa fa-check"></i><b>30.4.6</b> isLocked()</a></li>
-<li class="chapter" data-level="30.4.7" data-path="300_environment.html"><a href="300_environment.html#removename"><i class="fa fa-check"></i><b>30.4.7</b> remove(name)</a></li>
-<li class="chapter" data-level="30.4.8" data-path="300_environment.html"><a href="300_environment.html#lockbindings-false"><i class="fa fa-check"></i><b>30.4.8</b> lock(bindings = false)</a></li>
-<li class="chapter" data-level="30.4.9" data-path="300_environment.html"><a href="300_environment.html#lockbindingname"><i class="fa fa-check"></i><b>30.4.9</b> lockBinding(name)</a></li>
-<li class="chapter" data-level="30.4.10" data-path="300_environment.html"><a href="300_environment.html#unlockbindingname"><i class="fa fa-check"></i><b>30.4.10</b> unlockBinding(name){</a></li>
-<li class="chapter" data-level="30.4.11" data-path="300_environment.html"><a href="300_environment.html#bindingislockedname"><i class="fa fa-check"></i><b>30.4.11</b> bindingIsLocked(name)</a></li>
-<li class="chapter" data-level="30.4.12" data-path="300_environment.html"><a href="300_environment.html#bindingisactivename"><i class="fa fa-check"></i><b>30.4.12</b> bindingIsActive(name)</a></li>
-<li class="chapter" data-level="30.4.13" data-path="300_environment.html"><a href="300_environment.html#is_user_database"><i class="fa fa-check"></i><b>30.4.13</b> is_user_database()</a></li>
-<li class="chapter" data-level="30.4.14" data-path="300_environment.html"><a href="300_environment.html#parent"><i class="fa fa-check"></i><b>30.4.14</b> parent()</a></li>
-<li class="chapter" data-level="30.4.15" data-path="300_environment.html"><a href="300_environment.html#new_childhashed"><i class="fa fa-check"></i><b>30.4.15</b> new_child(hashed)</a></li>
-</ul></li>
-<li class="chapter" data-level="30.5" data-path="300_environment.html"><a href="300_environment.html#static-メンバ関数"><i class="fa fa-check"></i><b>30.5</b> static メンバ関数</a><ul>
-<li class="chapter" data-level="30.5.1" data-path="300_environment.html"><a href="300_environment.html#environmentglobal_env"><i class="fa fa-check"></i><b>30.5.1</b> Environment::global_env()</a></li>
-<li class="chapter" data-level="30.5.2" data-path="300_environment.html"><a href="300_environment.html#environmentempty_env"><i class="fa fa-check"></i><b>30.5.2</b> Environment::empty_env()</a></li>
-<li class="chapter" data-level="30.5.3" data-path="300_environment.html"><a href="300_environment.html#environmentbase_env"><i class="fa fa-check"></i><b>30.5.3</b> Environment::base_env()</a></li>
-<li class="chapter" data-level="30.5.4" data-path="300_environment.html"><a href="300_environment.html#environmentbase_namespace"><i class="fa fa-check"></i><b>30.5.4</b> Environment::base_namespace()</a></li>
-<li class="chapter" data-level="30.5.5" data-path="300_environment.html"><a href="300_environment.html#environmentrcpp_namespace"><i class="fa fa-check"></i><b>30.5.5</b> Environment::Rcpp_namespace()</a></li>
-<li class="chapter" data-level="30.5.6" data-path="300_environment.html"><a href="300_environment.html#environmentnamespace_envpackage"><i class="fa fa-check"></i><b>30.5.6</b> Environment::namespace_env(package)</a></li>
+<li class="chapter" data-level="28.5" data-path="300_environment.html"><a href="300_environment.html#static-メンバ関数"><i class="fa fa-check"></i><b>28.5</b> static メンバ関数</a><ul>
+<li class="chapter" data-level="28.5.1" data-path="300_environment.html"><a href="300_environment.html#environmentrcpp_namespace"><i class="fa fa-check"></i><b>28.5.1</b> Environment::Rcpp_namespace()</a></li>
+<li class="chapter" data-level="28.5.2" data-path="300_environment.html"><a href="300_environment.html#environmentnamespace_envpackage"><i class="fa fa-check"></i><b>28.5.2</b> Environment::namespace_env(package)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="31" data-path="310_iterator.html"><a href="310_iterator.html"><i class="fa fa-check"></i><b>31</b> イテレーター</a></li>
-<li class="chapter" data-level="32" data-path="320_as_wrap.html"><a href="320_as_wrap.html"><i class="fa fa-check"></i><b>32</b> 標準 C++ のデータ構造を利用する</a><ul>
-<li class="chapter" data-level="32.1" data-path="320_as_wrap.html"><a href="320_as_wrap.html#標準-c-データ構造と-rcpp-データ構造の変換"><i class="fa fa-check"></i><b>32.1</b> 標準 C++ データ構造と Rcpp データ構造の変換</a></li>
-<li class="chapter" data-level="32.2" data-path="320_as_wrap.html"><a href="320_as_wrap.html#標準-c-データ構造を関数の引数や返値にする"><i class="fa fa-check"></i><b>32.2</b> 標準 C++ データ構造を関数の引数や返値にする</a></li>
+<li class="chapter" data-level="29" data-path="310_iterator.html"><a href="310_iterator.html"><i class="fa fa-check"></i><b>29</b> イテレーター</a></li>
+<li class="chapter" data-level="30" data-path="320_as_wrap.html"><a href="320_as_wrap.html"><i class="fa fa-check"></i><b>30</b> 標準 C++ のデータ構造を利用する</a><ul>
+<li class="chapter" data-level="30.1" data-path="320_as_wrap.html"><a href="320_as_wrap.html#標準-c-データ構造と-rcpp-データ構造の変換"><i class="fa fa-check"></i><b>30.1</b> 標準 C++ データ構造と Rcpp データ構造の変換</a></li>
+<li class="chapter" data-level="30.2" data-path="320_as_wrap.html"><a href="320_as_wrap.html#標準-c-データ構造を関数の引数や返値にする"><i class="fa fa-check"></i><b>30.2</b> 標準 C++ データ構造を関数の引数や返値にする</a></li>
 </ul></li>
-<li class="chapter" data-level="33" data-path="330_STL.html"><a href="330_STL.html"><i class="fa fa-check"></i><b>33</b> 標準 C++ アルゴリズム</a></li>
-<li class="chapter" data-level="34" data-path="340_boost.html"><a href="340_boost.html"><i class="fa fa-check"></i><b>34</b> Boost を利用する</a></li>
-<li class="chapter" data-level="35" data-path="350_package.html"><a href="350_package.html"><i class="fa fa-check"></i><b>35</b> Rcppを用いたパッケージ作成</a><ul>
-<li class="chapter" data-level="35.1" data-path="350_package.html"><a href="350_package.html#rcppを用いたパッケージ作成の手順"><i class="fa fa-check"></i><b>35.1</b> Rcppを用いたパッケージ作成の手順</a><ul>
-<li class="chapter" data-level="35.1.1" data-path="350_package.html"><a href="350_package.html#手動で自作パッケージを-rcpp-に対応させる"><i class="fa fa-check"></i><b>35.1.1</b> 手動で自作パッケージを Rcpp に対応させる</a></li>
-<li class="chapter" data-level="35.1.2" data-path="350_package.html"><a href="350_package.html#rcpp.package.skeleton-を利用する"><i class="fa fa-check"></i><b>35.1.2</b> Rcpp.package.skeleton() を利用する</a></li>
-<li class="chapter" data-level="35.1.3" data-path="350_package.html"><a href="350_package.html#devtoolsuse_rcpp-を用いる"><i class="fa fa-check"></i><b>35.1.3</b> devtools::use_rcpp() を用いる</a></li>
+<li class="chapter" data-level="31" data-path="330_STL.html"><a href="330_STL.html"><i class="fa fa-check"></i><b>31</b> 標準 C++ アルゴリズム</a></li>
+<li class="chapter" data-level="32" data-path="340_boost.html"><a href="340_boost.html"><i class="fa fa-check"></i><b>32</b> Boost を利用する</a></li>
+<li class="chapter" data-level="33" data-path="350_package.html"><a href="350_package.html"><i class="fa fa-check"></i><b>33</b> Rcppを用いたパッケージ作成</a><ul>
+<li class="chapter" data-level="33.1" data-path="350_package.html"><a href="350_package.html#rcppを用いたパッケージ作成の手順"><i class="fa fa-check"></i><b>33.1</b> Rcppを用いたパッケージ作成の手順</a><ul>
+<li class="chapter" data-level="33.1.1" data-path="350_package.html"><a href="350_package.html#手動で自作パッケージを-rcpp-に対応させる"><i class="fa fa-check"></i><b>33.1.1</b> 手動で自作パッケージを Rcpp に対応させる</a></li>
+<li class="chapter" data-level="33.1.2" data-path="350_package.html"><a href="350_package.html#rcpp.package.skeleton-を利用する"><i class="fa fa-check"></i><b>33.1.2</b> Rcpp.package.skeleton() を利用する</a></li>
+<li class="chapter" data-level="33.1.3" data-path="350_package.html"><a href="350_package.html#devtoolsuse_rcpp-を用いる"><i class="fa fa-check"></i><b>33.1.3</b> devtools::use_rcpp() を用いる</a></li>
 </ul></li>
-<li class="chapter" data-level="35.2" data-path="350_package.html"><a href="350_package.html#roxygen2-パッケージを用いてパッケージのパッケージのドキュメントを作成する"><i class="fa fa-check"></i><b>35.2</b> roxygen2 パッケージを用いてパッケージのパッケージのドキュメントを作成する</a></li>
-<li class="chapter" data-level="35.3" data-path="350_package.html"><a href="350_package.html#自作パッケージで他のパッケージのcc関数を利用する"><i class="fa fa-check"></i><b>35.3</b> 自作パッケージで他のパッケージのC/C++関数を利用する</a></li>
-<li class="chapter" data-level="35.4" data-path="350_package.html"><a href="350_package.html#自作パッケージでサードパーティのccライブラリを利用する"><i class="fa fa-check"></i><b>35.4</b> 自作パッケージでサードパーティのC/C++ライブラリを利用する</a></li>
+<li class="chapter" data-level="33.2" data-path="350_package.html"><a href="350_package.html#roxygen2-パッケージを用いてパッケージのパッケージのドキュメントを作成する"><i class="fa fa-check"></i><b>33.2</b> roxygen2 パッケージを用いてパッケージのパッケージのドキュメントを作成する</a></li>
+<li class="chapter" data-level="33.3" data-path="350_package.html"><a href="350_package.html#自作パッケージで他のパッケージのcc関数を利用する"><i class="fa fa-check"></i><b>33.3</b> 自作パッケージで他のパッケージのC/C++関数を利用する</a></li>
+<li class="chapter" data-level="33.4" data-path="350_package.html"><a href="350_package.html#自作パッケージでサードパーティのccライブラリを利用する"><i class="fa fa-check"></i><b>33.4</b> 自作パッケージでサードパーティのC/C++ライブラリを利用する</a></li>
 </ul></li>
-<li class="chapter" data-level="36" data-path="360_parallel.html"><a href="360_parallel.html"><i class="fa fa-check"></i><b>36</b> RcppParallel</a><ul>
-<li class="chapter" data-level="36.1" data-path="360_parallel.html"><a href="360_parallel.html#rcppparallelの並列化の特徴"><i class="fa fa-check"></i><b>36.1</b> RcppParallelの並列化の特徴</a></li>
-<li class="chapter" data-level="36.2" data-path="360_parallel.html"><a href="360_parallel.html#インストール-1"><i class="fa fa-check"></i><b>36.2</b> インストール</a><ul>
-<li class="chapter" data-level="36.2.1" data-path="360_parallel.html"><a href="360_parallel.html#parallelfor-parallelreduce"><i class="fa fa-check"></i><b>36.2.1</b> parallelFor, parallelReduce</a></li>
-<li class="chapter" data-level="36.2.2" data-path="360_parallel.html"><a href="360_parallel.html#rvector-rmatrix"><i class="fa fa-check"></i><b>36.2.2</b> RVector, RMatrix</a></li>
+<li class="chapter" data-level="34" data-path="360_parallel.html"><a href="360_parallel.html"><i class="fa fa-check"></i><b>34</b> RcppParallel</a><ul>
+<li class="chapter" data-level="34.1" data-path="360_parallel.html"><a href="360_parallel.html#インストール-1"><i class="fa fa-check"></i><b>34.1</b> インストール</a><ul>
+<li class="chapter" data-level="34.1.1" data-path="360_parallel.html"><a href="360_parallel.html#parallelfor-parallelreduce"><i class="fa fa-check"></i><b>34.1.1</b> parallelFor, parallelReduce</a></li>
+<li class="chapter" data-level="34.1.2" data-path="360_parallel.html"><a href="360_parallel.html#rvector-rmatrix"><i class="fa fa-check"></i><b>34.1.2</b> RVector, RMatrix</a></li>
 </ul></li>
-<li class="chapter" data-level="36.3" data-path="360_parallel.html"><a href="360_parallel.html#worker"><i class="fa fa-check"></i><b>36.3</b> Worker</a></li>
-<li class="chapter" data-level="36.4" data-path="360_parallel.html"><a href="360_parallel.html#例parallelfor"><i class="fa fa-check"></i><b>36.4</b> 例：parallelFor()</a></li>
-<li class="chapter" data-level="36.5" data-path="360_parallel.html"><a href="360_parallel.html#例parallelreduce"><i class="fa fa-check"></i><b>36.5</b> 例：parallelReduce()</a></li>
-<li class="chapter" data-level="36.6" data-path="360_parallel.html"><a href="360_parallel.html#パッケージで利用する場合"><i class="fa fa-check"></i><b>36.6</b> パッケージで利用する場合</a></li>
+<li class="chapter" data-level="34.2" data-path="360_parallel.html"><a href="360_parallel.html#worker"><i class="fa fa-check"></i><b>34.2</b> Worker</a></li>
+<li class="chapter" data-level="34.3" data-path="360_parallel.html"><a href="360_parallel.html#例parallelfor"><i class="fa fa-check"></i><b>34.3</b> 例：parallelFor()</a></li>
+<li class="chapter" data-level="34.4" data-path="360_parallel.html"><a href="360_parallel.html#例parallelreduce"><i class="fa fa-check"></i><b>34.4</b> 例：parallelReduce()</a></li>
 </ul></li>
-<li class="chapter" data-level="37" data-path="370_link.html"><a href="370_link.html"><i class="fa fa-check"></i><b>37</b> リンク</a></li>
-<li class="chapter" data-level="38" data-path="380_performance.html"><a href="380_performance.html"><i class="fa fa-check"></i><b>38</b> パフォーマンス比較</a></li>
-<li class="chapter" data-level="39" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html"><i class="fa fa-check"></i><b>39</b> Rcpp Attributes</a><ul>
-<li class="chapter" data-level="39.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#利用可能な-rcpp-attributes"><i class="fa fa-check"></i><b>39.1</b> 利用可能な Rcpp Attributes</a><ul>
-<li class="chapter" data-level="39.1.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppexport"><i class="fa fa-check"></i><b>39.1.1</b> Rcpp::export</a></li>
+<li class="chapter" data-level="35" data-path="370_link.html"><a href="370_link.html"><i class="fa fa-check"></i><b>35</b> リンク</a></li>
+<li class="chapter" data-level="36" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html"><i class="fa fa-check"></i><b>36</b> Rcpp Attributes</a><ul>
+<li class="chapter" data-level="36.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#利用可能な-rcpp-attributes"><i class="fa fa-check"></i><b>36.1</b> 利用可能な Rcpp Attributes</a><ul>
+<li class="chapter" data-level="36.1.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppexport"><i class="fa fa-check"></i><b>36.1.1</b> Rcpp::export</a></li>
 </ul></li>
-<li class="chapter" data-level="39.2" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppinterfaces"><i class="fa fa-check"></i><b>39.2</b> Rcpp::interfaces</a></li>
-<li class="chapter" data-level="39.3" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppdepends"><i class="fa fa-check"></i><b>39.3</b> Rcpp::depends</a></li>
-<li class="chapter" data-level="39.4" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppplugins"><i class="fa fa-check"></i><b>39.4</b> Rcpp::plugins</a></li>
-<li class="chapter" data-level="39.5" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcpp-attributes-を処理する-rcpp-の関数"><i class="fa fa-check"></i><b>39.5</b> Rcpp Attributes を処理する Rcpp の関数</a><ul>
-<li class="chapter" data-level="39.5.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#compileattributes"><i class="fa fa-check"></i><b>39.5.1</b> compileAttributes()</a></li>
+<li class="chapter" data-level="36.2" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppinterfaces"><i class="fa fa-check"></i><b>36.2</b> Rcpp::interfaces</a></li>
+<li class="chapter" data-level="36.3" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppdepends"><i class="fa fa-check"></i><b>36.3</b> Rcpp::depends</a></li>
+<li class="chapter" data-level="36.4" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcppplugins"><i class="fa fa-check"></i><b>36.4</b> Rcpp::plugins</a></li>
+<li class="chapter" data-level="36.5" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#rcpp-attributes-を処理する-rcpp-の関数"><i class="fa fa-check"></i><b>36.5</b> Rcpp Attributes を処理する Rcpp の関数</a><ul>
+<li class="chapter" data-level="36.5.1" data-path="390_rcpp_attributes.html"><a href="390_rcpp_attributes.html#compileattributes"><i class="fa fa-check"></i><b>36.5.1</b> compileAttributes()</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="37" data-path="400_todo.html"><a href="400_todo.html"><i class="fa fa-check"></i><b>37</b> 書き加える可能性のある項目リスト</a></li>
+<li class="chapter" data-level="38" data-path="400_todo.html"><a href="400_todo.html#済み"><i class="fa fa-check"></i><b>38</b> 済み</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -494,13 +446,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-ライクな関数" class="section level1">
-<h1><span class="header-section-number">Chapter 20</span> R ライクな関数</h1>
-<p>R の関数と類似した Rcpp の関数の一覧を示します。</p>
-<p>また、これらの関数に与えるベクトルに <code>NA</code> が含まれていないと保証できる場合には、<code>noNA()</code>を使って印をつけると Rcpp 関数が <code>NA</code> のチェックを行わなくなるので計算が速くなる場合があります。</p>
-<pre><code>NumericVector res = mean(noNA(v));</code></pre>
 <div id="rライクな関数の一覧" class="section level2">
-<h2><span class="header-section-number">20.1</span> Rライクな関数の一覧</h2>
+<h2><span class="header-section-number">18.5</span> Rライクな関数の一覧</h2>
 <ul>
 <li><a href="200_rcpp_functions.html#ベクトルに関連する関数">ベクトルに関連する関数</a></li>
 <li><a href="200_rcpp_functions.html#文字列に関連する関数">文字列に関連する関数</a></li>
@@ -515,9 +462,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#NA、Inf、NaNに関連する関数">NA、Inf、NaNに関連する関数</a></li>
 <li><a href="200_rcpp_functions.html#apply関数">apply関数</a></li>
 <li><a href="200_rcpp_functions.html#cbind関数">cbind関数</a></li>
+<li><a href="200_rcpp_functions.html#サンプリング関数">サンプリング関数</a></li>
 </ul>
 <div id="ベクトルに関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.1</span> ベクトルに関連する関数</h3>
+<h3><span class="header-section-number">18.5.1</span> ベクトルに関連する関数</h3>
 <p><strong>head(v, n)</strong></p>
 <p>ベクトル v の最初の要素から n 個のベクトルを返す。</p>
 <p><strong>tail(v, n)</strong></p>
@@ -540,12 +488,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>ベクトル v の最後の要素を除いた各要素 i について <code>v[i+1] - v[i]</code> を計算したベクトルを返す。</p>
 </div>
 <div id="文字列に関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.2</span> 文字列に関連する関数</h3>
+<h3><span class="header-section-number">18.5.2</span> 文字列に関連する関数</h3>
 <p><strong>collapse(v)</strong></p>
 <p>文字列ベクトル v の各要素を結合した文字列を <code>String</code> 型で返す。</p>
 </div>
 <div id="値の検索に関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.3</span> 値の検索に関連する関数</h3>
+<h3><span class="header-section-number">18.5.3</span> 値の検索に関連する関数</h3>
 <p><strong>match(v, table)</strong></p>
 <p>ベクトル v の各要素について、値が一致するベクトル table の最初の要素の要素番号（1から始まる）を格納した整数ベクトルを返す。（つまり、<code>res = match(v, table)</code> とすると、res[i] には v[i]==table[j] となる最小の j+1 の値が格納される）</p>
 <p><strong>self_match(v)</strong></p>
@@ -556,7 +504,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>ベクトル v の最小の要素の要素番号を返す。</p>
 </div>
 <div id="重複の値に関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.4</span> 重複の値に関連する関数</h3>
+<h3><span class="header-section-number">18.5.4</span> 重複の値に関連する関数</h3>
 <p><strong>duplicated(v)</strong></p>
 <p>ベクトル v の各要素の値が、それより前の要素に存在する場合には 1 を、そうでない場合には 0 を入れたベクトルを返す。</p>
 <p><strong>unique(v)</strong></p>
@@ -565,7 +513,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>ベクトル v から要素の値の重複をなくし、値を昇順でソートしたベクトルを返す。</p>
 </div>
 <div id="集合演算に関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.5</span> 集合演算に関連する関数</h3>
+<h3><span class="header-section-number">18.5.5</span> 集合演算に関連する関数</h3>
 <p><strong>setdiff(v1,v2)</strong></p>
 <p>ベクトル v1 のユニークな(値の重複のない)要素から、ベクトル v2 のユニークな要素にある値を除いたベクトルを返す。</p>
 <p><strong>setequal(v1,v2)</strong></p>
@@ -576,7 +524,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>ベクトル v1 とベクトル v2 の要素を合わせてから値の重複をなくしたベクトルを返す。</p>
 </div>
 <div id="最大値最小値に関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.6</span> 最大値・最小値に関連する関数</h3>
+<h3><span class="header-section-number">18.5.6</span> 最大値・最小値に関連する関数</h3>
 <p><strong>min(v)</strong></p>
 <p>ベクトル v の要素の最小値を返す。</p>
 <p><strong>max(v)</strong></p>
@@ -595,7 +543,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>ベクトル v の要素の min 未満の値を min に、max 超の値を max に置き換えたベクトルを返す。</p>
 </div>
 <div id="集計に関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.7</span> 集計に関連する関数</h3>
+<h3><span class="header-section-number">18.5.7</span> 集計に関連する関数</h3>
 <p><strong>sum(v)</strong></p>
 <p>ベクトル v の要素の値の総和を返す。</p>
 <p><strong>mean(v)</strong></p>
@@ -612,9 +560,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>ベクトル v の各要素について、それ以前の要素の総積を格納したベクトル返す。</p>
 <p><strong>table(v)</strong></p>
 <p>ベクトル v のユニークな要素の値それぞれについて、値の等しい要素がいくつあるか集計した名前付き整数ベクトルを返す。</p>
+<p><strong>rowSums(m , na.rm = false)</strong></p>
+<p>行列 m の各行の総和をとったベクトルを返す。na.rm = true なら総和を計算する際にNAを無視する。</p>
+<p><strong>colSums(m , na.rm = false)</strong></p>
+<p>行列 m の各列の総和をとったベクトルを返す。na.rm = true なら総和を計算する際にNAを無視する。</p>
+<p><strong>rowMeans(m , na.rm = false)</strong></p>
+<p>行列 m の各行の平均をとったベクトルを返す。na.rm = true なら総和を計算する際にNAを無視する。</p>
+<p><strong>colMeans(m , na.rm = false)</strong></p>
+<p>行列 m の各列の平均をとったベクトルを返す。na.rm = true なら総和を計算する際にNAを無視する。</p>
 </div>
 <div id="端数処理に関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.8</span> 端数処理に関連する関数</h3>
+<h3><span class="header-section-number">18.5.8</span> 端数処理に関連する関数</h3>
 <p><strong>floor(v)</strong></p>
 <p>ベクトル v の各要素について、その値より大きくない最大の整数を格納したベクトルを返す。</p>
 <p><strong>ceil(v)</strong></p>
@@ -627,7 +583,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>ベクトル v の各要素について、小数点以下を切り捨てたベクトルを返す。</p>
 </div>
 <div id="数学に関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.9</span> 数学に関連する関数</h3>
+<h3><span class="header-section-number">18.5.9</span> 数学に関連する関数</h3>
 <p><strong>sign(v)</strong></p>
 <p>ベクトル v の各要素について、正なら1を負なら-1を格納したベクトルを返す。</p>
 <p><strong>abs(v)</strong></p>
@@ -692,7 +648,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><code>log(beta(va, vb))</code> と同義。</p>
 </div>
 <div id="論理値に関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.10</span> 論理値に関連する関数</h3>
+<h3><span class="header-section-number">18.5.10</span> 論理値に関連する関数</h3>
 <p><strong>all(v)</strong></p>
 <p>論理ベクトル v を受け取り、全ての要素が <code>TRUE</code> の時、<code>TRUE</code> を意味する <code>SingleLogicalResult</code> 型を返す。</p>
 <p><strong>any(v)</strong></p>
@@ -707,7 +663,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>論理ベクトル v を受け取り、v の要素が <code>TRUE</code> の時には x1 の対応する要素を, <code>FALSE</code> の時には x2 の対応する要素を格納したベクトルを返す。x1, x2 はベクトルでもスカラーでも良いが、ベクトルの長さは v と一致している必要がある。</p>
 </div>
 <div id="nainfnanに関連する関数" class="section level3">
-<h3><span class="header-section-number">20.1.11</span> NA、Inf、NaNに関連する関数</h3>
+<h3><span class="header-section-number">18.5.11</span> NA、Inf、NaNに関連する関数</h3>
 <p><strong>na_omit(v)</strong></p>
 <p>ベクトル v から <code>NA</code>を削除したベクトルを返す。</p>
 <p><strong>is_finite(v)</strong></p>
@@ -720,7 +676,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>ベクトル v の各要素が <code>NaN</code> である場合に <code>TRUE</code> を格納した論理ベクトルを返す。</p>
 </div>
 <div id="apply関数" class="section level3">
-<h3><span class="header-section-number">20.1.12</span> apply関数</h3>
+<h3><span class="header-section-number">18.5.12</span> apply関数</h3>
 <p><strong>lapply(x, fun)</strong></p>
 <p><code>Vector</code> x の各要素に対してC++の関数 fun を適用した結果を <code>List</code> で返す。</p>
 <p><strong>sapply(x, fun)</strong></p>
@@ -731,9 +687,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><code>Vector</code> x の各要素に対して3個の引数を受け取るC++の関数 fun3 を適用した結果を <code>Vector</code> で返す。</p>
 </div>
 <div id="cbind関数" class="section level3">
-<h3><span class="header-section-number">20.1.13</span> cbind関数</h3>
+<h3><span class="header-section-number">18.5.13</span> cbind関数</h3>
 <p><strong>cbind(v1,v2,…)</strong></p>
 <p>引数として渡した <code>Vector</code> または <code>Matrix</code> を列方向に結合した <code>Matrix</code> または <code>DataFrame</code> を返します。渡せる引数の数は50個まで。</p>
+</div>
+<div id="サンプリング関数" class="section level3">
+<h3><span class="header-section-number">18.5.14</span> サンプリング関数</h3>
+<p><strong>sample(x, size, replace = false, prob = R_NilValue)</strong></p>
+<p><code>Vector</code> x から size 個の要素をランダムに抽出した <code>Vector</code> を返す。replace = true の場合は要素の重複を許して抽出する。 prob には x の各要素を抽出する重みを指定するベクトルを渡す。</p>
+<p><strong>sample(n, size, replace = true, prob = R_NilValue, one_based = true)</strong></p>
+<p>n 個の要素から size 個の要素をランダムに抽出した時の、要素のインデックスを整数ベクトルで返す。replace = true の場合は要素の重複を許して抽出する。 prob には n 個の各要素を抽出する重みを指定するベクトルを渡す。one_based = true の場合には最初の要素のインデックスは 1、false の場合には最初の要素のインデックスは 0 で表現される。</p>
+<p>// Adapted from <code>do_sample</code>
+inline Vector<INTSXP>
+sample(int n, int size, bool replace = false, sugar::probs_t probs = R_NilValue, bool one_based = true)</p>
 
 </div>
 </div>
@@ -749,23 +715,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -773,6 +742,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
